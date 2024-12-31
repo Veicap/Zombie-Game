@@ -1,88 +1,80 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.TextCore.Text;
 
 public class MeleeHero : Character
 {
     private const string WALK = "Walk";
     private const string ATTACK = "Attack";
+
     [SerializeField] private Camera m_camera;
-    private float counterAttackSpeed;
-    private bool isMove;
+    [SerializeField] private float offsetRange = 0.2f;
+
+    private float attackCooldown;
+    private bool isMoving;
+
     
+    
+
     private void Start()
     {
         OnInit();
-        counterAttackSpeed = attackSpeed;
-        isMove = false;
-    }
-    
-
-    public void StopMoving()
-    {
-        isMove = false;
-    }
-    public void Update()
-    {
-
-        /*if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out RaycastHit hit))
-            {
-                agent.SetDestination(hit.point);
-            }
-        }*/
-        currentState.OnExecute(this);
-        Debug.Log(InRangeAttack());
-        Debug.Log(TargetTransform);
     }
 
     public override void OnInit()
     {
         base.OnInit();
-        hp = 100f;
-        damage = 20f;
+        attackCooldown = AttackSpeed;
+        isMoving = false;
+    }
 
-    }
-    
-    public bool InRangeAttack()
+    private void Update()
     {
-        if(Vector3.Distance(transform.position, TargetTransform.position) < attackRange)
-        {
-            return true;
-        }
-        return false;
+        CurrentState?.OnExecute(this);
+        Debug.Log(IsTargetInRange());
     }
+
     public override void OnAttack()
     {
-        counterAttackSpeed += Time.deltaTime;
-        if(counterAttackSpeed > attackSpeed)
+        attackCooldown += Time.deltaTime;
+        if (attackCooldown >= AttackSpeed)
         {
-            counterAttackSpeed = 0;
-            base.OnAttack();
-            ChangeAnim(ATTACK);
+            attackCooldown = 0f;
+            ChangeAnimation(ATTACK);
         }
-        
-    }
-    public void SetIsMove(bool isMove)
-    {
-        this.isMove = isMove;
     }
 
     public override void OnMove()
     {
-        base.OnMove();
-        if (!isMove)
+        if (!isMoving)
         {
-            ChangeAnim(WALK);
-            isMove = true;
+            ChangeAnimation(WALK);
+            isMoving = true;
         }
-        SetDestination(TargetTransform);
+
+        MoveToTarget();
     }
-   
-    
+
+    public bool IsTargetInRange()
+    {
+        if (TargetTransform == null) return false;
+        float distance = Vector3.Distance(transform.position, TargetTransform.position);
+        return distance <= AttackRange + offsetRange;
+    }
+    public void SetAttackCoolDown(float attackCoolDown)
+    {
+        attackCooldown = attackCoolDown;
+    }
+
+    public void ChangeStateHeroNotMoving()
+    {
+        isMoving = false;
+    }
+    public void RotateTowardsTarget()
+    {
+        if (TargetTransform == null) return;
+
+        Vector3 direction = (TargetTransform.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
+        Debug.Log("Rotate");
+    }
 }

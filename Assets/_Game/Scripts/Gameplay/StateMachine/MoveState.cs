@@ -15,8 +15,9 @@ public class MoveState : IState
         if(character is MeleeHero meleHero)
         {
             meleHero.OnMove();
-            if(meleHero.InRangeAttack())
+            if(meleHero.IsTargetInRange())
             {
+                
                 meleHero.ChangeState(new AttackState());
             }
         }

@@ -1,89 +1,82 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
-    public float hp;
-    public float damage;
-    public Animator animator;
-    public IState currentState;
-    private const string DEAD = "Dead";
+    [Header("Character Attributes")]
+    [SerializeField] private float health = 100f;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackSpeed = 1.0f;
+
+    [Header("References")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private NavMeshAgent agent;
+
+    private IState currentState;
+    private Transform targetTransform;
     private bool isDead;
-    public NavMeshAgent agent;
 
-    private Transform destination;
-    public float attackRange;
-    public float attackSpeed;
+    public IState CurrentState => currentState;
+    public float AttackSpeed => attackSpeed;
 
-    public bool IsDead => isDead;   
+    public bool IsDead => isDead;
+    public Transform TargetTransform => targetTransform;
+    public float AttackRange => attackRange;
 
-
-    // Khoi tao nhan vat
+    public void SetTargetPos(Transform targetTransfrorm)
+    {
+        this.targetTransform = targetTransfrorm;
+    }
     public virtual void OnInit()
     {
         currentState = new MoveState();
         isDead = false;
     }
-    // Attack
-    public virtual void OnAttack()
+
+    public virtual void OnAttack() { }
+
+    public virtual void OnMove() { }
+
+
+    public void OnHit(float damageAmount)
     {
+        health -= damageAmount;
 
-    }
-    // Di chuyen
-    public virtual void OnMove()
-    {
-
-    }
-
-
-    // Nhan Damage
-    public void OnHit(float damage)
-    {
-        hp -= damage;
-        if(hp < 0)
+        if (health <= 0 && !isDead)
         {
-            if(!isDead)
-            {
-                OnDeadth();
-                isDead = true;
-            }
-            
+            isDead = true;
+            OnDeath();
         }
     }
-    // Ham xu ly khi nhan vat chet
-    public void OnDeadth()
+
+    protected virtual void OnDeath()
     {
-        ChangeAnim(DEAD);
-    }
-    // Xoa nhan vat khoi game
-    public void OnDespawn()
-    {
-        // Destroy(gameObject);
+        ChangeAnimation("Dead");
     }
 
-    public void ChangeAnim(string nameAnim)
+    public void ChangeAnimation(string animationName)
     {
-        animator.SetTrigger(nameAnim);
+        if (animator != null)
+        {
+            animator.SetTrigger(animationName);
+        }
     }
 
     public void ChangeState(IState newState)
     {
         currentState?.OnExit(this);
         currentState = newState;
-        currentState.OnEnter(this);
+        currentState?.OnEnter(this);
     }
-    public void SetTargetPos(Transform targetTransform)
-    {
-        this.destination = targetTransform;
-    }
-    public Transform TargetTransform => destination;    
 
-    public void SetDestination(Transform destination)
+    public void MoveToTarget()
     {
-        this.destination = destination;
-        agent.SetDestination(this.destination.position);
+        if (targetTransform == null || agent == null) return;
+
+        Vector3 destination = targetTransform.position;
+        destination.x -= attackRange;
+        agent.SetDestination(destination);
     }
 }

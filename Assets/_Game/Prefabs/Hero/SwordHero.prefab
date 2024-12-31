@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7653899858901625858}
   - component: {fileID: 8604656483058259775}
   - component: {fileID: -6157341406351546049}
-  - component: {fileID: -717569285338583310}
   m_Layer: 0
   m_Name: SwordHero
   m_TagString: Untagged
@@ -109,26 +108,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-717569285338583310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630573012536013975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f94b08bec269104b86242c74c3c8d58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
-  damage: 20
-  speed: 7
-  animator: {fileID: 2495340385660740970}
-  agent: {fileID: -6157341406351546049}
-  m_camera: {fileID: 0}
-  attackRange: 1
-  attackSpeed: 2.2
 --- !u!1001 &2407753972369229328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,10 +116,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4443578233768401890}
     m_Modifications:
-    - target: {fileID: 1310211871898486979, guid: 369d8f1dd569ae24b8a8cd2ef21c9912, type: 3}
-      propertyPath: meleeHero
-      value: 
-      objectReference: {fileID: -717569285338583310}
     - target: {fileID: 2539763977156337017, guid: 369d8f1dd569ae24b8a8cd2ef21c9912, type: 3}
       propertyPath: m_Enabled
       value: 0

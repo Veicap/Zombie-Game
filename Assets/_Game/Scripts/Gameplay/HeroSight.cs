@@ -15,7 +15,7 @@ public class HeroSight : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-            hero.SetTargetPos(other.GetComponent<Zombie>().ZombiePoint);
+            hero.SetTargetPos(other.GetComponent<Zombie>().transform);
         }
     }
 
@@ -24,7 +24,6 @@ public class HeroSight : MonoBehaviour
         if(other.CompareTag("Zombie"))
         {
             hero.SetTargetPos(barrierPoint.transform);
-            Debug.Log("Exit");
         }
     }
 }

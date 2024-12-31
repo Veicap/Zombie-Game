@@ -7,20 +7,23 @@ public class AttackState : IState
 
     public void OnEnter<T>(T character)
     {
-        if (character is MeleeHero meleeHero)
+        if(character is MeleeHero meleeHero)
         {
-            meleeHero.SetIsMove(false);
+            meleeHero.ChangeStateHeroNotMoving();
+            
         }
+        
     }
 
     public void OnExecute<T>(T character)
     {
         if (character is MeleeHero meleeHero)
         {
-            if(!meleeHero.IsDead)
+            meleeHero.RotateTowardsTarget();
+            if (!meleeHero.IsDead)
             {
                 meleeHero.OnAttack();
-                if(!meleeHero.InRangeAttack())
+                if(!meleeHero.IsTargetInRange())
                 {
                     meleeHero.ChangeState(new MoveState());
                 }
