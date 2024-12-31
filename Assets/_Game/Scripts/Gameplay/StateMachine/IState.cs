@@ -4,7 +4,9 @@ using UnityEngine;
 
 public interface IState
 {
-    public void OnEnter<T>(T character);
-    public void OnExecute<T>(T character);
-    public void OnExit<T>(T character);
+    // Istate using for both character and zombie
+
+    public void OnEnter(Character character);
+    public void OnExecute(Character character);
+    public void OnExit(Character character);
 }

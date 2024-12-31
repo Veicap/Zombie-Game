@@ -5,25 +5,24 @@ using UnityEngine;
 public class MoveState : IState
 {
 
-    public void OnEnter<T>(T character)
+    public void OnEnter(Character character)
     {
         
     }
 
-    public void OnExecute<T>(T character)
+    public void OnExecute(Character character)
     {
-        if(character is MeleeHero meleHero)
+        // Di chuyen
+        character.OnMove();
+        // Neu co muc tieu trong tam danh
+        if(character.IsTargetInRange())
         {
-            meleHero.OnMove();
-            if(meleHero.IsTargetInRange())
-            {
-                
-                meleHero.ChangeState(new AttackState());
-            }
+            // chuyen sang trang thai tan cong
+            character.ChangeState(new AttackState());
         }
     }
 
-    public void OnExit<T>(T character)
+    public void OnExit(Character character)
     {
        
     }

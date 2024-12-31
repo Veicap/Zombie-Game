@@ -5,35 +5,41 @@ using UnityEngine;
 public class AttackState : IState
 {
 
-    public void OnEnter<T>(T character)
+    public void OnEnter(Character character)
     {
-        if(character is MeleeHero meleeHero)
+        character.StopMoving();
+    }
+
+    public void OnExecute(Character character)
+    {
+        // xoay nhan vat ve phia target
+        character.RotateTowardsTarget();
+        // neu nhan vat chua chet
+        if (!character.IsDead)
         {
-            meleeHero.ChangeStateHeroNotMoving();
-            
+            // Tan cong
+            character.OnAttack();
+            // Neu khong co muc tieu
+            if(!character.IsTargetInRange())
+            {
+                character.ChangeState(new MoveState());
+                character.ResetAttackCoolDown();
+                
+            }
+            if(character is GunHero gunHero)
+            {
+                if(!gunHero.HasTarget())
+                {
+                    gunHero.ChangeState(new IdleState());
+                }
+            }
         }
+            
         
     }
 
-    public void OnExecute<T>(T character)
-    {
-        if (character is MeleeHero meleeHero)
-        {
-            meleeHero.RotateTowardsTarget();
-            if (!meleeHero.IsDead)
-            {
-                meleeHero.OnAttack();
-                if(!meleeHero.IsTargetInRange())
-                {
-                    meleeHero.ChangeState(new MoveState());
-                }
-            }
-            
-        }
-    }
 
-
-    public void OnExit<T>(T character)
+    public void OnExit(Character character)
     {
         
     }
