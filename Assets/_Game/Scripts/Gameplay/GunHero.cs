@@ -9,9 +9,14 @@ public class GunHero : Character
     public override void Update()
     {
         base.Update();
-       /* Debug.Log(CurrentState);
-        Debug.Log("IN Range? " + IsTargetInRange());
-        Debug.Log("Is moving? " + IsMoving());*/
+        /* Debug.Log(CurrentState);
+         Debug.Log("IN Range? " + IsTargetInRange());
+         Debug.Log("Is moving? " + IsMoving());*/
+        if(TargetTransform != null)
+        {
+            Debug.Log(TargetTransform.name);
+        }
+       
     }
     public override void OnInit()
     {
@@ -32,7 +37,7 @@ public class GunHero : Character
 
     public bool HasTarget()
     {
-        return TargetTransform;
+        return TargetTransform != null;
     }
 
 }

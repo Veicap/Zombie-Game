@@ -1,44 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HeroSight : MonoBehaviour
 {
-    [SerializeField] Character hero;
+    [SerializeField] Character character;
     [SerializeField] Transform barrierPoint;
+    private List<Zombie> listCharacterInSight = new();
 
     private void Awake()
     {
-        if(hero is MeleeHero)
+        if (character is MeleeHero || character is Zombie)
         {
-            hero.SetTargetPos(barrierPoint);
+            character.SetTargetPos(barrierPoint);
         }
-        if(hero is GunHero)
+        if (character is GunHero)
         {
-            hero.SetTargetPos(null);
+            character.SetTargetPos(null);
         }
     }
+
+/*    private void LateUpdate()
+    {
+        if(hero is GunHero)
+        {
+            Debug.Log(listZombieInSight.Count());
+        }
+    }*/
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Zombie"))
         {
-            hero.SetTargetPos(other.GetComponent<Zombie>().transform);
+            if(!listCharacterInSight.Contains(other.GetComponent<Zombie>()))
+            {
+                listCharacterInSight.Add(other.GetComponent<Zombie>());
+            }
+            character.SetTargetPos(listCharacterInSight[0].transform);
         }
+        Debug.Log(other.name);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Zombie"))
         {
-            if (hero is MeleeHero)
+            listCharacterInSight.Remove(other.GetComponent<Zombie>()); 
+            if (character is MeleeHero &&  listCharacterInSight.Count == 0)
             {
-                hero.SetTargetPos(barrierPoint.transform);
+                character.SetTargetPos(barrierPoint.transform);
             }
-            if (hero is GunHero)
+            if (character is GunHero)
             {
-               // hero.SetTargetPos(null);
+                if(listCharacterInSight.Count != 0)
+                {
+                    character.SetTargetPos(listCharacterInSight[0].transform);
+                }
+                else
+                {
+                    character.SetTargetPos(null);
+                }
             }
         }
-        Debug.LogError("Exit");
     }
 }

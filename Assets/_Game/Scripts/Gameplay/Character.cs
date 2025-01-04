@@ -22,18 +22,18 @@ public abstract class Character : MonoBehaviour
 
     private IState currentState;
     private Transform targetTransform;
-    private bool isDead;
     private bool isMoving;
     private float attackCooldown;
 
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
-
-    public bool IsDead => isDead;
+    public bool IsDead => health <= 0;
     public Transform TargetTransform => targetTransform;
     public float AttackRange => attackRange;
 
+
+    
     public virtual void Start()
     {
         OnInit();
@@ -51,7 +51,6 @@ public abstract class Character : MonoBehaviour
     public virtual void OnInit()
     {
         currentState = new MoveState();
-        isDead = false;
         isMoving = false;
         attackCooldown = AttackSpeed;
     }
@@ -83,13 +82,16 @@ public abstract class Character : MonoBehaviour
 
     public void OnHit(float damageAmount)
     {
-        health -= damageAmount;
-
-        if (health <= 0 && !isDead)
+        if(!IsDead)
         {
-            isDead = true;
-            OnDeath();
+            health -= damageAmount;
+
+            if (IsDead)
+            {
+                OnDeath();
+            }
         }
+        
     }
 
     protected virtual void OnDeath()
@@ -118,12 +120,12 @@ public abstract class Character : MonoBehaviour
         float distance = Vector3.Distance(transform.position, TargetTransform.position);
         return distance <= AttackRange + offsetRange;
     }
-
+    // sua lai cho hop voi zombie
     public void MoveToTarget()
     {
         if (targetTransform == null || agent == null) return;
         Vector3 destination = targetTransform.position;
-        destination.x -= attackRange;
+        destination.z -= attackRange;
         agent.SetDestination(destination);
     }
     public void StopMoving()
@@ -134,6 +136,8 @@ public abstract class Character : MonoBehaviour
     {
         return isMoving;
     }
+
+    // can phai sua lai
     public void RotateTowardsTarget()
     {
         if (TargetTransform == null) return;

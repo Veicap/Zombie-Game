@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class Zombie : Character
 {
-    [SerializeField] private Transform zombiePoint;
+    public override void OnInit()
+    {
+        base.OnInit();
+    }
 
-    public Transform ZombiePoint => zombiePoint;
+    public override void Update()
+    {
+        base.Update();
+       // Debug.Log(TargetTransform);
+    }
+
+    public override void OnAttack()
+    {
+        base.OnAttack();
+    }
 }

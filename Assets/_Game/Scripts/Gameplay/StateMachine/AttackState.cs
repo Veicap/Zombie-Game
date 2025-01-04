@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackState : IState
 {
-
     public void OnEnter(Character character)
     {
         character.StopMoving();
@@ -24,7 +23,6 @@ public class AttackState : IState
             {
                 character.ChangeState(new MoveState());
                 character.ResetAttackCoolDown();
-                
             }
             if(character is GunHero gunHero)
             {

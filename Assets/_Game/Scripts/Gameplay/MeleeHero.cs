@@ -10,5 +10,11 @@ public class MeleeHero : Character
     {
         base.OnAttack();
     }
-    
+
+    public override void Update()
+    {
+        base.Update();
+        Debug.Log(TargetTransform.forward);
+    }
+
 }
