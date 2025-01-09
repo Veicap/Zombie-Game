@@ -2,21 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunHero : Character
+public class PistolHero : Character
 {
-    private const string IDLE = "Idle";
-
     public override void Update()
     {
         base.Update();
         /* Debug.Log(CurrentState);
          Debug.Log("IN Range? " + IsTargetInRange());
          Debug.Log("Is moving? " + IsMoving());*/
-        if(TargetTransform != null)
-        {
-            Debug.Log(TargetTransform.name);
-        }
-       
+        Debug.Log(HasTarget());
     }
     public override void OnInit()
     {
@@ -28,16 +22,4 @@ public class GunHero : Character
         // Attack
         base.OnAttack();
     }
-    
-    public void ChangeToIdleState()
-    {
-        // Chuyen sang trang thai ilde
-        ChangeAnimation(IDLE);
-    }
-
-    public bool HasTarget()
-    {
-        return TargetTransform != null;
-    }
-
 }

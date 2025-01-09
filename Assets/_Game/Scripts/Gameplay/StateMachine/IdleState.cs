@@ -6,22 +6,15 @@ public class IdleState : IState
 {
     public void OnEnter(Character character)
     {
-        if (character is GunHero gunHero)
-        {
-            gunHero.ChangeToIdleState();
-        }
+        character.ChangeToIdleState();
     }
 
     public void OnExecute(Character character)
     {
-        if(character is GunHero gunHero)
+        if (character.HasTarget())
         {
-            if(gunHero.HasTarget())
-            {
-                gunHero.ChangeState(new MoveState());
-            }
+            character.ChangeState(new MoveState());
         }
-
     }
 
     public void OnExit(Character character)

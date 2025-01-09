@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,10 +19,11 @@ public abstract class Character : MonoBehaviour
     private const string WALK = "Walk";
     private const string DEAD = "Dead";
     private const string ATTACK = "Attack";
+    private const string IDLE = "Idle";
+
 
     private IState currentState;
     private Transform targetTransform;
-    private bool isMoving;
     private float attackCooldown;
 
 
@@ -51,7 +52,6 @@ public abstract class Character : MonoBehaviour
     public virtual void OnInit()
     {
         currentState = new MoveState();
-        isMoving = false;
         attackCooldown = AttackSpeed;
     }
 
@@ -66,17 +66,11 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-
     public void OnMove()
     {
         // Tranh tinh trang update move lien tuc
-        if (!isMoving)
-        {
-            ChangeAnimation(WALK);
-            isMoving = true;
-        }
-
-        MoveToTarget();
+        ChangeAnimation(WALK);
+        MoveToTarget(TargetTransform);
     }
 
 
@@ -121,20 +115,23 @@ public abstract class Character : MonoBehaviour
         return distance <= AttackRange + offsetRange;
     }
     // sua lai cho hop voi zombie
-    public void MoveToTarget()
+    public void MoveToTarget(Transform targetTransform)
     {
+        SetTargetPos(targetTransform);
+
         if (targetTransform == null || agent == null) return;
         Vector3 destination = targetTransform.position;
-        destination.z -= attackRange;
+
+        Vector3 forwardDirection = targetTransform.forward;
+
+        destination += forwardDirection * attackRange;
+
         agent.SetDestination(destination);
     }
-    public void StopMoving()
+
+    public bool HasTarget()
     {
-        isMoving = false;
-    }
-    public bool IsMoving()
-    {
-        return isMoving;
+        return TargetTransform != null;
     }
 
     // can phai sua lai
@@ -150,5 +147,10 @@ public abstract class Character : MonoBehaviour
     public void ResetAttackCoolDown()
     {
         attackCooldown = attackSpeed;
+    }
+    public void ChangeToIdleState()
+    {
+        // Chuyen sang trang thai ilde
+        ChangeAnimation(IDLE);
     }
 }

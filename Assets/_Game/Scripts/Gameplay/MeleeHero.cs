@@ -14,7 +14,6 @@ public class MeleeHero : Character
     public override void Update()
     {
         base.Update();
-        Debug.Log(TargetTransform.forward);
     }
 
 }

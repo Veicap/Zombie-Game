@@ -6,7 +6,7 @@ public class AttackState : IState
 {
     public void OnEnter(Character character)
     {
-        character.StopMoving();
+
     }
 
     public void OnExecute(Character character)
@@ -18,22 +18,20 @@ public class AttackState : IState
         {
             // Tan cong
             character.OnAttack();
-            // Neu khong co muc tieu
-            if(!character.IsTargetInRange())
+            if (!character.HasTarget())
             {
-                character.ChangeState(new MoveState());
-                character.ResetAttackCoolDown();
+                character.ChangeState(new IdleState());
             }
-            if(character is GunHero gunHero)
+            else
             {
-                if(!gunHero.HasTarget())
+                if (!character.IsTargetInRange())
                 {
-                    gunHero.ChangeState(new IdleState());
+                    character.ResetAttackCoolDown();
+                    character.ChangeState(new MoveState());
                 }
             }
+            // Neu khong co muc tieu
         }
-            
-        
     }
 
 

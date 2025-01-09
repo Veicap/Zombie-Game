@@ -7,13 +7,11 @@ public class MoveState : IState
 
     public void OnEnter(Character character)
     {
-        
+        character.OnMove();
     }
 
     public void OnExecute(Character character)
     {
-        // Di chuyen
-        character.OnMove();
         // Neu co muc tieu trong tam danh
         if(character.IsTargetInRange())
         {

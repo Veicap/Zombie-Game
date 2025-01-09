@@ -7,61 +7,83 @@ public class HeroSight : MonoBehaviour
 {
     [SerializeField] Character character;
     [SerializeField] Transform barrierPoint;
-    private List<Zombie> listCharacterInSight = new();
+    private readonly List<Character> listTargetInsight = new();
 
-    private void Awake()
+    private void Start()
     {
-        if (character is MeleeHero || character is Zombie)
+       
+        if (character is PistolHero)
         {
-            character.SetTargetPos(barrierPoint);
+            character.MoveToTarget(null);
         }
-        if (character is GunHero)
+        else
         {
-            character.SetTargetPos(null);
+            character.MoveToTarget(barrierPoint);
         }
     }
 
-/*    private void LateUpdate()
+    private void LateUpdate()
     {
-        if(hero is GunHero)
+        if (character is Zombie)
         {
-            Debug.Log(listZombieInSight.Count());
+            Debug.Log(listTargetInsight.Count());
         }
-    }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        // sight of hero
         if (other.CompareTag("Zombie"))
         {
-            if(!listCharacterInSight.Contains(other.GetComponent<Zombie>()))
+            if(!listTargetInsight.Contains(other.GetComponent<Character>()))
             {
-                listCharacterInSight.Add(other.GetComponent<Zombie>());
+                listTargetInsight.Add(other.GetComponent<Character>());
             }
-            character.SetTargetPos(listCharacterInSight[0].transform);
+            character.MoveToTarget(listTargetInsight[0].transform);
         }
-        Debug.Log(other.name);
+        // sight of zombie
+        if(other.CompareTag("Hero"))
+        {
+            /*if (!listTargetInsight.Contains())
+            {
+                listTargetInsight.Add(other.GetComponent<Character>());
+            }*/
+            if (!listTargetInsight.Contains(other.GetComponent<Character>()))
+            {
+                listTargetInsight.Add(other.GetComponent<Character>());
+            }
+            character.MoveToTarget(listTargetInsight[0].transform);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Zombie"))
         {
-            listCharacterInSight.Remove(other.GetComponent<Zombie>()); 
-            if (character is MeleeHero &&  listCharacterInSight.Count == 0)
+            listTargetInsight.Remove(other.GetComponent<Character>()); 
+            if (character is MeleeHero &&  listTargetInsight.Count == 0)
             {
-                character.SetTargetPos(barrierPoint.transform);
+                character.MoveToTarget(barrierPoint.transform);
             }
-            if (character is GunHero)
+            if (character is PistolHero)
             {
-                if(listCharacterInSight.Count != 0)
+                if(listTargetInsight.Count != 0)
                 {
-                    character.SetTargetPos(listCharacterInSight[0].transform);
+                    character.MoveToTarget(listTargetInsight[0].transform);
                 }
                 else
                 {
-                    character.SetTargetPos(null);
+                    character.MoveToTarget(null);
                 }
             }
+        }
+        if (other.CompareTag("Hero"))
+        {
+            /*if (!listTargetInsight.Contains())
+            {
+                listTargetInsight.Add(other.GetComponent<Character>());
+            }*/
+            character.SetTargetPos(barrierPoint);
         }
     }
 }
