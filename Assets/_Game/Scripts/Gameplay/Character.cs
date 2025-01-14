@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour, ITarget
 {
     [Header("Character Attributes")]
     [SerializeField] private float health = 100f;
@@ -11,30 +11,31 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float attackSpeed = 1.0f;
     [SerializeField] private float offsetRange = 0.2f;
     [SerializeField] private float speedRotation = 3f;
+    [SerializeField] private Transform cTransform;
+    [SerializeField] private float timeToDespawn = 3.5f;
 
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
 
-    private const string WALK = "Walk";
-    private const string DEAD = "Dead";
-    private const string ATTACK = "Attack";
-    private const string IDLE = "Idle";
-
-
+    
     private IState currentState;
     private Transform targetTransform;
     private float attackCooldown;
+    private bool isMoving;
+    private ITarget target;
 
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
-    public bool IsDead => health <= 0;
+    public bool IsDead() => health <= 0;
     public Transform TargetTransform => targetTransform;
+    public ITarget Target => target;
     public float AttackRange => attackRange;
 
-
     
+
+
     public virtual void Start()
     {
         OnInit();
@@ -45,10 +46,6 @@ public abstract class Character : MonoBehaviour
         CurrentState?.OnExecute(this);
     }
 
-    public void SetTargetPos(Transform targetTransfrorm)
-    {
-        targetTransform = targetTransfrorm;
-    }
     public virtual void OnInit()
     {
         currentState = new MoveState();
@@ -62,37 +59,58 @@ public abstract class Character : MonoBehaviour
         if (attackCooldown >= AttackSpeed)
         {
             attackCooldown = 0f;
-            ChangeAnimation(ATTACK);
+            if(!target.IsDead())
+            {
+                target.OnHit(damage);
+            }
+            ChangeAnimation(Constants.ANIM_ATTACK);
         }
     }
 
     public void OnMove()
     {
         // Tranh tinh trang update move lien tuc
-        ChangeAnimation(WALK);
-        MoveToTarget(TargetTransform);
+        if(!isMoving)
+        {
+            ChangeAnimation(Constants.ANIM_WALK);
+            isMoving = true;
+        }
+        MoveToTarget();
     }
-
+    public void StopMoving()
+    {
+        isMoving = false;
+    }
 
     public void OnHit(float damageAmount)
     {
-        if(!IsDead)
+        if(!IsDead())
         {
             health -= damageAmount;
 
-            if (IsDead)
+            if (IsDead())
             {
                 OnDeath();
             }
         }
-        
     }
 
-    protected virtual void OnDeath()
+    public virtual void OnDeath()
     {
-        ChangeAnimation(DEAD);
+        ChangeAnimation(Constants.ANIM_DEAD);
+        StartCoroutine(DespawnTarget());
     }
 
+    public void OnDespawn()
+    {
+        Destroy(gameObject);
+    }
+
+    private IEnumerator DespawnTarget()
+    {
+        yield return new WaitForSeconds(timeToDespawn);
+        OnDespawn();
+    }
     public void ChangeAnimation(string animationName)
     {
         if (animator != null)
@@ -108,6 +126,26 @@ public abstract class Character : MonoBehaviour
         currentState?.OnEnter(this);
     }
 
+    // Handle Target Position and move to target
+
+    public void SetTarget(ITarget target)
+    {
+        this.target = target;
+        if(target != null)
+        {
+            SetTargetPos(target.GetTransform());
+        }
+    }
+
+    public void SetTargetPos(Transform targetTransfrorm)
+    {
+        targetTransform = targetTransfrorm;
+    }
+
+    public Transform GetTransform()
+    {
+        return cTransform;
+    }
     public bool IsTargetInRange()
     {
         if (TargetTransform == null) return false;
@@ -115,23 +153,18 @@ public abstract class Character : MonoBehaviour
         return distance <= AttackRange + offsetRange;
     }
     // sua lai cho hop voi zombie
-    public void MoveToTarget(Transform targetTransform)
+    public void MoveToTarget()
     {
-        SetTargetPos(targetTransform);
-
         if (targetTransform == null || agent == null) return;
-        Vector3 destination = targetTransform.position;
-
         Vector3 forwardDirection = targetTransform.forward;
-
-        destination += forwardDirection * attackRange;
-
+        Vector3 destination = targetTransform.position + forwardDirection * attackRange;
         agent.SetDestination(destination);
     }
 
     public bool HasTarget()
     {
-        return TargetTransform != null;
+        
+        return target != null;
     }
 
     // can phai sua lai
@@ -142,7 +175,6 @@ public abstract class Character : MonoBehaviour
         Vector3 direction = (TargetTransform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedRotation);
-       
     }
     public void ResetAttackCoolDown()
     {
@@ -151,6 +183,8 @@ public abstract class Character : MonoBehaviour
     public void ChangeToIdleState()
     {
         // Chuyen sang trang thai ilde
-        ChangeAnimation(IDLE);
+        ChangeAnimation(Constants.ANIM_IDLE);
     }
+
+    protected float Health => health;
 }

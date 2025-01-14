@@ -7,13 +7,14 @@ public class MoveState : IState
 
     public void OnEnter(Character character)
     {
-        character.OnMove();
+        
     }
 
     public void OnExecute(Character character)
     {
+        character.OnMove();
         // Neu co muc tieu trong tam danh
-        if(character.IsTargetInRange())
+        if (character.IsTargetInRange())
         {
             // chuyen sang trang thai tan cong
             character.ChangeState(new AttackState());

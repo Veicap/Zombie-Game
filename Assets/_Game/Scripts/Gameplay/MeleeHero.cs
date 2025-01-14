@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MeleeHero : Character
+public class MeleeHero : Hero
 {
     public override void OnInit()
     {
@@ -14,6 +14,7 @@ public class MeleeHero : Character
     public override void Update()
     {
         base.Update();
+        Debug.Log("Player has target:  " + HasTarget());
     }
 
 }

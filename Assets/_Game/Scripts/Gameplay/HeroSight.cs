@@ -5,54 +5,63 @@ using UnityEngine;
 
 public class HeroSight : MonoBehaviour
 {
-    [SerializeField] Character character;
-    [SerializeField] Transform barrierPoint;
-    private readonly List<Character> listTargetInsight = new();
+    [SerializeField] Hero hero;
+    [SerializeField] GoalTarget goalTarget;
+    private readonly List<Zombie> listZombieInsight = new();
+    private ITarget currentTarget;
 
     private void Start()
     {
-       
-        if (character is PistolHero)
+        if (hero is PistolHero)
         {
-            character.MoveToTarget(null);
+            hero.SetTarget(null);
         }
         else
         {
-            character.MoveToTarget(barrierPoint);
+            hero.SetTarget(goalTarget);
         }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        if (character is Zombie)
+        if(listZombieInsight.Count >= 2)
         {
-            Debug.Log(listTargetInsight.Count());
+            if(currentTarget.IsDead())
+            {
+                listZombieInsight.RemoveAt(0);
+                hero.SetTarget(listZombieInsight[0]);
+            }
         }
+        /*else
+        {
+            if (currentTarget.IsDead())
+            {
+                listZombieInsight.RemoveAt(0);
+                if(hero is MeleeHero)
+                {
+                    hero.SetTarget(goalTarget);
+                }
+                else if(hero is PistolHero)
+                {
+                    hero.SetTarget(null);
+                }
+            }
+        }*/
+
+        Debug.Log(listZombieInsight.Count);
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // sight of hero
         if (other.CompareTag("Zombie"))
         {
-            if(!listTargetInsight.Contains(other.GetComponent<Character>()))
+            if(!listZombieInsight.Contains(other.GetComponent<Zombie>()))
             {
-                listTargetInsight.Add(other.GetComponent<Character>());
+                listZombieInsight.Add(other.GetComponent<Zombie>());
             }
-            character.MoveToTarget(listTargetInsight[0].transform);
-        }
-        // sight of zombie
-        if(other.CompareTag("Hero"))
-        {
-            /*if (!listTargetInsight.Contains())
-            {
-                listTargetInsight.Add(other.GetComponent<Character>());
-            }*/
-            if (!listTargetInsight.Contains(other.GetComponent<Character>()))
-            {
-                listTargetInsight.Add(other.GetComponent<Character>());
-            }
-            character.MoveToTarget(listTargetInsight[0].transform);
+            currentTarget = listZombieInsight[0];
+            hero.SetTarget(currentTarget);
         }
     }
 
@@ -60,30 +69,7 @@ public class HeroSight : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-            listTargetInsight.Remove(other.GetComponent<Character>()); 
-            if (character is MeleeHero &&  listTargetInsight.Count == 0)
-            {
-                character.MoveToTarget(barrierPoint.transform);
-            }
-            if (character is PistolHero)
-            {
-                if(listTargetInsight.Count != 0)
-                {
-                    character.MoveToTarget(listTargetInsight[0].transform);
-                }
-                else
-                {
-                    character.MoveToTarget(null);
-                }
-            }
-        }
-        if (other.CompareTag("Hero"))
-        {
-            /*if (!listTargetInsight.Contains())
-            {
-                listTargetInsight.Add(other.GetComponent<Character>());
-            }*/
-            character.SetTargetPos(barrierPoint);
+            listZombieInsight.Remove(other.GetComponent<Zombie>()); 
         }
     }
 }
