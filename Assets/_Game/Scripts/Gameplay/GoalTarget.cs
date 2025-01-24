@@ -22,7 +22,7 @@ public class GoalTarget : MonoBehaviour, ITarget
     }
     public void OnDeath()
     {
-        Debug.Log("End Game");
+      //  Debug.Log("End Game");
     }
 
     public Transform GetTransform()

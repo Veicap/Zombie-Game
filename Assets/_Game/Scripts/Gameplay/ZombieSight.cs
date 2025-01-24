@@ -6,8 +6,8 @@ public class ZombieSight : MonoBehaviour
 {
     [SerializeField] Zombie zombie;
     [SerializeField] GoalTarget goalTarget;
-    private readonly List<Hero> listTargetInsight = new();
-    private ITarget currentTarget;
+    private readonly List<Hero> listHeroInsight = new();
+    private Hero currentHeroTarget;
 
     private void Start()
     {
@@ -16,20 +16,34 @@ public class ZombieSight : MonoBehaviour
 
     private void Update()
     {
+        if (currentHeroTarget != null && currentHeroTarget.IsDead())
+        {
+            listHeroInsight.RemoveAt(0);
+            if (listHeroInsight.Count > 0)
+            {
+                zombie.SetTarget(listHeroInsight[0]);
+                currentHeroTarget = listHeroInsight[0];
+            }
+            else
+            {
+                zombie.SetTarget(goalTarget);
+                currentHeroTarget = null;
+            }
 
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        // sight of zombie
+        Debug.Log(other.name);
+        // sight of zombie  
         if (other.CompareTag("Hero"))
         {
-            if (!listTargetInsight.Contains(other.GetComponent<Hero>()))
+            if (!listHeroInsight.Contains(other.GetComponent<Hero>()))
             {
-                listTargetInsight.Add(other.GetComponent<Hero>());
+                listHeroInsight.Add(other.GetComponent<Hero>());
             }
-            zombie.SetTarget(listTargetInsight[0]);
+            zombie.SetTarget(listHeroInsight[0]);
         }
     }
 
@@ -38,7 +52,7 @@ public class ZombieSight : MonoBehaviour
         
         if (other.CompareTag("Hero"))
         {
-            zombie.SetTarget(goalTarget);
+            listHeroInsight.Remove(other.GetComponent<Hero>());
         }
     }
 }

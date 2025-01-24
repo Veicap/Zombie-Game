@@ -12,9 +12,10 @@ public class Zombie : Character
     public override void Update()
     {
         base.Update();
-        Debug.Log("Zombie HP: " + Health);
+       // Debug.Log("Zombie HP: " + Health);
         //Debug.Log();
-       // Debug.Log(TargetTransform);
+        Debug.Log(TargetTransform);
+
     }
 
     public override void OnAttack()

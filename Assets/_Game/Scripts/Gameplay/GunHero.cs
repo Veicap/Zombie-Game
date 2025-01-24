@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolHero : Hero
+public class GunHero : Hero
 {
     public override void Update()
     {
         base.Update();
-        Debug.Log(HasTarget());
+        //Debug.Log(HasTarget());
     }
     public override void OnInit()
     {

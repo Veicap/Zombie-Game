@@ -8,29 +8,44 @@ public class HeroSight : MonoBehaviour
     [SerializeField] Hero hero;
     [SerializeField] GoalTarget goalTarget;
     private readonly List<Zombie> listZombieInsight = new();
-    private ITarget currentTarget;
+    private Zombie currentZombieTarget;
 
     private void Start()
     {
-        if (hero is PistolHero)
+        if (hero is GunHero)
         {
             hero.SetTarget(null);
         }
-        else
+        else if( hero is MeleeHero)
         {
             hero.SetTarget(goalTarget);
         }
+       
     }
 
     private void Update()
     {
-        if(listZombieInsight.Count >= 2)
+        if (currentZombieTarget != null && currentZombieTarget.IsDead())
         {
-            if(currentTarget.IsDead())
+            listZombieInsight.RemoveAt(0);
+            if(listZombieInsight.Count > 0)
             {
-                listZombieInsight.RemoveAt(0);
                 hero.SetTarget(listZombieInsight[0]);
+                currentZombieTarget = listZombieInsight[0];
             }
+            else
+            {
+                if(hero is GunHero)
+                {
+                    hero.SetTarget(null);
+                    
+                }
+                else if (hero is MeleeHero) {
+                    hero.SetTarget(goalTarget);
+                }
+                currentZombieTarget = null;
+            }
+           
         }
         /*else
         {
@@ -60,8 +75,8 @@ public class HeroSight : MonoBehaviour
             {
                 listZombieInsight.Add(other.GetComponent<Zombie>());
             }
-            currentTarget = listZombieInsight[0];
-            hero.SetTarget(currentTarget);
+            currentZombieTarget = listZombieInsight[0];
+            hero.SetTarget(currentZombieTarget);
         }
     }
 

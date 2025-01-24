@@ -103,7 +103,7 @@ public abstract class Character : MonoBehaviour, ITarget
 
     public void OnDespawn()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private IEnumerator DespawnTarget()
