@@ -20,7 +20,6 @@ public class HeroSight : MonoBehaviour
         {
             hero.SetTarget(goalTarget);
         }
-       
     }
 
     private void Update()
@@ -30,15 +29,14 @@ public class HeroSight : MonoBehaviour
             listZombieInsight.RemoveAt(0);
             if(listZombieInsight.Count > 0)
             {
-                hero.SetTarget(listZombieInsight[0]);
                 currentZombieTarget = listZombieInsight[0];
+                hero.SetTarget(currentZombieTarget);
             }
             else
             {
                 if(hero is GunHero)
                 {
                     hero.SetTarget(null);
-                    
                 }
                 else if (hero is MeleeHero) {
                     hero.SetTarget(goalTarget);
@@ -63,12 +61,13 @@ public class HeroSight : MonoBehaviour
             }
         }*/
 
-        Debug.Log(listZombieInsight.Count);
+       
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.CompareTag("Zombie"))
         {
             if(!listZombieInsight.Contains(other.GetComponent<Zombie>()))

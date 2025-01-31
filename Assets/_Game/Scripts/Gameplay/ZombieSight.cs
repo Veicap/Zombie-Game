@@ -21,8 +21,8 @@ public class ZombieSight : MonoBehaviour
             listHeroInsight.RemoveAt(0);
             if (listHeroInsight.Count > 0)
             {
-                zombie.SetTarget(listHeroInsight[0]);
                 currentHeroTarget = listHeroInsight[0];
+                zombie.SetTarget(currentHeroTarget);
             }
             else
             {
@@ -31,11 +31,11 @@ public class ZombieSight : MonoBehaviour
             }
 
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         // sight of zombie  
         if (other.CompareTag("Hero"))
         {
@@ -43,6 +43,7 @@ public class ZombieSight : MonoBehaviour
             {
                 listHeroInsight.Add(other.GetComponent<Hero>());
             }
+            currentHeroTarget = listHeroInsight[0];
             zombie.SetTarget(listHeroInsight[0]);
         }
     }

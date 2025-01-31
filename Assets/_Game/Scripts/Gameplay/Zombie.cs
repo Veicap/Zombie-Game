@@ -14,7 +14,7 @@ public class Zombie : Character
         base.Update();
        // Debug.Log("Zombie HP: " + Health);
         //Debug.Log();
-        Debug.Log(TargetTransform);
+        //Debug.Log(TargetTransform);
 
     }
 

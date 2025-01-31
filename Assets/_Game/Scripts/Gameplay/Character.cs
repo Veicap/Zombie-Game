@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class Character : MonoBehaviour, ITarget
+public abstract class Character : GameUnit, ITarget
 {
     [Header("Character Attributes")]
     [SerializeField] private float health = 100f;
@@ -48,7 +48,7 @@ public abstract class Character : MonoBehaviour, ITarget
 
     public virtual void OnInit()
     {
-        currentState = new MoveState();
+        currentState = new IdleState();
         attackCooldown = AttackSpeed;
     }
 
@@ -90,6 +90,7 @@ public abstract class Character : MonoBehaviour, ITarget
 
             if (IsDead())
             {
+
                 OnDeath();
             }
         }
@@ -103,7 +104,7 @@ public abstract class Character : MonoBehaviour, ITarget
 
     public void OnDespawn()
     {
-        gameObject.SetActive(false);
+        SimplePool.Despawn(this);   
     }
 
     private IEnumerator DespawnTarget()
@@ -163,7 +164,6 @@ public abstract class Character : MonoBehaviour, ITarget
 
     public bool HasTarget()
     {
-        
         return target != null;
     }
 
