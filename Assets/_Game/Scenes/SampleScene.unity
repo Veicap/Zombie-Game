@@ -3061,7 +3061,7 @@ Transform:
   m_GameObject: {fileID: 1770324825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.18, y: -1, z: -12.15}
+  m_LocalPosition: {x: -6.97, y: -1, z: -12.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3405,7 +3405,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.323
+  m_FillAmount: 0.448
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -3575,6 +3575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b6d28f01ce28041a56a6fd70b81a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfManaText: {fileID: 1697428092}
+  manaBarImage: {fileID: 1956183922}
 --- !u!1 &1992361852
 GameObject:
   m_ObjectHideFlags: 0

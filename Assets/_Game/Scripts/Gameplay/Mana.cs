@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mana : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI numberOfManaText;
+    [SerializeField] private Image manaBarImage;
+
+    private float numberOfMana;
+    private float maxMana;
+
+    private void Awake()
     {
-        
+        maxMana = LevelManager.Ins.MaxMana;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        numberOfMana = LevelManager.Ins.NumberOfMana;
+        numberOfManaText.text = numberOfMana.ToString();
+        manaBarImage.fillAmount = numberOfMana / maxMana;
     }
 }

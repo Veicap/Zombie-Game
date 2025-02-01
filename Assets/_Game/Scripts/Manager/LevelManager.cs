@@ -8,9 +8,11 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform spawnHeroPoint;
     private float numberOfMana;
     private float counter;
+    private const float maxMana = 100;
     int level;
 
     public float NumberOfMana => numberOfMana;
+    public float MaxMana => maxMana;
     private void Start()
     {
         OnInit();
@@ -18,7 +20,7 @@ public class LevelManager : Singleton<LevelManager>
     private void Update()
     {
         counter += Time.deltaTime;
-        if(counter > 1f)
+        if(counter > 1f && numberOfMana < maxMana)
         {
             numberOfMana += 1;
             counter = 0f;
@@ -26,6 +28,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnInit()
     {
+       
         numberOfMana = 0;
         //khoi tao cac thong so truoc khi bat dau man choi
     }
