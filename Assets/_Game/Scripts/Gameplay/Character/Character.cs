@@ -5,14 +5,14 @@ using UnityEngine.AI;
 public abstract class Character : GameUnit, ITarget
 {
     [Header("Character Attributes")]
-    [SerializeField] private float health = 100f;
-    [SerializeField] private float damage = 10f;
-    [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private float attackSpeed = 1.0f;
-    [SerializeField] private float offsetRange = 0.2f;
-    [SerializeField] private float speedRotation = 3f;
-    [SerializeField] private Transform cTransform;
-    [SerializeField] private float timeToDespawn = 3.5f;
+    [SerializeField] protected float health = 100f;
+    [SerializeField] protected float damage = 10f;
+    [SerializeField] protected float attackRange = 1.5f;
+    [SerializeField] protected float attackSpeed = 1.0f;
+    [SerializeField] protected float offsetRange = 0.2f;
+    [SerializeField] protected float speedRotation = 3f;
+    [SerializeField] protected Transform cTransform;
+    [SerializeField] protected float timeToDespawn = 3.5f;
 
     [Header("References")]
     [SerializeField] private Animator animator;
@@ -21,9 +21,9 @@ public abstract class Character : GameUnit, ITarget
     
     private IState currentState;
     private Transform targetTransform;
-    private float attackCooldown;
-    private bool isMoving;
-    private ITarget target;
+    protected float attackCooldown;
+    protected bool isMoving;
+    protected ITarget target;
 
 
     public IState CurrentState => currentState;

@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunHero : Hero
+public class Zombie : Character
 {
-    public override void Update()
-    {
-        base.Update();
-        //Debug.Log(HasTarget());
-    }
     public override void OnInit()
     {
         base.OnInit();
     }
+
+    public override void Update()
+    {
+        base.Update();
+    }
+
     public override void OnAttack()
     {
         base.OnAttack();

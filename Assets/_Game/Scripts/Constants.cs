@@ -8,6 +8,7 @@ public class Constants
     public const string ANIM_DEAD = "Dead";
     public const string ANIM_ATTACK = "Attack";
     public const string ANIM_IDLE = "Idle";
+    public const string ANIM_RELOAD = "Reload";
 }
 
 public enum ItemType
