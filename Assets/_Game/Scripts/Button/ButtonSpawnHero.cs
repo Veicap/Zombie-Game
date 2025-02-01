@@ -17,7 +17,7 @@ public class ButtonSpawnHero : MonoBehaviour
     private float counter;
     private RectTransform rectTransform;
     private const float offsetChangePosRect = 30f;
-    private bool spawnHeroUIReaveled;
+    private bool isSpawnHeroUIEnabled;
 
 
     private void Awake()
@@ -26,14 +26,13 @@ public class ButtonSpawnHero : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-
     public void OnInit()
     {
         buttonSpawnHero.interactable = false;
         manaToSpawnHero.text = heroToSpawn.ManaToSpawn.ToString();
         timeToSpawnHero = heroToSpawn.TimeToSpawn;
         counter = timeToSpawnHero;
-        spawnHeroUIReaveled = false;
+        isSpawnHeroUIEnabled = false;
     }
     private void Start()
     {
@@ -41,23 +40,22 @@ public class ButtonSpawnHero : MonoBehaviour
     }
 
     private void Update()
-    {
-        Debug.Log(spawnHeroUIReaveled);
-        // Debug.Log(LevelManager.Ins.NumberOfMana);
-        // Debug.Log(heroToSpawn.ManaToSpawn);
-        //  Debug.Log(counter);
-        
-        if (CanSpawnHeroUI())
+    {       
+        if (CanSpawnHeroUI() && !isSpawnHeroUIEnabled)
         {
             EnableSpawnHeroUI();
-            spawnHeroUIReaveled = true;
+            isSpawnHeroUIEnabled = true;
         }
-        
+        if(!CanSpawnHeroUI() && isSpawnHeroUIEnabled)
+        {
+            DisAbleSpawnHeroUI();
+            isSpawnHeroUIEnabled = false;
+        }
     }
 
     private bool CanSpawnHeroUI()
     {
-        return LevelManager.Ins.NumberOfMana >= heroToSpawn.ManaToSpawn && counter < 0 && !spawnHeroUIReaveled;
+        return LevelManager.Ins.NumberOfMana >= heroToSpawn.ManaToSpawn && counter < 0;
     }
 
     // reference by button
@@ -65,20 +63,26 @@ public class ButtonSpawnHero : MonoBehaviour
     {
         //spawn hero
         LevelManager.Ins.OnSpawnHero(heroToSpawn.PoolType);
+        // Reduce Mana
+        LevelManager.Ins.ReduceManaOfGame(heroToSpawn.ManaToSpawn);
         // lock spawn hero
         LockSpawnHero();
         // Unlock spawn hero
         StartCoroutine(UnlockSpawnHero());
     }
 
-    private void LockSpawnHero()
+    private void DisAbleSpawnHeroUI()
     {
         ShowBackGround();
-        spawnHeroUIReaveled = false;
+        isSpawnHeroUIEnabled = false;
         buttonSpawnHero.interactable = false;
+        ChangePositionOfRectransfor(-offsetChangePosRect);
+    }
+
+    private void LockSpawnHero()
+    {
         counter = timeToSpawnHero;
         countDownToSpawnImage.fillAmount = 1;
-        ChangePositionOfRectransfor(-offsetChangePosRect);
     }
 
     private void ChangePositionOfRectransfor(float numberOfOffset)
@@ -94,7 +98,7 @@ public class ButtonSpawnHero : MonoBehaviour
         {
             counter -= Time.deltaTime;
             countDownToSpawnImage.fillAmount = counter / timeToSpawnHero;
-            yield return null;  // Chờ frame tiếp theo
+            yield return null;
         }
     }
     private void EnableSpawnHeroUI()

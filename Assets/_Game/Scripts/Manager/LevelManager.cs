@@ -79,6 +79,11 @@ public class LevelManager : Singleton<LevelManager>
         Character hero = SimplePool.Spawn<Character>(poolType, spawnHeroPoint.position, spawnHeroPoint.rotation);
     }
 
+    public void ReduceManaOfGame(float numberOfMana)
+    {
+        this.numberOfMana -= numberOfMana;
+    }
+
     public void CollectItem(AddDictionaryItem item)
     {
         //thu thap nhung thang item da hoan thanh
