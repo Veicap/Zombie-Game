@@ -9,8 +9,9 @@ public class RifleHero : GunHero
 
     [SerializeField] private int numberOfBullet;
     [SerializeField] private float timeToReload;
+    [SerializeField] private int numberOfBulletShoot;
     
-    private int numberOfShoot;
+    private int totalNumberOfBulletShooted;
     private IRifleState currentState;
     private bool canCounter = true;
     private bool isReloading = false;
@@ -24,14 +25,14 @@ public class RifleHero : GunHero
         /*Debug.Log(currentState);
         Debug.Log("Rifle Hero has target: " + HasTarget());*/
         currentState.OnExecute(this);
-        Debug.Log("Number of shoot" + numberOfShoot);
+        Debug.Log("Number of shoot" + totalNumberOfBulletShooted);
         // Debug.Log(attackCooldown);
        // Debug.Log(attackCooldown);
     }
     public override void OnInit()
     {
         base.OnInit();
-        numberOfShoot = 0;
+        totalNumberOfBulletShooted = 0;
         currentState = new IdleRifleState();
     }
 
@@ -53,7 +54,7 @@ public class RifleHero : GunHero
 
                 StartCoroutine(OnChangeAttackAnim());
 
-                numberOfShoot += 3;
+                totalNumberOfBulletShooted += numberOfBulletShoot;
 
                 
             }
@@ -70,7 +71,7 @@ public class RifleHero : GunHero
         {
             canCounter = true;
         }
-        if (numberOfShoot >= numberOfBullet)
+        if (totalNumberOfBulletShooted >= numberOfBullet)
         {
             StartCoroutine(OnReload());
         }
@@ -83,7 +84,7 @@ public class RifleHero : GunHero
 
         yield return new WaitForSeconds(timeToReload);
 
-        numberOfShoot = 0;
+        totalNumberOfBulletShooted = 0;
         isReloading = false;
         canCounter = true;
     }

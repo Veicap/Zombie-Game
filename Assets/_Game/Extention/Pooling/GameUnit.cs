@@ -21,11 +21,14 @@ public class GameUnit : MonoBehaviour
 
 public enum PoolType
 {
+    // Hero
     Hero_1 = 0,
     Hero_2 = 1,
     Hero_3 = 2,
+    Hero_4 = 3,
+    Hero_5 = 4,
 
     //Zombie
-    Zombie_1 = 3,
-    Zombie_2 = 4,   
+    Zombie_1 = 5,
+    Zombie_2 = 6,   
 }
