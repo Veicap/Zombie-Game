@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public abstract class Character : GameUnit, ITarget
 {
     [Header("Character Attributes")]
-    [SerializeField] protected float health = 100f;
+    [SerializeField] protected float maxHP = 100f;
     [SerializeField] protected float damage = 10f;
     [SerializeField] protected float attackRange = 1.5f;
     [SerializeField] protected float attackSpeed = 1.0f;
@@ -17,26 +17,31 @@ public abstract class Character : GameUnit, ITarget
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private GoalTarget goalTarget;
+    [SerializeField] private HealthBar healthBar;
 
-    
+
     private IState currentState;
     private Transform targetTransform;
     protected float attackCooldown;
     protected bool isMoving;
     protected ITarget target;
+    protected float hp;
+    protected HealthBar hBar;
 
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
-    public bool IsDead() => health <= 0;
+    public bool IsDead() => hp <= 0;
     public Transform TargetTransform => targetTransform;
     public ITarget Target => target;
     public float AttackRange => attackRange;
+    public GoalTarget GoalTarget => goalTarget;
 
-    
 
 
-    public virtual void Start()
+
+    private void Start()
     {
         OnInit();
     }
@@ -48,8 +53,13 @@ public abstract class Character : GameUnit, ITarget
 
     public virtual void OnInit()
     {
+        hp = maxHP;
         currentState = new IdleState();
         attackCooldown = AttackSpeed;
+      //  Debug.Log(maxHP);
+        hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
+        hBar.OnInit(maxHP, transform);
+        
     }
 
     public virtual void OnAttack()
@@ -86,8 +96,8 @@ public abstract class Character : GameUnit, ITarget
     {
         if(!IsDead())
         {
-            health -= damageAmount;
-
+            hp -= damageAmount;
+            hBar.SetNewHP(hp);
             if (IsDead())
             {
 
@@ -104,7 +114,8 @@ public abstract class Character : GameUnit, ITarget
 
     public void OnDespawn()
     {
-        SimplePool.Despawn(this);   
+        SimplePool.Despawn(this);
+        SimplePool.Despawn(hBar);
     }
 
     private IEnumerator DespawnTarget()
@@ -186,5 +197,5 @@ public abstract class Character : GameUnit, ITarget
         ChangeAnimation(Constants.ANIM_IDLE);
     }
 
-    protected float Health => health;
+    protected float Health => hp;
 }

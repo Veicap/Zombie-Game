@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolType: 4
-  health: 10000
+  maxHP: 100
   damage: 10
   attackRange: 7
   attackSpeed: 1
@@ -131,6 +131,9 @@ MonoBehaviour:
   timeToDespawn: 3.5
   animator: {fileID: 1773617240148621185}
   agent: {fileID: 633231108386022260}
+  goalTarget: {fileID: 2590774997228650549, guid: 3e0b953c90f102547acd17a201fba8a3, type: 3}
+  healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  healBarSpawn: {fileID: 0}
   manaToSpawn: 5
   timeToSpawn: 3
   numberOfBullet: 1
@@ -255,7 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 985020868294944665}
-  goalTarget: {fileID: 0}
 --- !u!1001 &710100726434181852
 PrefabInstance:
   m_ObjectHideFlags: 0

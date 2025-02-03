@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Zombie : Character
 {
-    public override void OnInit()
+    private void Start()
     {
-        base.OnInit();
+        OnInit();
     }
 
     public override void Update()

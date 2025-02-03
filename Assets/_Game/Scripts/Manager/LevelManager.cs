@@ -29,7 +29,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnInit()
     {
        
-        numberOfMana = 0;
+        numberOfMana = 100;
         //khoi tao cac thong so truoc khi bat dau man choi
     }
 

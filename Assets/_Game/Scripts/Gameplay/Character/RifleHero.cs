@@ -17,7 +17,8 @@ public class RifleHero : GunHero
     private bool isReloading = false;
     private void Awake()
     {
-        OnInit();
+         //OnInit();
+        
     }
     public override void Update()
     {
@@ -25,7 +26,7 @@ public class RifleHero : GunHero
         /*Debug.Log(currentState);
         Debug.Log("Rifle Hero has target: " + HasTarget());*/
         currentState.OnExecute(this);
-        Debug.Log("Number of shoot" + totalNumberOfBulletShooted);
+       // Debug.Log("Number of shoot" + totalNumberOfBulletShooted);
         // Debug.Log(attackCooldown);
        // Debug.Log(attackCooldown);
     }
@@ -34,6 +35,7 @@ public class RifleHero : GunHero
         base.OnInit();
         totalNumberOfBulletShooted = 0;
         currentState = new IdleRifleState();
+        Debug.Log("Oke em oi!!!");
     }
 
     public override void OnAttack()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MeleeHero : Hero
 {
+
     public override void OnInit()
     {
         base.OnInit();

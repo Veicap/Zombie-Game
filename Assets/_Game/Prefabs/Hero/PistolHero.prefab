@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolType: 0
-  health: 100
+  maxHP: 100
   damage: 10
   attackRange: 5
   attackSpeed: 1
@@ -131,6 +131,9 @@ MonoBehaviour:
   timeToDespawn: 3.5
   animator: {fileID: 7412066545292842909}
   agent: {fileID: 8665091746268955474}
+  goalTarget: {fileID: 2590774997228650549, guid: 3e0b953c90f102547acd17a201fba8a3, type: 3}
+  healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  healBarSpawn: {fileID: 3442336914332391564, guid: 6395b1f626258bd4295d09e98fb8c22f, type: 3}
   manaToSpawn: 5
   timeToSpawn: 2
 --- !u!1001 &1498832433779286750

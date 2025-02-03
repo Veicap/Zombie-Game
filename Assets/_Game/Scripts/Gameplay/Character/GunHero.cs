@@ -8,12 +8,14 @@ public class GunHero : Hero
     {
         base.Update();
         //Debug.Log(HasTarget());
-        Debug.Log(offsetRange);
+        //Debug.Log(offsetRange);
     }
+
     public override void OnInit()
     {
         base.OnInit();
     }
+
     public override void OnAttack()
     {
         base.OnAttack();

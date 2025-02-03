@@ -30,5 +30,8 @@ public enum PoolType
 
     //Zombie
     Zombie_1 = 5,
-    Zombie_2 = 6,   
+    Zombie_2 = 6,
+    
+    // HealBar
+    HealBar = 7,    
 }

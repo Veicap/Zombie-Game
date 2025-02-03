@@ -18,7 +18,7 @@ public static class SimplePool
         // tạo pool dựa theo type của prefab
         if (!poolInstance.ContainsKey(prefab.PoolType) || poolInstance[prefab.PoolType] == null)
         {
-            Pool p = new Pool();
+            Pool p = new();
             p.PreLoad(prefab, amount, parent);
             poolInstance[prefab.PoolType] = p;
         }
@@ -28,7 +28,7 @@ public static class SimplePool
     {
         if (!poolInstance.ContainsKey(poolType))
         {
-            Debug.LogError(poolType + "IS NOT PRELOAD !!!");
+            Debug.LogError(poolType + " IS NOT PRELOAD !!!");
             return null;
         }
         return poolInstance[poolType].Spawn(Pose, rot) as T;
@@ -102,7 +102,6 @@ public class Pool
         for (int i = 0; i < amount; i++)
         {
             // Tạo ra các object sau đó đưa nó vào pool 
-            Debug.Log("Preload");
             Despawn(Object.Instantiate(prefab, parent));
         }
     }
@@ -114,7 +113,7 @@ public class Pool
     {
         GameUnit unit;
         // neu ma trong inactives ma chua co phan tu nao day thi minh phai tao ra mot thang unit tai cai simple pooling ta tạo ra trong scene
-        Debug.Log("Amount pool in inactives" + inActives.Count);
+        //Debug.Log("Amount pool in inactives" + inActives.Count);
         if (inActives.Count <= 0)
         {
             unit = Object.Instantiate(prefab, parent);
@@ -141,7 +140,7 @@ public class Pool
         // kiem tra xem co dang active hay khong
         if (unit != null /* && unit.gameObject.activeSelf*/)
         {
-            Debug.Log("Despawn");
+           // Debug.Log("Despawn");
             inActives.Enqueue(unit);
             actives.Remove(unit);
             

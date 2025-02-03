@@ -6,7 +6,7 @@ using UnityEngine;
 public class HeroSight : MonoBehaviour
 {
     [SerializeField] Hero hero;
-    [SerializeField] GoalTarget goalTarget;
+   // [SerializeField] GoalTarget goalTarget;
     private readonly List<Zombie> listZombieInsight = new();
     private Zombie currentZombieTarget;
 
@@ -18,7 +18,7 @@ public class HeroSight : MonoBehaviour
         }
         else if( hero is MeleeHero)
         {
-            hero.SetTarget(goalTarget);
+            hero.SetTarget(hero.GoalTarget);
         }
     }
 
@@ -39,7 +39,7 @@ public class HeroSight : MonoBehaviour
                     hero.SetTarget(null);
                 }
                 else if (hero is MeleeHero) {
-                    hero.SetTarget(goalTarget);
+                    hero.SetTarget(hero.GoalTarget);
                 }
                 currentZombieTarget = null;
             }
