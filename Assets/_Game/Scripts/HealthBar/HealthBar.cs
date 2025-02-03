@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class HealthBar : GameUnit
 {
     [SerializeField] Image imageFill;
-    [SerializeField] Vector3 offset;
-    [SerializeField] PoolType poolType  ;
+    //[SerializeField] Vector3 offset;
+    [SerializeField] PoolType poolType;
 
     private float hp;
     private float maxHp;
-    private Transform target;
+    private ITarget target;
     private void Update()
     {
         if (imageFill != null && maxHp > 0)
@@ -21,18 +21,18 @@ public class HealthBar : GameUnit
 
         if (target != null)
         {
-            transform.position = target.position + offset;
+            transform.position = target.GetOffsetHealthBar() + target.GetPosition();
         }
         //Debug.Log("RealHp" + this.hp);
     }
 
-    public void OnInit(float maxHp, Transform target)
+    public void OnInit(float maxHp, ITarget target)
     {
         this.maxHp = maxHp;
         hp = this.maxHp;
         this.target = target;
         imageFill.fillAmount = 1f;
-        transform.position = target.position + offset;
+        transform.position = target.GetOffsetHealthBar() + target.GetPosition();
     }
 
     public void SetNewHP(float health)

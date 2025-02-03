@@ -8,6 +8,14 @@ public class Zombie : Character
     {
         OnInit();
     }
+    private GoalTarget goalTarget;
+    public GoalTarget GoalTarget => goalTarget;
+    public override void OnInit()
+    {
+        base.OnInit();
+        goalTarget = LevelManager.Ins.heroTurret;
+    }
+    
 
     public override void Update()
     {

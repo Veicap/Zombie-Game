@@ -12,4 +12,8 @@ public interface ITarget
     public void OnDespawn();
 
     public Transform GetTransform();
+
+    public Vector3 GetOffsetHealthBar();
+
+    public Vector3 GetPosition();
 }

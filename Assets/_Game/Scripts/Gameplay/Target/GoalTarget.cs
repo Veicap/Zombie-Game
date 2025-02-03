@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class GoalTarget : MonoBehaviour, ITarget
 {
-    [SerializeField] private float health;
+    [SerializeField] private float maxHp;
     [SerializeField] private Transform goalPos;
-    public bool IsDead() => health <= 0;
+    [SerializeField] private Vector3 offsetHeathBar;
+    [SerializeField] private TurretType turretType;
+
+    protected HealthBar hBar;
+    private float hp;
+
+    private void Start()
+    {
+        OnInit();
+    }
+    private void OnInit()
+    {
+        hp = maxHp;
+        hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
+        hBar.OnInit(maxHp, this);
+    }
+
+    public Vector3 GetOffsetHealthBar()
+    {
+        return offsetHeathBar;
+    }
+
+    public bool IsDead() => hp <= 0;
     public void OnHit(float damageAmount)
     {
         if (!IsDead())
         {
-            health -= damageAmount;
-
+            hp -= damageAmount;
+            hBar.SetNewHP(hp);
             if (IsDead())
             {
                 OnDeath();
@@ -23,6 +45,14 @@ public class GoalTarget : MonoBehaviour, ITarget
     public void OnDeath()
     {
       //  Debug.Log("End Game");
+        if(turretType == TurretType.Turret_Enemy)
+        {
+            Debug.Log("Win");
+        }
+        if (turretType == TurretType.Turret_Hero)
+        {
+            Debug.Log("Lose");
+        }
     }
 
     public Transform GetTransform()
@@ -34,5 +64,15 @@ public class GoalTarget : MonoBehaviour, ITarget
     {
        
     }
+
+    public Vector3 GetPosition()
+    {
+       return transform.position;   
+    }
 }
 
+public enum TurretType
+{
+    Turret_Hero =1,
+    Turret_Enemy =2,
+}

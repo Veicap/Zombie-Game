@@ -13,11 +13,12 @@ public abstract class Character : GameUnit, ITarget
     [SerializeField] protected float speedRotation = 3f;
     [SerializeField] protected Transform cTransform;
     [SerializeField] protected float timeToDespawn = 3.5f;
+    [SerializeField] private Vector3 offsetHealthBar;
 
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private GoalTarget goalTarget;
+    //[SerializeField] private GoalTarget goalTarget;
     [SerializeField] private HealthBar healthBar;
 
 
@@ -28,7 +29,7 @@ public abstract class Character : GameUnit, ITarget
     protected ITarget target;
     protected float hp;
     protected HealthBar hBar;
-
+    private GoalTarget goalTarget;
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
@@ -58,8 +59,8 @@ public abstract class Character : GameUnit, ITarget
         attackCooldown = AttackSpeed;
       //  Debug.Log(maxHP);
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
-        hBar.OnInit(maxHP, transform);
-        
+        hBar.OnInit(maxHP, this);
+        goalTarget = LevelManager.Ins.zombieTurret;
     }
 
     public virtual void OnAttack()
@@ -195,6 +196,16 @@ public abstract class Character : GameUnit, ITarget
     {
         // Chuyen sang trang thai ilde
         ChangeAnimation(Constants.ANIM_IDLE);
+    }
+
+    public Vector3 GetOffsetHealthBar()
+    {
+        return offsetHealthBar;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 
     protected float Health => hp;

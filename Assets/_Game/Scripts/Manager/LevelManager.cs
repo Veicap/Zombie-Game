@@ -6,6 +6,9 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager> 
 {
     [SerializeField] private Transform spawnHeroPoint;
+    public GoalTarget heroTurret;
+    public GoalTarget zombieTurret;
+
     private float numberOfMana;
     private float counter;
     private const float maxMana = 100;
@@ -28,7 +31,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnInit()
     {
-       
+        
         numberOfMana = 100;
         //khoi tao cac thong so truoc khi bat dau man choi
     }

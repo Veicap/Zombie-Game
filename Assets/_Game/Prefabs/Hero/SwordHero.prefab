@@ -301,11 +301,11 @@ MonoBehaviour:
   speedRotation: 3
   cTransform: {fileID: 8993620025469632708}
   timeToDespawn: 3.5
+  offsetHealthBar: {x: 0, y: 2.1, z: 0}
   animator: {fileID: 6907130209430594382}
   agent: {fileID: 445459694953523682}
-  goalTarget: {fileID: 2590774997228650549, guid: 3e0b953c90f102547acd17a201fba8a3, type: 3}
+  goalTarget: {fileID: 214001407490540225, guid: 94e7b04dd7aa3da46b3c7cb7c0d3c454, type: 3}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
-  healBarSpawn: {fileID: 3442336914332391564, guid: 6395b1f626258bd4295d09e98fb8c22f, type: 3}
   manaToSpawn: 5
   timeToSpawn: 3
 --- !u!1001 &2577598459523184093

@@ -190,7 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533b50980e06c424cbab438055689b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  PoolType: 5
+  maxHP: 100
   damage: 10
   attackRange: 1.5
   attackSpeed: 2
@@ -198,8 +199,11 @@ MonoBehaviour:
   speedRotation: 3
   cTransform: {fileID: 6881099610919383818}
   timeToDespawn: 3.43
+  offsetHealthBar: {x: 0, y: 2.1, z: 0}
   animator: {fileID: 3488952115671993644}
   agent: {fileID: 1365412693835654106}
+  goalTarget: {fileID: 1832029410654928897, guid: aebfde2c6d6901e4a8b1f2b25a4c41a8, type: 3}
+  healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
 --- !u!136 &957728715523786673
 CapsuleCollider:
   m_ObjectHideFlags: 0
