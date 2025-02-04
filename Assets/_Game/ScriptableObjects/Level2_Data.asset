@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd378ac13292d4243a60d9f8c829255b, type: 3}
+  m_Name: Level2_Data
+  m_EditorClassIdentifier: 
+  zombieTypes:
+  - type: Zomebie-Regualr
+    prefab: {fileID: 4691699071006621098, guid: e6095c95f8729e34ead016c3ae91ee6f, type: 3}
+    difficultyLevel: 1
+  - type: Zomebie-Fast
+    prefab: {fileID: 5387242364443022954, guid: 41b94bced70f8dd4aa17021db754845f, type: 3}
+    difficultyLevel: 2
+  - type: Zomebie-Fast
+    prefab: {fileID: 7851372517236712684, guid: 724d791081104f0488b4d4f4f8e3f164, type: 3}
+    difficultyLevel: 3
+  level: 2
+  maxWaves: 7

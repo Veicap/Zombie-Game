@@ -134,7 +134,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ZombieController
+  m_Name: ZombieRegular-Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Idle
@@ -211,7 +211,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2395862121540357984}
-    m_Position: {x: 500, y: -40, z: 0}
+    m_Position: {x: 490, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4313218372864942877}
     m_Position: {x: 490, y: 60, z: 0}
@@ -231,7 +231,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 130, y: 10, z: 0}
-  m_EntryPosition: {x: 760, y: -40, z: 0}
+  m_EntryPosition: {x: 780, y: -30, z: 0}
   m_ExitPosition: {x: 760, y: 60, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2395862121540357984}

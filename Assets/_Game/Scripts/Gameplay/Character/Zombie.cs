@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Zombie : Character
 {
-    private void Start()
+    /*private void Start()
     {
         OnInit();
-    }
+    }*/
     private GoalTarget goalTarget;
     public GoalTarget GoalTarget => goalTarget;
     public override void OnInit()

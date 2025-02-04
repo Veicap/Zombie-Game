@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class HeroSight : MonoBehaviour
 {
-    [SerializeField] Hero hero;
-   // [SerializeField] GoalTarget goalTarget;
+    [SerializeField] private Hero hero;
     private readonly List<Zombie> listZombieInsight = new();
     private Zombie currentZombieTarget;
 
@@ -16,7 +15,7 @@ public class HeroSight : MonoBehaviour
         {
             hero.SetTarget(null);
         }
-        else if( hero is MeleeHero)
+        else if (hero is MeleeHero)
         {
             hero.SetTarget(hero.GoalTarget);
         }
@@ -26,56 +25,24 @@ public class HeroSight : MonoBehaviour
     {
         if (currentZombieTarget != null && currentZombieTarget.IsDead())
         {
-            listZombieInsight.RemoveAt(0);
-            if(listZombieInsight.Count > 0)
-            {
-                currentZombieTarget = listZombieInsight[0];
-                hero.SetTarget(currentZombieTarget);
-            }
-            else
-            {
-                if(hero is GunHero)
-                {
-                    hero.SetTarget(null);
-                }
-                else if (hero is MeleeHero) {
-                    hero.SetTarget(hero.GoalTarget);
-                }
-                currentZombieTarget = null;
-            }
-           
+            listZombieInsight.Remove(currentZombieTarget);
+            UpdateCurrentTarget();
         }
-        /*else
-        {
-            if (currentTarget.IsDead())
-            {
-                listZombieInsight.RemoveAt(0);
-                if(hero is MeleeHero)
-                {
-                    hero.SetTarget(goalTarget);
-                }
-                else if(hero is PistolHero)
-                {
-                    hero.SetTarget(null);
-                }
-            }
-        }*/
-
-       
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-       
         if (other.CompareTag("Zombie"))
         {
-            if(!listZombieInsight.Contains(other.GetComponent<Zombie>()))
+            Zombie zombie = other.GetComponent<Zombie>();
+            if (zombie != null && !listZombieInsight.Contains(zombie))
             {
-                listZombieInsight.Add(other.GetComponent<Zombie>());
+                listZombieInsight.Add(zombie);
+                if (currentZombieTarget == null)
+                {
+                    UpdateCurrentTarget();
+                }
             }
-            currentZombieTarget = listZombieInsight[0];
-            hero.SetTarget(currentZombieTarget);
         }
     }
 
@@ -83,7 +50,36 @@ public class HeroSight : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-            listZombieInsight.Remove(other.GetComponent<Zombie>()); 
+            Zombie zombie = other.GetComponent<Zombie>();
+            if (zombie != null && listZombieInsight.Contains(zombie))
+            {
+                listZombieInsight.Remove(zombie);
+                if (currentZombieTarget == zombie)
+                {
+                    UpdateCurrentTarget();
+                }
+            }
+        }
+    }
+
+    private void UpdateCurrentTarget()
+    {
+        if (listZombieInsight.Count > 0)
+        {
+            currentZombieTarget = listZombieInsight[0];
+            hero.SetTarget(currentZombieTarget);
+        }
+        else
+        {
+            currentZombieTarget = null;
+            if (hero is GunHero)
+            {
+                hero.SetTarget(null);
+            }
+            else if (hero is MeleeHero)
+            {
+                hero.SetTarget(hero.GoalTarget);
+            }
         }
     }
 }

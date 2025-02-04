@@ -29,7 +29,7 @@ public abstract class Character : GameUnit, ITarget
     protected ITarget target;
     protected float hp;
     protected HealthBar hBar;
-    private GoalTarget goalTarget;
+    
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
@@ -37,15 +37,8 @@ public abstract class Character : GameUnit, ITarget
     public Transform TargetTransform => targetTransform;
     public ITarget Target => target;
     public float AttackRange => attackRange;
-    public GoalTarget GoalTarget => goalTarget;
+    
 
-
-
-
-    private void Start()
-    {
-        OnInit();
-    }
 
     public virtual void Update()
     {
@@ -57,10 +50,10 @@ public abstract class Character : GameUnit, ITarget
         hp = maxHP;
         currentState = new IdleState();
         attackCooldown = AttackSpeed;
-      //  Debug.Log(maxHP);
+        //  Debug.Log(maxHP);
+        // Debug.Log(hBar);
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
         hBar.OnInit(maxHP, this);
-        goalTarget = LevelManager.Ins.zombieTurret;
     }
 
     public virtual void OnAttack()
@@ -115,8 +108,10 @@ public abstract class Character : GameUnit, ITarget
 
     public void OnDespawn()
     {
+        
         SimplePool.Despawn(this);
         SimplePool.Despawn(hBar);
+
     }
 
     private IEnumerator DespawnTarget()
