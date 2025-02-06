@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveState : IState
 {
-
     public void OnEnter(Character character)
     {
         

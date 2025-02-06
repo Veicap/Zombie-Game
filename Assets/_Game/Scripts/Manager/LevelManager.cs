@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager> 
 {
-    [SerializeField] private Transform spawnHeroPoint;
+    [SerializeField] private Transform spawnHeroPoints;
     [SerializeField] private Transform parentPool;
     [SerializeField] private ListLevelDataSO listLevelDataSO;
-    [SerializeField] private List<Transform> spawnPoints;
+    [SerializeField] private List<Transform> spawnZombiePoints;
     public GoalTarget heroTurret;
     public GoalTarget zombieTurret;
+
+   
+    private readonly List<Hero> listHeroSpawned = new();
+    private readonly List<Zombie> listZombieSpawned = new();
+
 
     private float numberOfMana;
     private float counter;
@@ -23,9 +28,21 @@ public class LevelManager : Singleton<LevelManager>
     public float MaxMana => maxMana;
     private void Start()
     {
-        currentLevel = 1;
-        OnInit();
+        //currentLevel = 1;
+        UIManager.Ins.OpenUI<CanvasMainMenu>();
+        CanvasMainMenu.OnLoadLevel += CanvasMainMenu_OnLoadLevel;
     }
+
+ /*   private void CanvasPauseUI_OnReTryLevel(object sender, System.EventArgs e)
+    {
+        OnRetryLevel();
+    }*/
+
+    private void CanvasMainMenu_OnLoadLevel(object sender, CanvasMainMenu.OnLoadLevelEventArg e)
+    {
+        LoadLevel(e.level);
+    }
+
     private void Update()
     {
         counter += Time.deltaTime;
@@ -37,25 +54,17 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnInit()
     {
-        numberOfMana = 100;
-        currentLevelData = listLevelDataSO.listLevelDataSO[currentLevel-1];
-        for (int i = 0; i < currentLevelData.zombieTypes.Count; i++)
-        {
-            SimplePool.PreLoad(currentLevelData.zombieTypes[i].prefab, 1, parentPool);
-         
-        }
+        numberOfMana = 10;
         currentWave = 1;
         StartCoroutine(SpawnRandomZombies());
-      
     }
 
-    IEnumerator SpawnRandomZombies()
+    private IEnumerator SpawnRandomZombies()
     {
        
         while (currentWave <= currentLevelData.maxWaves)
         {
-          
-            int zombiesToSpawn = 5 + currentWave * 2; 
+            int zombiesToSpawn = 2 + currentWave * 2; 
 
             for (int i = 0; i < zombiesToSpawn; i++)
             {
@@ -63,18 +72,14 @@ public class LevelManager : Singleton<LevelManager>
                 SpawnZombieBasedOnWave(currentWave);
                 yield return new WaitForSeconds(Random.Range(3f, 4f));
             }
-
-            
-            yield return new WaitForSeconds(8f); // Nghỉ giữa các wave
+            yield return new WaitForSeconds(8f); 
             currentWave++;
         }
-
-        
     }
 
-    void SpawnZombieBasedOnWave(int waveNumber)
+    private void SpawnZombieBasedOnWave(int waveNumber)
     {
-        // Tăng tỷ lệ spawn zombie mạnh hơn theo wave
+       
         List<ZombieType> availableZombies = new List<ZombieType>();
         foreach (var zombie in currentLevelData.zombieTypes)
         {
@@ -82,7 +87,6 @@ public class LevelManager : Singleton<LevelManager>
             if (zombie.difficultyLevel <= waveNumber)
             {
                 //Debug.Log("Continue");
-                // Tăng cơ hội xuất hiện cho zombie mạnh hơn ở wave cao hơn
                 for (int i = 0; i < zombie.difficultyLevel; i++)
                 {
                     availableZombies.Add(zombie);
@@ -92,17 +96,14 @@ public class LevelManager : Singleton<LevelManager>
 
         if (availableZombies.Count == 0)
         {
-            
             return;
         }
-
         ZombieType selectedZombie = availableZombies[Random.Range(0, availableZombies.Count)];
       
-        Debug.Log(availableZombies.Count);
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        Character zombieSpawn = SimplePool.Spawn<Character>(selectedZombie.prefab.PoolType, spawnPoint.position, spawnPoint.rotation);
+       // Debug.Log(availableZombies.Count);
+        Transform spawnPoint = spawnZombiePoints[Random.Range(0, spawnZombiePoints.Count)];
+        Zombie zombieSpawn = SimplePool.Spawn<Zombie>(selectedZombie.prefab.PoolType, spawnPoint.position, spawnPoint.rotation);
         zombieSpawn.OnInit();
-        Debug.Log($"Spawned {selectedZombie.type} at {spawnPoint.position}");
     }
 
     public void OnPlay()
@@ -113,6 +114,13 @@ public class LevelManager : Singleton<LevelManager>
     public void LoadLevel(int level)
     {
         //load lai object trong man choi
+        currentLevel = level;
+        currentLevelData = listLevelDataSO.listLevelDataSO[currentLevel - 1];
+        for (int i = 0; i < currentLevelData.zombieTypes.Count; i++)
+        {
+            SimplePool.PreLoad(currentLevelData.zombieTypes[i].prefab, 1, parentPool);
+        }
+        OnInit();
     }
 
     public void OnWin()
@@ -130,25 +138,31 @@ public class LevelManager : Singleton<LevelManager>
         //next 1 level
         OnDespawn();
         LoadLevel(++currentLevel);
-        OnInit();
+        //OnInit();
     }
 
     public void OnRetryLevel()
     {
         //choi lai level
         OnDespawn();
+        // Preload lai element cua level
+        PoolControll.Ins.PreloadInit();
+        // Load lai doc lai data
         LoadLevel(currentLevel);
+        //Khoi tao level
         OnInit();
+    
     }
 
     public void OnDespawn()
     {
         //reset tat ca cac thong so cua man choi
+        SimplePool.ReleaseAll();
     }
 
     public void OnSpawnHero(PoolType poolType)
     {
-        Character hero = SimplePool.Spawn<Character>(poolType, spawnHeroPoint.position, spawnHeroPoint.rotation);
+        Hero hero = SimplePool.Spawn<Hero>(poolType, spawnHeroPoints.position, spawnHeroPoints.rotation);
         hero.OnInit();
     }
 

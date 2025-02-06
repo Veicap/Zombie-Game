@@ -14,13 +14,15 @@ public class GoalTarget : MonoBehaviour, ITarget
 
     private void Start()
     {
-        OnInit();
+       
     }
+
     private void OnInit()
     {
         hp = maxHp;
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
         hBar.OnInit(maxHp, this);
+      //  Debug.Log(hBar);
     }
 
     public Vector3 GetOffsetHealthBar()
@@ -47,11 +49,11 @@ public class GoalTarget : MonoBehaviour, ITarget
       //  Debug.Log("End Game");
         if(turretType == TurretType.Turret_Enemy)
         {
-            Debug.Log("Win");
+            UIManager.Ins.OpenUI<CanvasLevelCompleteUI>();
         }
         if (turretType == TurretType.Turret_Hero)
         {
-            Debug.Log("Lose");
+            UIManager.Ins.OpenUI<CanvasGameOver>();
         }
     }
 

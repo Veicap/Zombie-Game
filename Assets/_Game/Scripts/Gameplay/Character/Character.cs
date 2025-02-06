@@ -108,10 +108,8 @@ public abstract class Character : GameUnit, ITarget
 
     public void OnDespawn()
     {
-        
         SimplePool.Despawn(this);
         SimplePool.Despawn(hBar);
-
     }
 
     private IEnumerator DespawnTarget()

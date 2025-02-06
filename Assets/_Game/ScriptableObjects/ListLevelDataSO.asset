@@ -15,4 +15,5 @@ MonoBehaviour:
   listLevelDataSO:
   - {fileID: 11400000, guid: 5fbca48cce1198349b883567e1ca0dfc, type: 2}
   - {fileID: 11400000, guid: d2e6a38709ba6f0439232ad6438e2a97, type: 2}
+  - {fileID: 11400000, guid: 0228447b494f6fb479a9940edf92d651, type: 2}
   level: 0

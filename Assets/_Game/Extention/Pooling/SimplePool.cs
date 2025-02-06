@@ -138,7 +138,7 @@ public class Pool
     public void Despawn(GameUnit unit)
     {
         // kiem tra xem co dang active hay khong
-        if (unit != null /* && unit.gameObject.activeSelf*/)
+        if (unit != null  && unit.gameObject.activeSelf)
         {
            // Debug.Log("Despawn");
             inActives.Enqueue(unit);

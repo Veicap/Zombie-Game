@@ -14,29 +14,45 @@ public class ButtonSpawnHero : MonoBehaviour
     [SerializeField] private Image countDownToSpawnImage;
 
     private float timeToSpawnHero;
-    private float counter;
+    public float counter;
     private RectTransform rectTransform;
     private const float offsetChangePosRect = 30f;
     private bool isSpawnHeroUIEnabled;
-
+    private Vector3 originPos;
+    Coroutine c;
 
     private void Awake()
     {
-        OnInit();
         rectTransform = GetComponent<RectTransform>();
+        originPos = rectTransform.position;
+        OnInit();
     }
 
     public void OnInit()
     {
+        ShowBackGround();
         buttonSpawnHero.interactable = false;
         manaToSpawnHero.text = heroToSpawn.ManaToSpawn.ToString();
         timeToSpawnHero = heroToSpawn.TimeToSpawn;
         counter = timeToSpawnHero;
         isSpawnHeroUIEnabled = false;
+        countDownToSpawnImage.fillAmount = 1;
+        rectTransform.position = originPos;
+        //Debug.Log(counter);
+        c = StartCoroutine(UnlockSpawnHero());
+        Debug.Log("Start Coroutine");
     }
     private void Start()
     {
-        StartCoroutine(UnlockSpawnHero());
+        ButtonRetryLevel.OnReTryLevel += CanvasPauseUI_OnReTryLevel;
+    }
+
+    private void CanvasPauseUI_OnReTryLevel(object sender, EventArgs e)
+    {
+        Debug.Log("Stop Coroutine");
+        StopCoroutine(c);
+        //Debug.Log("Stop Coroutine");
+        OnInit();
     }
 
     private void Update()
@@ -51,6 +67,7 @@ public class ButtonSpawnHero : MonoBehaviour
             DisAbleSpawnHeroUI();
             isSpawnHeroUIEnabled = false;
         }
+        
     }
 
     private bool CanSpawnHeroUI()
@@ -68,7 +85,7 @@ public class ButtonSpawnHero : MonoBehaviour
         // lock spawn hero
         LockSpawnHero();
         // Unlock spawn hero
-        StartCoroutine(UnlockSpawnHero());
+         c = StartCoroutine(UnlockSpawnHero());
     }
 
     private void DisAbleSpawnHeroUI()

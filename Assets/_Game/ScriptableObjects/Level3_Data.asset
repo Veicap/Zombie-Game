@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd378ac13292d4243a60d9f8c829255b, type: 3}
-  m_Name: Level2_Data
+  m_Name: Level3_Data
   m_EditorClassIdentifier: 
   zombieTypes:
-  - type: Zomebie-Fast
-    prefab: {fileID: 5387242364443022954, guid: 41b94bced70f8dd4aa17021db754845f, type: 3}
+  - type: Zomebie-Boss
+    prefab: {fileID: 7851372517236712684, guid: 724d791081104f0488b4d4f4f8e3f164, type: 3}
     difficultyLevel: 1
   level: 2
   maxWaves: 7

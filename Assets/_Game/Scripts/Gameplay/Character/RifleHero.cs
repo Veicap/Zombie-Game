@@ -35,7 +35,6 @@ public class RifleHero : GunHero
         base.OnInit();
         totalNumberOfBulletShooted = 0;
         currentState = new IdleRifleState();
-        Debug.Log("Oke em oi!!!");
     }
 
     public override void OnAttack()
@@ -48,17 +47,15 @@ public class RifleHero : GunHero
             {
                 attackCooldown = 0f;
                 canCounter = false;
-
-                if (!target.IsDead())
+                if(target != null)
                 {
-                    target.OnHit(damage);
+                    if (!target.IsDead())
+                    {
+                        target.OnHit(damage);
+                    }
                 }
-
                 StartCoroutine(OnChangeAttackAnim());
-
                 totalNumberOfBulletShooted += numberOfBulletShoot;
-
-                
             }
         }
     }
@@ -83,7 +80,6 @@ public class RifleHero : GunHero
     {
         isReloading = true;
         ChangeAnimation(Constants.ANIM_RELOAD);
-
         yield return new WaitForSeconds(timeToReload);
 
         totalNumberOfBulletShooted = 0;
