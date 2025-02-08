@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class CanvasPauseUI : UICanvas
 {
     //public static event EventHandler OnReTryLevel;
-    [SerializeField] private ButtonRetryLevel reTryButton;  
-
+   
     public void PlayGame()
     {
         Time.timeScale = 1.0f;

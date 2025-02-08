@@ -80,6 +80,14 @@ public static class SimplePool
             item.Release();
         }
     }
+
+    /*public static void ReleaseAll<T>()
+    {
+        foreach (var item in poolInstance.Values)
+        {
+            item.Release();
+        }
+    }*/
 }
 
 public class Pool

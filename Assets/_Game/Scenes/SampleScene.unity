@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b27f44abcde42d498054808998a3383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnHeroPoints: {fileID: 0}
+  spawnHeroPoints: {fileID: 1299183235}
   parentPool: {fileID: 1522793869}
   listLevelDataSO: {fileID: 11400000, guid: 69dccf527cb35db46a025a5a60b255f6, type: 2}
   spawnZombiePoints:

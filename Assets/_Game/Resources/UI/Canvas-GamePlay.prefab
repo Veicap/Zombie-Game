@@ -57,6 +57,7 @@ MonoBehaviour:
   manaToSpawnHero: {fileID: 4338766220698733582}
   background: {fileID: 8855498202371816261}
   countDownToSpawnImage: {fileID: 3476242047213061299}
+  counter: 0
 --- !u!1 &586098150649974802
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +486,7 @@ MonoBehaviour:
   manaToSpawnHero: {fileID: 4178047444690926355}
   background: {fileID: 8769507053938051312}
   countDownToSpawnImage: {fileID: 6109005540149815721}
+  counter: 0
 --- !u!1 &2279152903067859045
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +630,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9004859494295704523}
-  - component: {fileID: 3178228891354183053}
   m_Layer: 5
   m_Name: SpawnHeroManager
   m_TagString: Untagged
@@ -660,18 +661,6 @@ RectTransform:
   m_AnchoredPosition: {x: -396, y: -253}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3178228891354183053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3045248129055338849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72633a6a215a45b4e998d3432076e7ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3238741988586304284
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +718,7 @@ MonoBehaviour:
   manaToSpawnHero: {fileID: 150398792774099968}
   background: {fileID: 6891260590613125700}
   countDownToSpawnImage: {fileID: 1905514867834621020}
+  counter: 0
 --- !u!1 &3344450542794775188
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +985,7 @@ MonoBehaviour:
   manaToSpawnHero: {fileID: 8532621984041608624}
   background: {fileID: 659188051209768826}
   countDownToSpawnImage: {fileID: 4054260526239451176}
+  counter: 0
 --- !u!1 &4178213593590583477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1756,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isdestroyOnClose: 0
+  buttonSpawnHeroes:
+  - {fileID: 5558761869324839980}
+  - {fileID: 563478408738313583}
+  - {fileID: 8510839457430427693}
+  - {fileID: 4148301736155030158}
+  - {fileID: 4695995576030379603}
 --- !u!1 &5713133739310253515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,6 +2963,7 @@ MonoBehaviour:
   manaToSpawnHero: {fileID: 3161935499308010913}
   background: {fileID: 5135635324884928919}
   countDownToSpawnImage: {fileID: 5332211317972373785}
+  counter: 0
 --- !u!1 &8231243544640616812
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class CanvasMainMenu : UICanvas
          
         UIManager.Ins.CloseUIDirectly<CanvasMainMenu>();
         UIManager.Ins.OpenUI<CanvasGamePlay>();
-        LevelManager.Ins.OnRetryLevel();
+        LevelManager.Ins.LoadLevel(level);
         Time.timeScale = 1.0f;
     }
 

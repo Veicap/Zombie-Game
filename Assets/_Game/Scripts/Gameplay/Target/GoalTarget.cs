@@ -17,7 +17,7 @@ public class GoalTarget : MonoBehaviour, ITarget
        
     }
 
-    private void OnInit()
+    public void OnInit()
     {
         hp = maxHp;
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);

@@ -9,38 +9,21 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform parentPool;
     [SerializeField] private ListLevelDataSO listLevelDataSO;
     [SerializeField] private List<Transform> spawnZombiePoints;
+    
     public GoalTarget heroTurret;
     public GoalTarget zombieTurret;
-
-   
-    private readonly List<Hero> listHeroSpawned = new();
-    private readonly List<Zombie> listZombieSpawned = new();
-
-
     private float numberOfMana;
     private float counter;
     private const float maxMana = 100;
     int currentLevel;
     private LevelDataSO currentLevelData;
     private int currentWave;
-
+    private Coroutine c;
     public float NumberOfMana => numberOfMana;
     public float MaxMana => maxMana;
     private void Start()
     {
-        //currentLevel = 1;
         UIManager.Ins.OpenUI<CanvasMainMenu>();
-        CanvasMainMenu.OnLoadLevel += CanvasMainMenu_OnLoadLevel;
-    }
-
- /*   private void CanvasPauseUI_OnReTryLevel(object sender, System.EventArgs e)
-    {
-        OnRetryLevel();
-    }*/
-
-    private void CanvasMainMenu_OnLoadLevel(object sender, CanvasMainMenu.OnLoadLevelEventArg e)
-    {
-        LoadLevel(e.level);
     }
 
     private void Update()
@@ -54,14 +37,15 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnInit()
     {
-        numberOfMana = 10;
+        numberOfMana = 100;
         currentWave = 1;
-        StartCoroutine(SpawnRandomZombies());
+        c = StartCoroutine(SpawnRandomZombies());
+        heroTurret.OnInit();
+        zombieTurret.OnInit();  
     }
 
     private IEnumerator SpawnRandomZombies()
     {
-       
         while (currentWave <= currentLevelData.maxWaves)
         {
             int zombiesToSpawn = 2 + currentWave * 2; 
@@ -113,6 +97,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel(int level)
     {
+        if(c != null) StopCoroutine(c);
+        SimplePool.ReleaseAll();
+        CanvasGamePlay.Instance.OnInit();
         //load lai object trong man choi
         currentLevel = level;
         currentLevelData = listLevelDataSO.listLevelDataSO[currentLevel - 1];
@@ -138,7 +125,7 @@ public class LevelManager : Singleton<LevelManager>
         //next 1 level
         OnDespawn();
         LoadLevel(++currentLevel);
-        //OnInit();
+        
     }
 
     public void OnRetryLevel()
@@ -150,14 +137,14 @@ public class LevelManager : Singleton<LevelManager>
         // Load lai doc lai data
         LoadLevel(currentLevel);
         //Khoi tao level
-        OnInit();
+        
     
     }
 
     public void OnDespawn()
     {
         //reset tat ca cac thong so cua man choi
-        SimplePool.ReleaseAll();
+        //SimplePool.ReleaseAll();
     }
 
     public void OnSpawnHero(PoolType poolType)

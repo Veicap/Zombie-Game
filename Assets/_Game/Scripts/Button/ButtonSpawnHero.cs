@@ -30,6 +30,10 @@ public class ButtonSpawnHero : MonoBehaviour
 
     public void OnInit()
     {
+        if (c != null)
+        {
+            StopCoroutine(c);
+        }
         ShowBackGround();
         buttonSpawnHero.interactable = false;
         manaToSpawnHero.text = heroToSpawn.ManaToSpawn.ToString();
@@ -38,22 +42,10 @@ public class ButtonSpawnHero : MonoBehaviour
         isSpawnHeroUIEnabled = false;
         countDownToSpawnImage.fillAmount = 1;
         rectTransform.position = originPos;
-        //Debug.Log(counter);
         c = StartCoroutine(UnlockSpawnHero());
-        Debug.Log("Start Coroutine");
-    }
-    private void Start()
-    {
-        ButtonRetryLevel.OnReTryLevel += CanvasPauseUI_OnReTryLevel;
     }
 
-    private void CanvasPauseUI_OnReTryLevel(object sender, EventArgs e)
-    {
-        Debug.Log("Stop Coroutine");
-        StopCoroutine(c);
-        //Debug.Log("Stop Coroutine");
-        OnInit();
-    }
+    //public static void 
 
     private void Update()
     {       
