@@ -9,7 +9,11 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform parentPool;
     [SerializeField] private ListLevelDataSO listLevelDataSO;
     [SerializeField] private List<Transform> spawnZombiePoints;
-    
+
+
+    private List<Hero> listHeroesSpawned = new();
+    private List<Zombie> listZombieSpawned = new();
+
     public GoalTarget heroTurret;
     public GoalTarget zombieTurret;
     private float numberOfMana;
@@ -63,14 +67,12 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnZombieBasedOnWave(int waveNumber)
     {
-       
-        List<ZombieType> availableZombies = new List<ZombieType>();
+        List<ZombieType> availableZombies = new();
         foreach (var zombie in currentLevelData.zombieTypes)
         {
-            //Debug.LogError("Begin");
+            
             if (zombie.difficultyLevel <= waveNumber)
             {
-                //Debug.Log("Continue");
                 for (int i = 0; i < zombie.difficultyLevel; i++)
                 {
                     availableZombies.Add(zombie);
@@ -83,10 +85,10 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
         ZombieType selectedZombie = availableZombies[Random.Range(0, availableZombies.Count)];
-      
        // Debug.Log(availableZombies.Count);
         Transform spawnPoint = spawnZombiePoints[Random.Range(0, spawnZombiePoints.Count)];
         Zombie zombieSpawn = SimplePool.Spawn<Zombie>(selectedZombie.prefab.PoolType, spawnPoint.position, spawnPoint.rotation);
+        listZombieSpawned.Add(zombieSpawn);
         zombieSpawn.OnInit();
     }
 
@@ -150,6 +152,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnSpawnHero(PoolType poolType)
     {
         Hero hero = SimplePool.Spawn<Hero>(poolType, spawnHeroPoints.position, spawnHeroPoints.rotation);
+        listHeroesSpawned.Add(hero);
         hero.OnInit();
     }
 
@@ -161,6 +164,17 @@ public class LevelManager : Singleton<LevelManager>
     public void CollectItem(AddDictionaryItem item)
     {
         //thu thap nhung thang item da hoan thanh
+    }
+
+    public void RemoveZombieDeadthFormList(Zombie zombie)
+    {
+        listZombieSpawned.Remove(zombie);   
+    }
+
+    public void RemoveHeroDeadthFromList(Hero hero)
+    {
+        
+        listHeroesSpawned.Remove(hero);
     }
 
 }

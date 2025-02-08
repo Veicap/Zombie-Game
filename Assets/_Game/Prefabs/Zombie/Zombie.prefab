@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f71a22a7463e724ca944f7e6896dabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: {fileID: 4691699071006621098}
+  zombie: {fileID: 5134109141773489257}
   goalTarget: {fileID: 0}
 --- !u!1 &3686224334277692299
 GameObject:
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7520544479898831417}
   - component: {fileID: 1365412693835654106}
-  - component: {fileID: 4691699071006621098}
+  - component: {fileID: 5134109141773489257}
   - component: {fileID: 957728715523786673}
   - component: {fileID: 7230630285498754723}
   m_Layer: 9
@@ -178,7 +178,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4691699071006621098
+--- !u!114 &5134109141773489257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3686224334277692299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 533b50980e06c424cbab438055689b36, type: 3}
+  m_Script: {fileID: 11500000, guid: eea76cd9e3364ac4d9e5950d6eaa190a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PoolType: 5
@@ -197,12 +197,11 @@ MonoBehaviour:
   attackSpeed: 2
   offsetRange: 0.2
   speedRotation: 3
-  cTransform: {fileID: 6881099610919383818}
+  cTransform: {fileID: 7520544479898831417}
   timeToDespawn: 3.43
   offsetHealthBar: {x: 0, y: 2.1, z: 0}
   animator: {fileID: 3488952115671993644}
   agent: {fileID: 1365412693835654106}
-  goalTarget: {fileID: 1832029410654928897, guid: aebfde2c6d6901e4a8b1f2b25a4c41a8, type: 3}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
 --- !u!136 &957728715523786673
 CapsuleCollider:

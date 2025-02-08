@@ -5,7 +5,6 @@ using UnityEngine;
 public class ZombieSight : MonoBehaviour
 {
     [SerializeField] private Zombie zombie;
-    [SerializeField] private GoalTarget goalTarget;
     private readonly List<Hero> listHeroInsight = new();
     private Hero currentHeroTarget;
 

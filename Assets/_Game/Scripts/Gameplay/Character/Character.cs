@@ -29,6 +29,7 @@ public abstract class Character : GameUnit, ITarget
     protected ITarget target;
     protected float hp;
     protected HealthBar hBar;
+    private float originalSpeed;
     
 
     public IState CurrentState => currentState;
@@ -37,8 +38,12 @@ public abstract class Character : GameUnit, ITarget
     public Transform TargetTransform => targetTransform;
     public ITarget Target => target;
     public float AttackRange => attackRange;
-    
 
+    private void Awake()
+    {
+        originalSpeed = agent.speed;
+        //Debug.Log(originalSpeed);
+    }
 
     public virtual void Update()
     {
@@ -78,12 +83,14 @@ public abstract class Character : GameUnit, ITarget
         {
             ChangeAnimation(Constants.ANIM_WALK);
             isMoving = true;
+            agent.speed = originalSpeed;
         }
         MoveToTarget();
     }
     public void StopMoving()
     {
         isMoving = false;
+        agent.speed = 0f;
     }
 
     public void OnHit(float damageAmount)

@@ -17,4 +17,10 @@ public class Hero : Character
 
     public int ManaToSpawn => manaToSpawn;
     public float TimeToSpawn => timeToSpawn;
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        LevelManager.Ins.RemoveHeroDeadthFromList(this);
+    }
 }

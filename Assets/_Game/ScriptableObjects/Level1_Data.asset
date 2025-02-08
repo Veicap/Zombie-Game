@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieTypes:
   - type: Zomebie-Regualr
-    prefab: {fileID: 4691699071006621098, guid: e6095c95f8729e34ead016c3ae91ee6f, type: 3}
+    prefab: {fileID: 5134109141773489257, guid: e6095c95f8729e34ead016c3ae91ee6f, type: 3}
     difficultyLevel: 1
   - type: Zomebie-Fast
     prefab: {fileID: 5387242364443022954, guid: 41b94bced70f8dd4aa17021db754845f, type: 3}

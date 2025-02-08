@@ -12,11 +12,6 @@ public class GoalTarget : MonoBehaviour, ITarget
     protected HealthBar hBar;
     private float hp;
 
-    private void Start()
-    {
-       
-    }
-
     public void OnInit()
     {
         hp = maxHp;
