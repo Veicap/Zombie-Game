@@ -168,13 +168,14 @@ public class LevelManager : Singleton<LevelManager>
 
     public void RemoveZombieDeadthFormList(Zombie zombie)
     {
-        listZombieSpawned.Remove(zombie);   
+        listZombieSpawned.Remove(zombie);
+        SimplePool.Despawn(zombie);
     }
 
     public void RemoveHeroDeadthFromList(Hero hero)
     {
-        
         listHeroesSpawned.Remove(hero);
+        SimplePool.Despawn(hero);
     }
 
 }

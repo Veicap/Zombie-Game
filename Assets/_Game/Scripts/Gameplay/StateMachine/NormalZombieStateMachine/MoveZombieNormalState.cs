@@ -13,23 +13,27 @@ public class MoveZombieNormalState : IZombieNormalState
 
     public void OnExecute(NormalZombie normalZombie)
     {
-        normalZombie.OnMove();
-        // Neu co muc tieu trong tam danh
-        if (normalZombie.IsTargetInRange())
+        if(!normalZombie.IsDead())
         {
-            // chuyen sang trang thai tan cong
-            normalZombie.ChangeState(new AttackZombieNormalState());
-        }
-        else
-        {
-            counter += Time.deltaTime;
-            if(counter > 2.2f)
+            normalZombie.OnMove();
+            // Neu co muc tieu trong tam danh
+            if (normalZombie.IsTargetInRange())
             {
-                counter = 0;
-                normalZombie.ChangeState(new IdleZombieNormalState());
+                // chuyen sang trang thai tan cong
+                normalZombie.ChangeState(new AttackZombieNormalState());
             }
-            
+            else
+            {
+                counter += Time.deltaTime;
+                if (counter > 2.2f)
+                {
+                    counter = 0;
+                    normalZombie.ChangeState(new IdleZombieNormalState());
+                }
+
+            }
         }
+        
     }
 
     public void OnExit(NormalZombie normalZombie)

@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class GunHero : Hero
 {
+    [SerializeField] private Gun gun;
     public override void Update()
     {
-        base.Update();
-        //Debug.Log(HasTarget());
-        //Debug.Log(offsetRange);
+        base.Update();  
     }
 
     public override void OnInit()
     {
         base.OnInit();
+        gun.PreLoadBullet();
     }
 
     public override void OnAttack()
     {
-        base.OnAttack();
+       // base.OnAttack();
+       
+        attackCooldown += Time.deltaTime;
+        if (attackCooldown >= AttackSpeed)
+        {
+            gun.SpawnBullet();
+            isAttacking = true;
+            attackCooldown = 0f;
+            ChangeAnimation(Constants.ANIM_ATTACK);
+        }
+
     }
 }

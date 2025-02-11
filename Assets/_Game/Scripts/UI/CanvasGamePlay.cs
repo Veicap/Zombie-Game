@@ -15,8 +15,21 @@ public class CanvasGamePlay : UICanvas
     }
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        StartCoroutine(PauseWithAnimation());
+    }
+    private IEnumerator PauseWithAnimation()
+    {
+        
+        Time.timeScale = 1;
+       
         UIManager.Ins.OpenUI<CanvasPauseUI>();
+       
+        CanvasPauseUI.Instance.ShowPauseUIAnimationStart();
+        
+        yield return new WaitForSeconds(1.0f); 
+
+        Time.timeScale = 0;
+    
     }
 
     public void OnInit()

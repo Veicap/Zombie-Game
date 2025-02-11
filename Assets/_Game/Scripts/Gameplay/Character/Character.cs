@@ -30,6 +30,7 @@ public abstract class Character : GameUnit, ITarget
     protected float hp;
     protected HealthBar hBar;
     private float originalSpeed;
+    protected bool isAttacking;
     
 
     public IState CurrentState => currentState;
@@ -45,6 +46,11 @@ public abstract class Character : GameUnit, ITarget
         //Debug.Log(originalSpeed);
     }
 
+    private void Start()
+    {
+        OnInit();
+    }
+
     public virtual void Update()
     {
         CurrentState?.OnExecute(this);
@@ -55,8 +61,7 @@ public abstract class Character : GameUnit, ITarget
         hp = maxHP;
         currentState = new IdleState();
         attackCooldown = AttackSpeed;
-        //  Debug.Log(maxHP);
-        // Debug.Log(hBar);
+        isAttacking = false;    
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
         hBar.OnInit(maxHP, this);
     }
@@ -67,14 +72,22 @@ public abstract class Character : GameUnit, ITarget
         attackCooldown += Time.deltaTime;
         if (attackCooldown >= AttackSpeed)
         {
+            isAttacking = true;
             attackCooldown = 0f;
-            if(!target.IsDead())
-            {
-                target.OnHit(damage);
-            }
             ChangeAnimation(Constants.ANIM_ATTACK);
+            StartCoroutine(DelayAttack(attackSpeed));
         }
     }
+
+    private IEnumerator DelayAttack(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (target != null && !target.IsDead())
+        {
+            target.OnHit(damage);
+        }
+        isAttacking = false;
+    } 
 
     public void OnMove()
     {
@@ -101,7 +114,6 @@ public abstract class Character : GameUnit, ITarget
             hBar.SetNewHP(hp);
             if (IsDead())
             {
-
                 OnDeath();
             }
         }
@@ -111,12 +123,17 @@ public abstract class Character : GameUnit, ITarget
     {
         ChangeAnimation(Constants.ANIM_DEAD);
         StartCoroutine(DespawnTarget());
+        //Invoke(nameof(OnDespawn), timeToDespawn);
     }
 
     public void OnDespawn()
     {
         SimplePool.Despawn(this);
+        // LevelManager.Ins.RemoveZombieDeadthFormList
+
         SimplePool.Despawn(hBar);
+
+
     }
 
     private IEnumerator DespawnTarget()
@@ -178,15 +195,16 @@ public abstract class Character : GameUnit, ITarget
     {
         return target != null;
     }
-
     // can phai sua lai
-    public void RotateTowardsTarget()
+    public bool RotateTowardsTarget()
     {
-        if (TargetTransform == null) return;
-
+        if (TargetTransform == null) return false;
         Vector3 direction = (TargetTransform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedRotation);
+        float angle = Quaternion.Angle(transform.rotation, targetRotation);
+        return angle < 0.5f;
+
     }
     public void ResetAttackCoolDown()
     {

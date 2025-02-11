@@ -34,7 +34,10 @@ public enum PoolType
     Zombie_Boss= 7,
     
     // HealBar
-    HealBar = 8,    
+    HealBar = 8, 
+    
+    // Bullet
+    Bullet_Green = 9,
 
     
 }

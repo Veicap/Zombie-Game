@@ -21,6 +21,6 @@ public class Hero : Character
     public override void OnDeath()
     {
         base.OnDeath();
-        LevelManager.Ins.RemoveHeroDeadthFromList(this);
+       // LevelManager.Ins.RemoveHeroDeadthFromList(this);
     }
 }

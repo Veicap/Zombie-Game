@@ -12,9 +12,9 @@ public class AttackRifleState : IRifleState
 
     public void OnExecute(RifleHero rifleHero)
     {
-        rifleHero.RotateTowardsTarget();
+        
         // neu nhan vat chua chet
-        if (!rifleHero.IsDead())
+        if (!rifleHero.IsDead() && rifleHero.RotateTowardsTarget())
         {
             // Tan cong
             rifleHero.OnAttack();

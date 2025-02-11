@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 81858754480186274}
   - component: {fileID: 860453002932451387}
   - component: {fileID: 1626177787828107350}
-  - component: {fileID: 2997354909128732769}
   m_Layer: 5
   m_Name: Button-ReTry
   m_TagString: Untagged
@@ -265,18 +264,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2997354909128732769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993790830926680108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5071a890b8e06ba42821da2bdefe25e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2717583243221191397
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +560,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8838406040402541928}
   - component: {fileID: 926822796933209520}
+  - component: {fileID: 3588413598602886071}
+  - component: {fileID: 5136789298547376596}
   m_Layer: 5
   m_Name: Canvas-PauseUI
   m_TagString: Untagged
@@ -614,7 +603,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isdestroyOnClose: 0
-  reTryButton: {fileID: 2997354909128732769}
+  animator: {fileID: 5136789298547376596}
+--- !u!225 &3588413598602886071
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625057602550816308}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &5136789298547376596
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625057602550816308}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f4b16ff787c03c45b3754821c35b294, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8091513199087283808
 GameObject:
   m_ObjectHideFlags: 0

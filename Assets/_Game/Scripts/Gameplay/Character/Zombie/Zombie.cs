@@ -30,6 +30,6 @@ public class Zombie : Character
     public override void OnDeath()
     {
         base.OnDeath();
-        LevelManager.Ins.RemoveZombieDeadthFormList(this);
+        //LevelManager.Ins.RemoveZombieDeadthFormList(this);
     }
 }

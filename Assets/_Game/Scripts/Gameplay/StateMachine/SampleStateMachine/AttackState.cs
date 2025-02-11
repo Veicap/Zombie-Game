@@ -11,10 +11,7 @@ public class AttackState : IState
 
     public void OnExecute(Character character)
     {
-        // xoay nhan vat ve phia target
-        character.RotateTowardsTarget();
-        // neu nhan vat chua chet
-        if (!character.IsDead())
+        if (!character.IsDead() && character.RotateTowardsTarget())
         {
             // Tan cong
             character.OnAttack();

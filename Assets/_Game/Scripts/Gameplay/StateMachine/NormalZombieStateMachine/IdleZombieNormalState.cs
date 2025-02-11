@@ -15,12 +15,11 @@ public class IdleZombieNormalState : IZombieNormalState
     public void OnExecute(NormalZombie normalZombie)
     {   
         counter += Time.deltaTime;
-        if(counter > Random.Range(2.8f, 3.5f))
+        if(!normalZombie.IsDead() && counter > Random.Range(2.8f, 3.5f))
         {
             Debug.Log("Change state move");
             counter = 0;
             normalZombie.ChangeState(new MoveZombieNormalState());
-            
         }
     }
 

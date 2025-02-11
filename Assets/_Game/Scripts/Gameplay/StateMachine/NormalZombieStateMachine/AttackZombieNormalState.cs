@@ -12,9 +12,7 @@ public class AttackZombieNormalState : IZombieNormalState
 
     public void OnExecute(NormalZombie normalZombie)
     {
-        normalZombie.RotateTowardsTarget();
-       
-        if (!normalZombie.IsDead())
+        if (!normalZombie.IsDead() && normalZombie.RotateTowardsTarget())
         {
             // Tan cong
             normalZombie.OnAttack();

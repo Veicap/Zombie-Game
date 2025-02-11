@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager>
         foreach (var canv in canvases)
         {
             canvasPrefabs.Add(canv.GetType(), canv);
+            Debug.Log(canv.GetType());
             Debug.Log("Load Resource Complete!");
         }
         
