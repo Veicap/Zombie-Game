@@ -168,7 +168,7 @@ MonoBehaviour:
   timeToSpawn: 3
   gun: {fileID: 1921653323947198910}
   numberOfBullet: 1
-  timeToReload: 2.8
+  timeToReload: 2.5
   numberOfBulletShoot: 1
 --- !u!1 &3796794323895852421
 GameObject:

@@ -39,5 +39,6 @@ public enum PoolType
     // Bullet
     Bullet_Green = 9,
     Bullet_Red = 10,
+    Bullet_Blue = 11,
     
 }
