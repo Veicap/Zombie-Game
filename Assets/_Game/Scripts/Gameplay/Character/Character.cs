@@ -14,6 +14,7 @@ public abstract class Character : GameUnit, ITarget
     [SerializeField] protected Transform cTransform;
     [SerializeField] protected float timeToDespawn = 3.5f;
     [SerializeField] private Vector3 offsetHealthBar;
+    
 
     [Header("References")]
     [SerializeField] private Animator animator;
@@ -48,7 +49,7 @@ public abstract class Character : GameUnit, ITarget
 
     private void Start()
     {
-        OnInit();
+        //OnInit();
     }
 
     public virtual void Update()
@@ -64,6 +65,7 @@ public abstract class Character : GameUnit, ITarget
         isAttacking = false;    
         hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
         hBar.OnInit(maxHP, this);
+        GetComponent<Collider>().enabled = true;
     }
 
     public virtual void OnAttack()
@@ -121,7 +123,9 @@ public abstract class Character : GameUnit, ITarget
 
     public virtual void OnDeath()
     {
+        GetComponent<Collider>().enabled = false;
         ChangeAnimation(Constants.ANIM_DEAD);
+        SimplePool.Despawn(hBar);
         StartCoroutine(DespawnTarget());
         //Invoke(nameof(OnDespawn), timeToDespawn);
     }
@@ -129,11 +133,8 @@ public abstract class Character : GameUnit, ITarget
     public void OnDespawn()
     {
         SimplePool.Despawn(this);
-        // LevelManager.Ins.RemoveZombieDeadthFormList
-
-        SimplePool.Despawn(hBar);
-
-
+       
+        //LevelManager.Ins.RemoveZombieDeadthFormList
     }
 
     private IEnumerator DespawnTarget()
@@ -203,7 +204,7 @@ public abstract class Character : GameUnit, ITarget
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedRotation);
         float angle = Quaternion.Angle(transform.rotation, targetRotation);
-        return angle < 0.5f;
+        return angle < 1f;
 
     }
     public void ResetAttackCoolDown()

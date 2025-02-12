@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunHero : Hero
 {
-    [SerializeField] private Gun gun;
+    [SerializeField] protected Gun gun;
     public override void Update()
     {
         base.Update();  
@@ -23,7 +23,7 @@ public class GunHero : Hero
         attackCooldown += Time.deltaTime;
         if (attackCooldown >= AttackSpeed)
         {
-            gun.SpawnBullet();
+            gun.SpawnBullet(TargetTransform);
             isAttacking = true;
             attackCooldown = 0f;
             ChangeAnimation(Constants.ANIM_ATTACK);

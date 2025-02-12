@@ -15,17 +15,18 @@ public class RifleHero : GunHero
     private IRifleState currentState;
     private bool canCounter = true;
     private bool isReloading = false;
-    private void Awake()
+   /* private void Awake()
     {
          //OnInit();
         
-    }
+    }*/
     public override void Update()
     {
         //Debug.Log(Target);
         /*Debug.Log(currentState);
         Debug.Log("Rifle Hero has target: " + HasTarget());*/
         currentState.OnExecute(this);
+        Debug.Log(HasTarget());
        // Debug.Log("Number of shoot" + totalNumberOfBulletShooted);
         // Debug.Log(attackCooldown);
        // Debug.Log(attackCooldown);
@@ -47,13 +48,7 @@ public class RifleHero : GunHero
             {
                 attackCooldown = 0f;
                 canCounter = false;
-                if(target != null)
-                {
-                    if (!target.IsDead())
-                    {
-                        target.OnHit(damage);
-                    }
-                }
+                gun.SpawnBullet(TargetTransform);
                 StartCoroutine(OnChangeAttackAnim());
                 totalNumberOfBulletShooted += numberOfBulletShoot;
             }

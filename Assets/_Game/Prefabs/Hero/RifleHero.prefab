@@ -170,7 +170,7 @@ MonoBehaviour:
   PoolType: 2
   maxHP: 100
   damage: 10
-  attackRange: 7
+  attackRange: 10
   attackSpeed: 1
   offsetRange: 0.2
   speedRotation: 3
@@ -179,10 +179,10 @@ MonoBehaviour:
   offsetHealthBar: {x: 0, y: 2.1, z: 0}
   animator: {fileID: 6276487098124519313}
   agent: {fileID: 2091768103872590524}
-  goalTarget: {fileID: 214001407490540225, guid: 94e7b04dd7aa3da46b3c7cb7c0d3c454, type: 3}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
   manaToSpawn: 5
   timeToSpawn: 3
+  gun: {fileID: 0}
   numberOfBullet: 9
   timeToReload: 2.8
   numberOfBulletShoot: 3

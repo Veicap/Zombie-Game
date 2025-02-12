@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 6
   maxHP: 100
-  damage: 100
+  damage: 20
   attackRange: 1.5
   attackSpeed: 2
   offsetRange: 0.2

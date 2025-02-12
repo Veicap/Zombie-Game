@@ -15,15 +15,16 @@ public class Gun : MonoBehaviour
     }
 
 
-    public void SpawnBullet()
+    public void SpawnBullet(Transform TargetTransform)
     {
         Bullet bullet = SimplePool.Spawn<Bullet>(bulletToShoot.PoolType, pointToSpawnBullet.position, pointToSpawnBullet.rotation);
-        bullet.MoveForward(pointToSpawnBullet);
+        bullet.MoveForward(TargetTransform);
+
         if(!listBulletSpawned.Contains(bullet))
         {
             listBulletSpawned.Add(bullet);
         }
     }
 
-
+    
 }
