@@ -15,9 +15,16 @@ public class GoalTarget : MonoBehaviour, ITarget
     public void OnInit()
     {
         hp = maxHp;
-        hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
+        if(turretType == TurretType.Turret_Enemy)
+        {
+            hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Zombie, transform.position, Quaternion.identity);
+        }
+        if (turretType == TurretType.Turret_Hero)
+        {
+            hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Hero, transform.position, Quaternion.identity);
+        }
         hBar.OnInit(maxHp, this);
-      //  Debug.Log(hBar);
+        //  Debug.Log(hBar);
     }
 
     public Vector3 GetOffsetHealthBar()
@@ -30,6 +37,7 @@ public class GoalTarget : MonoBehaviour, ITarget
     {
         if (!IsDead())
         {
+            Debug.Log(damageAmount);
             hp -= damageAmount;
             hBar.SetNewHP(hp);
             if (IsDead())

@@ -96,12 +96,11 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
         ZombieType selectedZombie = availableZombies[Random.Range(0, availableZombies.Count)];
-       // Debug.Log(availableZombies.Count);
+        //Debug.Log(availableZombies.Count);
         Transform spawnPoint = spawnZombiePoints[Random.Range(0, spawnZombiePoints.Count)];
         Zombie zombieSpawn = SimplePool.Spawn<Zombie>(selectedZombie.prefab.PoolType, spawnPoint.position, spawnPoint.rotation);
         zombieSpawn.OnInit();
         listZombieSpawned.Add(zombieSpawn);
-        
     }
 
     public void OnPlay()

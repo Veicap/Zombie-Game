@@ -13,7 +13,7 @@ public class MoveState : IState
     {
         character.OnMove();
         // Neu co muc tieu trong tam danh
-        if (character.IsTargetInRange())
+        if (character.HasTargetInRange())
         {
             // chuyen sang trang thai tan cong
             character.ChangeState(new AttackState());

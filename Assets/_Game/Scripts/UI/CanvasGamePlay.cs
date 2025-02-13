@@ -26,7 +26,7 @@ public class CanvasGamePlay : UICanvas
        
         CanvasPauseUI.Instance.ShowPauseUIAnimationStart();
         
-        yield return new WaitForSeconds(1.0f); 
+        yield return new WaitForSeconds(0.5f); 
 
         Time.timeScale = 0;
     

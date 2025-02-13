@@ -14,23 +14,22 @@ public class AttackState : IState
         if (!character.IsDead() && character.RotateTowardsTarget())
         {
             // Tan cong
-            character.OnAttack();
             if (!character.HasTarget())
             {
                 character.ChangeState(new IdleState());
             }
             else
             {
-                if (!character.IsTargetInRange())
+                if (!character.HasTargetInRange())
                 {
                     character.ResetAttackCoolDown();
                     character.ChangeState(new MoveState());
                 }
             }
             // Neu khong co muc tieu
+            character.OnAttack();
         }
     }
-
 
     public void OnExit(Character character)
     {

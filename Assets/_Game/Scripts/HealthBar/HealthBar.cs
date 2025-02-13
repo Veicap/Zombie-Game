@@ -7,7 +7,7 @@ public class HealthBar : GameUnit
 {
     [SerializeField] Image imageFill;
     //[SerializeField] Vector3 offset;
-    [SerializeField] PoolType poolType;
+    //[SerializeField] PoolType poolType;
 
     private float hp;
     private float maxHp;

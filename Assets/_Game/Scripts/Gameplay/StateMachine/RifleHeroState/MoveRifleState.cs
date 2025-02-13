@@ -14,7 +14,7 @@ public class MoveRifleState : IRifleState
     {
         rifleHero.OnMove();
         // Neu co muc tieu trong tam danh
-        if (rifleHero.IsTargetInRange())
+        if (rifleHero.HasTargetInRange())
         {
             // chuyen sang trang thai tan cong
             rifleHero.ChangeState(new AttackRifleState());

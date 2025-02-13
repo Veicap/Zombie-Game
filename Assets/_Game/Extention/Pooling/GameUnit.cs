@@ -33,8 +33,8 @@ public enum PoolType
     Zombie_Fast = 6,
     Zombie_Boss= 7,
     
-    // HealBar
-    HealBar = 8, 
+    // HealBar_Zombie
+    HealBar_Zombie = 8, 
     
     // Bullet
     Bullet_Green = 9,
@@ -43,5 +43,8 @@ public enum PoolType
 
     // Hit effect
     HitEffect_Zombie = 12,
+
+    // HealBar_Hero
+    HealBar_Hero = 13,
     
 }

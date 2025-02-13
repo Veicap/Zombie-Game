@@ -57,9 +57,17 @@ public abstract class Character : GameUnit, ITarget
         hp = maxHP;
         currentState = new IdleState();
         attackCooldown = AttackSpeed;
-        isAttacking = false;    
-        hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar, transform.position, Quaternion.identity);
-        hBar.OnInit(maxHP, this);
+        isAttacking = false;
+        if(this is Hero)
+        {
+            hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Hero, transform.position, Quaternion.identity);
+            hBar.OnInit(maxHP, this);
+        }
+        if(this is Zombie)
+        {
+            hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Zombie, transform.position, Quaternion.identity);
+            hBar.OnInit(maxHP, this);
+        }
         GetComponent<Collider>().enabled = true;
     }
 
@@ -72,6 +80,7 @@ public abstract class Character : GameUnit, ITarget
             isAttacking = true;
             attackCooldown = 0f;
             ChangeAnimation(Constants.ANIM_ATTACK);
+            Debug.Log(gameObject.name);
             StartCoroutine(DelayAttack(attackSpeed));
         }
     }
@@ -136,7 +145,6 @@ public abstract class Character : GameUnit, ITarget
     public void OnDespawn()
     {
         SimplePool.Despawn(this);
-        
     }
 
     private IEnumerator DespawnTarget()
@@ -179,7 +187,7 @@ public abstract class Character : GameUnit, ITarget
     {
         return cTransform;
     }
-    public bool IsTargetInRange()
+    public bool HasTargetInRange()
     {
         if (TargetTransform == null) return false;
         float distance = Vector3.Distance(transform.position, TargetTransform.position);

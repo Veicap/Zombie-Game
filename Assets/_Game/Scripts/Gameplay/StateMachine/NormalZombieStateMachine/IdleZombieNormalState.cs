@@ -19,7 +19,7 @@ public class IdleZombieNormalState : IZombieNormalState
         {
             Debug.Log("Change state move");
             counter = 0;
-            normalZombie.ChangeState(new MoveZombieNormalState());
+            normalZombie.ChangeState(new PartrolNormalZombieState());
         }
     }
 

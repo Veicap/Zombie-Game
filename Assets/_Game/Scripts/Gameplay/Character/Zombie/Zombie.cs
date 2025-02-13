@@ -18,7 +18,6 @@ public class Zombie : Character
         return SimplePool.Spawn<Effect>(hitEffect.PoolType, parent.position, parent.rotation);
     }
     
-
     public override void Update()
     {
         base.Update();

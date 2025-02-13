@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99863327, z: -0, w: -0.05226486}
   m_LocalPosition: {x: -6, y: -1, z: -0.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3395287400340720717}
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   speedRotation: 3
   cTransform: {fileID: 8581083877820243575}
   timeToDespawn: 3.43
-  offsetHealthBar: {x: 0, y: 2.1, z: 0}
+  offsetHealthBar: {x: 0, y: 2.4, z: 0}
   animator: {fileID: 1987076934194278687}
   agent: {fileID: 5740868118004228867}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}

@@ -30,4 +30,9 @@ public class NormalZombie : Zombie
         currentState = newState;
         currentState?.OnEnter(this);
     }
+    //Todo
+    public void MoveForward()
+    {
+
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class MoveZombieNormalState : IZombieNormalState
+public class PartrolNormalZombieState : IZombieNormalState
 {
     float counter = 0;
     public void OnEnter(NormalZombie normalZombie)
@@ -15,9 +15,12 @@ public class MoveZombieNormalState : IZombieNormalState
     {
         if(!normalZombie.IsDead())
         {
-            normalZombie.OnMove();
+            // old
+            normalZombie.OnMove();  
+            
+            
             // Neu co muc tieu trong tam danh
-            if (normalZombie.IsTargetInRange())
+            if (normalZombie.HasTargetInRange())
             {
                 // chuyen sang trang thai tan cong
                 normalZombie.ChangeState(new AttackZombieNormalState());
@@ -31,6 +34,12 @@ public class MoveZombieNormalState : IZombieNormalState
                     normalZombie.ChangeState(new IdleZombieNormalState());
                 }
 
+            }
+            // Todo new()
+            normalZombie.MoveForward();
+            if (normalZombie.HasTarget())
+            {
+                normalZombie.ChangeState(new FollowZombieNormalState());
             }
         }
         

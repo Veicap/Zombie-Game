@@ -24,7 +24,7 @@ public class AttackRifleState : IRifleState
             }
             else
             {
-                if (!rifleHero.IsTargetInRange())
+                if (!rifleHero.HasTargetInRange())
                 {
                     rifleHero.ResetAttackCoolDown();
                     rifleHero.ChangeState(new MoveRifleState());

@@ -76,7 +76,6 @@ public class RifleHero : GunHero
         isReloading = true;
         ChangeAnimation(Constants.ANIM_RELOAD);
         yield return new WaitForSeconds(timeToReload);
-
         totalNumberOfBulletShooted = 0;
         isReloading = false;
         canCounter = true;

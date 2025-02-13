@@ -295,8 +295,8 @@ MonoBehaviour:
   PoolType: 1
   maxHP: 100
   damage: 20
-  attackRange: 1.3
-  attackSpeed: 2.08
+  attackRange: 1.2
+  attackSpeed: 2.05
   offsetRange: 0.7
   speedRotation: 3
   cTransform: {fileID: 8993620025469632708}

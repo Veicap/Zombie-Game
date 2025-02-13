@@ -8,8 +8,6 @@ public class Bullet : GameUnit
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed;
     [SerializeField] private float damage = 20f;
-    //[SerializeField] private Effect hitEffect;
-    //[SerializeField] private Transform containerEffect;
     private float counter = 0;
 
     
@@ -46,7 +44,6 @@ public class Bullet : GameUnit
             OnDespawn();
             zombie.OnHit(damage);
         }
-        
     }
     
     private void OnDespawn()

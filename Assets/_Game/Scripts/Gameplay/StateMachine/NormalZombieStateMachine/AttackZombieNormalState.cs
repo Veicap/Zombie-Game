@@ -14,13 +14,19 @@ public class AttackZombieNormalState : IZombieNormalState
     {
         if (!normalZombie.IsDead() && normalZombie.RotateTowardsTarget())
         {
-            // Tan cong
-            normalZombie.OnAttack();
-            if (!normalZombie.IsTargetInRange())
+            if (!normalZombie.HasTarget())
             {
-                normalZombie.ResetAttackCoolDown();
-                normalZombie.ChangeState(new MoveState());
+                normalZombie.ChangeState(new PartrolNormalZombieState());
             }
+            else
+            {
+                if (!normalZombie.HasTargetInRange())
+                {
+                    normalZombie.ResetAttackCoolDown();
+                    normalZombie.ChangeState(new PartrolNormalZombieState());
+                }
+            }
+            normalZombie.OnAttack();
             // Neu khong co muc tieu
         }
     }

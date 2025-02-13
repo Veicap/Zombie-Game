@@ -51,7 +51,6 @@ MonoBehaviour:
   rb: {fileID: 4765013065318703716}
   speed: 10
   damage: 20
-  hitEffect: {fileID: 9030627335931277897, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
 --- !u!54 &4765013065318703716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -108,9 +107,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 172690512290833439}
     m_Modifications:
+    - target: {fileID: 2248598804056315019, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_Range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248598804056315019, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_Color.b
+      value: 0.069811285
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248598804056315019, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_Color.g
+      value: 0.07929887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248598804056315019, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248598804056315019, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2248598804062430609, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
       propertyPath: m_Name
       value: BlueLaser3DBoltMissile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2248598804062441431, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2248598804062780181, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
       propertyPath: m_LocalPosition.x
@@ -151,6 +174,14 @@ PrefabInstance:
     - target: {fileID: 2248598804062780181, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504529999443862209, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094933485665722845, guid: 7697bd10cd39f984e8ee951091283925, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
