@@ -295,7 +295,7 @@ MonoBehaviour:
   PoolType: 1
   maxHP: 100
   damage: 20
-  attackRange: 1
+  attackRange: 1.3
   attackSpeed: 2.08
   offsetRange: 0.7
   speedRotation: 3
@@ -384,6 +384,128 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3896183731728365736, guid: 89ac8564bc1e0ed48a995271d33b86b2, type: 3}
   m_PrefabInstance: {fileID: 2577598459523184093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8448210595851343338
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 100642819292767919}
+    m_Modifications:
+    - target: {fileID: 170604, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_Name
+      value: ModularLightningMissile
+      objectReference: {fileID: 0}
+    - target: {fileID: 170604, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0020000048
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0019999933
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00342
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00523
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.17042947
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12511915
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6609896
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7199943
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -65.391
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -76.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -99.411
+      objectReference: {fileID: 0}
+    - target: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219366, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: Priority
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219366, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_Volume
+      value: 0.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219366, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10839010, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: ShapeModule.type
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: ShapeModule.m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 8ec74f2b7e9107047b4d7274c0728f2c, type: 3}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 10.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848928, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 5.87
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+--- !u!4 &8448210595851763446 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 420636, guid: 80dd3aa1f4a914241a2e8084d8d4365e, type: 3}
+  m_PrefabInstance: {fileID: 8448210595851343338}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8882638598307342127
 PrefabInstance:
@@ -707,6 +829,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8800304848960209280, guid: dfe04ae1786bbd54ebe4aca1c125d81d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1573865487122173301}
+    - targetCorrespondingSourceObject: {fileID: 8800304848960209280, guid: dfe04ae1786bbd54ebe4aca1c125d81d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8448210595851763446}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dfe04ae1786bbd54ebe4aca1c125d81d, type: 3}
       insertIndex: -1

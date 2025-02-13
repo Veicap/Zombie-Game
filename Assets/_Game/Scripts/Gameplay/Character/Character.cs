@@ -47,11 +47,6 @@ public abstract class Character : GameUnit, ITarget
         //Debug.Log(originalSpeed);
     }
 
-    private void Start()
-    {
-        //OnInit();
-    }
-
     public virtual void Update()
     {
         CurrentState?.OnExecute(this);
@@ -126,6 +121,14 @@ public abstract class Character : GameUnit, ITarget
         GetComponent<Collider>().enabled = false;
         ChangeAnimation(Constants.ANIM_DEAD);
         SimplePool.Despawn(hBar);
+        if (this is Hero)
+        {
+            LevelManager.Ins.RemoveHeroDeadthFromList(this as Hero);
+        }
+        if (this is Zombie)
+        {
+            LevelManager.Ins.RemoveZombieDeadthFormList(this as Zombie);
+        }
         StartCoroutine(DespawnTarget());
         //Invoke(nameof(OnDespawn), timeToDespawn);
     }
@@ -133,8 +136,7 @@ public abstract class Character : GameUnit, ITarget
     public void OnDespawn()
     {
         SimplePool.Despawn(this);
-       
-        //LevelManager.Ins.RemoveZombieDeadthFormList
+        
     }
 
     private IEnumerator DespawnTarget()

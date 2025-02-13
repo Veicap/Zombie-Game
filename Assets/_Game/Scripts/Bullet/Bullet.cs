@@ -8,7 +8,20 @@ public class Bullet : GameUnit
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed;
     [SerializeField] private float damage = 20f;
-    [SerializeField] private GameObject hitEffect;
+    //[SerializeField] private Effect hitEffect;
+    //[SerializeField] private Transform containerEffect;
+    private float counter = 0;
+
+    
+    private void Update()
+    {
+        counter += Time.deltaTime;
+        if (counter > 5f)
+        {
+            OnDespawn();
+            counter = 0;
+        }
+    }
 
     public void MoveForward(Transform targetTransform)
     {
@@ -27,11 +40,17 @@ public class Bullet : GameUnit
     {
         if(other.CompareTag("Zombie"))
         {
-            Debug.Log("Trigger");
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
             Zombie zombie = other.GetComponent<Zombie>();
+            Effect effect = zombie.SpawnHitEffect(transform);
+            LevelManager.Ins.DespawnEffect(effect);
+            OnDespawn();
             zombie.OnHit(damage);
-            SimplePool.Despawn(this);
         }
+        
+    }
+    
+    private void OnDespawn()
+    {
+        SimplePool.Despawn(this);
     }
 }

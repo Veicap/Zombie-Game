@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombie: {fileID: 5134109141773489257}
-  goalTarget: {fileID: 0}
 --- !u!1 &3686224334277692299
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99863327, z: -0, w: -0.05226486}
   m_LocalPosition: {x: -7.7, y: -1, z: -3.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6881099610919383818}
@@ -203,6 +202,7 @@ MonoBehaviour:
   animator: {fileID: 3488952115671993644}
   agent: {fileID: 1365412693835654106}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  hitEffect: {fileID: 9030627335931277897, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
 --- !u!136 &957728715523786673
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
 
     public void PreLoadBullet()
     {
-        SimplePool.PreLoad(bulletToShoot, 3, transform);
+        SimplePool.PreLoad(bulletToShoot, 3, LevelManager.Ins.transform);
     }
 
 

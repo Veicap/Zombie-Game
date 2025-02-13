@@ -51,7 +51,7 @@ MonoBehaviour:
   rb: {fileID: 4765013065318703716}
   speed: 10
   damage: 20
-  hitEffect: {fileID: 959219855135723688, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
+  hitEffect: {fileID: 9030627335931277897, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
 --- !u!54 &4765013065318703716
 Rigidbody:
   m_ObjectHideFlags: 0

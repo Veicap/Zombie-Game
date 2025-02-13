@@ -48,6 +48,17 @@ public class LevelManager : Singleton<LevelManager>
         zombieTurret.OnInit();  
     }
 
+    public void DespawnEffect(Effect effect)
+    {
+        StartCoroutine(IEDespawnEffect(effect));
+    }
+
+    private IEnumerator IEDespawnEffect(Effect effect)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SimplePool.Despawn(effect);
+    }
+
     private IEnumerator SpawnRandomZombies()
     {
         while (currentWave <= currentLevelData.maxWaves)
@@ -88,8 +99,9 @@ public class LevelManager : Singleton<LevelManager>
        // Debug.Log(availableZombies.Count);
         Transform spawnPoint = spawnZombiePoints[Random.Range(0, spawnZombiePoints.Count)];
         Zombie zombieSpawn = SimplePool.Spawn<Zombie>(selectedZombie.prefab.PoolType, spawnPoint.position, spawnPoint.rotation);
-        listZombieSpawned.Add(zombieSpawn);
         zombieSpawn.OnInit();
+        listZombieSpawned.Add(zombieSpawn);
+        
     }
 
     public void OnPlay()
@@ -169,13 +181,13 @@ public class LevelManager : Singleton<LevelManager>
     public void RemoveZombieDeadthFormList(Zombie zombie)
     {
         listZombieSpawned.Remove(zombie);
-        SimplePool.Despawn(zombie);
+       // SimplePool.Despawn(zombie);
     }
 
     public void RemoveHeroDeadthFromList(Hero hero)
     {
         listHeroesSpawned.Remove(hero);
-        SimplePool.Despawn(hero);
+       // SimplePool.Despawn(hero);
     }
 
 }
