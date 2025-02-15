@@ -15,7 +15,7 @@ public class LoadAttackNormalZombieState : IZombieNormalState
     {
         if(!normalZombie.IsDead())
         {
-            if (!normalZombie.HasTargetInRange())
+            if (!normalZombie.HasTargetInRange())   
             {
                 // Debug.Log("Change Move State");
                 normalZombie.ChangeState(new PartrolState());

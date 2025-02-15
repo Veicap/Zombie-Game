@@ -13,7 +13,6 @@ public class AttackState : IState
     {
         if (!character.IsDead() && character.RotateTowardsTarget())
         {
-            
             // Tan cong
             // Danh cho ban xa
 

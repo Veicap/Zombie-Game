@@ -9,6 +9,7 @@ public class GunHero : Hero
     {
         base.Update();
         Debug.Log(CurrentState.ToString());
+        //Debug.Log(HasTargetInRange());
     }
   
     public override void OnInit()

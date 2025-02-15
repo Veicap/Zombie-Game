@@ -52,7 +52,7 @@ public abstract class Character : GameUnit, ITarget
     }
     public virtual void Update()
     {
-        CurrentState?.OnExecute(this);
+        currentState?.OnExecute(this);
     }
 
     public virtual void OnInit()

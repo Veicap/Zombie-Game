@@ -11,7 +11,9 @@ public class FollowState : IState
 
     public void OnExecute(Character character)
     {
-        if(character.IsDead())
+        Debug.Log("Follow Execute");
+       // Debug.Log(character.HasTargetInRange());
+        if (!character.IsDead())
         {
             character.OnMove(); //MoveToTarget Update lien tuc de tien toi vi tru cua doi tuong
 
@@ -20,9 +22,11 @@ public class FollowState : IState
             {
                 character.ChangeState(new PartrolState());
             }
+            Debug.Log(character.HasTargetInRange());
             // neu doi tuong trong tam danh thi => chuyen sang attack State
-            if (character.HasTargetInRange())
+            if (character.HasTargetInRange())   
             {
+               
                 character.ChangeState(new AttackState());
             }
         }

@@ -24,7 +24,6 @@ public class LoadAttackState : IState
             else
             {
                 attackCooldown += Time.deltaTime;
-                //Debug.Log(attackCooldown);
                 if (attackCooldown >= character.AttackSpeed)
                 {
                     if (character.Target != null && !character.Target.IsDead())
