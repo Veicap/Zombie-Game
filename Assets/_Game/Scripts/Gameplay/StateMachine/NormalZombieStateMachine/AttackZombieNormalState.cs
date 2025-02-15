@@ -14,19 +14,24 @@ public class AttackZombieNormalState : IZombieNormalState
     {
         if (!normalZombie.IsDead() && normalZombie.RotateTowardsTarget())
         {
+            
             if (!normalZombie.HasTarget())
             {
                 normalZombie.ChangeState(new PartrolNormalZombieState());
             }
             else
             {
+                // Neu ke dich khong o trong tam danh
                 if (!normalZombie.HasTargetInRange())
                 {
-                    normalZombie.ResetAttackCoolDown();
-                    normalZombie.ChangeState(new PartrolNormalZombieState());
+                    normalZombie.ChangeState(new PartrolState());
+                }
+                else // Neu Ke dich trong tam danh
+                {
+                    normalZombie.OnAttack();
+                    normalZombie.ChangeState(new LoadAttackNormalZombieState());
                 }
             }
-            normalZombie.OnAttack();
             // Neu khong co muc tieu
         }
     }

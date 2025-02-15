@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4474419603975853609}
   - component: {fileID: 7615949908216845090}
   - component: {fileID: 6209511398695120453}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ZombieSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99863327, z: -0, w: -0.05226486}
   m_LocalPosition: {x: -7.7, y: -1, z: -3.01}
-  m_LocalScale: {x: 1, y: 1.1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6881099610919383818}
@@ -192,13 +192,13 @@ MonoBehaviour:
   PoolType: 5
   maxHP: 100
   damage: 10
-  attackRange: 1.5
+  attackRange: 1.4
   attackSpeed: 2
   offsetRange: 0.2
   speedRotation: 3
   cTransform: {fileID: 7520544479898831417}
   timeToDespawn: 3.43
-  offsetHealthBar: {x: 0, y: 2.1, z: 0}
+  offsetHealthBar: {x: 0, y: 2.2, z: 0}
   animator: {fileID: 3488952115671993644}
   agent: {fileID: 1365412693835654106}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
@@ -222,10 +222,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.46954268
   m_Height: 2.0076642
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9012444, z: 0}
+  m_Center: {x: 1.4978803e-11, y: 0.9012446, z: 0.0064410567}
 --- !u!54 &7230630285498754723
 Rigidbody:
   m_ObjectHideFlags: 0

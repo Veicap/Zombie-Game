@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 
 public abstract class Character : GameUnit, ITarget
 {
@@ -21,7 +22,7 @@ public abstract class Character : GameUnit, ITarget
     [SerializeField] private NavMeshAgent agent;
     //[SerializeField] private GoalTarget goalTarget;
     [SerializeField] private HealthBar healthBar;
-
+   
 
     private IState currentState;
     private Transform targetTransform;
@@ -32,6 +33,7 @@ public abstract class Character : GameUnit, ITarget
     protected HealthBar hBar;
     private float originalSpeed;
     protected bool isAttacking;
+    private Collider characterCollider;
     
 
     public IState CurrentState => currentState;
@@ -40,13 +42,14 @@ public abstract class Character : GameUnit, ITarget
     public Transform TargetTransform => targetTransform;
     public ITarget Target => target;
     public float AttackRange => attackRange;
+    public float Damage => damage;
 
     private void Awake()
     {
         originalSpeed = agent.speed;
+        characterCollider = GetComponent<Collider>();
         //Debug.Log(originalSpeed);
     }
-
     public virtual void Update()
     {
         CurrentState?.OnExecute(this);
@@ -68,32 +71,13 @@ public abstract class Character : GameUnit, ITarget
             hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Zombie, transform.position, Quaternion.identity);
             hBar.OnInit(maxHP, this);
         }
-        GetComponent<Collider>().enabled = true;
+        characterCollider.enabled = true;
     }
 
     public virtual void OnAttack()
     {
-        // Chuyen animation dua tren toc danh cua nhan vat
-        attackCooldown += Time.deltaTime;
-        if (attackCooldown >= AttackSpeed)
-        {
-            isAttacking = true;
-            attackCooldown = 0f;
-            ChangeAnimation(Constants.ANIM_ATTACK);
-            Debug.Log(gameObject.name);
-            StartCoroutine(DelayAttack(attackSpeed));
-        }
+        ChangeAnimation(Constants.ANIM_ATTACK);
     }
-
-    private IEnumerator DelayAttack(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (target != null && !target.IsDead())
-        {
-            target.OnHit(damage);
-        }
-        isAttacking = false;
-    } 
 
     public void OnMove()
     {
@@ -127,7 +111,7 @@ public abstract class Character : GameUnit, ITarget
 
     public virtual void OnDeath()
     {
-        GetComponent<Collider>().enabled = false;
+        characterCollider.enabled = false;
         ChangeAnimation(Constants.ANIM_DEAD);
         SimplePool.Despawn(hBar);
         if (this is Hero)
@@ -174,11 +158,11 @@ public abstract class Character : GameUnit, ITarget
         this.target = target;
         if(target != null)
         {
-            SetTargetPos(target.GetTransform());
+            SetTargetTransform(target.GetTransform());
         }
     }
 
-    public void SetTargetPos(Transform targetTransfrorm)
+    public void SetTargetTransform(Transform targetTransfrorm)
     {
         targetTransform = targetTransfrorm;
     }
@@ -190,8 +174,20 @@ public abstract class Character : GameUnit, ITarget
     public bool HasTargetInRange()
     {
         if (TargetTransform == null) return false;
-        float distance = Vector3.Distance(transform.position, TargetTransform.position);
-        return distance <= AttackRange + offsetRange;
+
+        Vector3 myPosition = transform.position;
+        Vector3 targetPosition = TargetTransform.position;
+
+        float actualDistance = Vector3.Distance(myPosition, targetPosition);
+        Collider targetCollider = TargetTransform.GetComponent<Collider>();
+
+        if (characterCollider != null && targetCollider != null)
+        {
+            Vector3 myClosestPoint = characterCollider.ClosestPoint(targetPosition);
+            Vector3 targetClosestPoint = targetCollider.ClosestPoint(myPosition);
+            actualDistance = Vector3.Distance(myClosestPoint, targetClosestPoint);
+        }
+        return actualDistance <= AttackRange;
     }
     // sua lai cho hop voi zombie
     public void MoveToTarget()
@@ -205,6 +201,12 @@ public abstract class Character : GameUnit, ITarget
     public bool HasTarget()
     {
         return target != null;
+    }
+
+    public bool HasCharacterTarget()
+    {
+        if(target is Character) return true;
+        return false;
     }
     // can phai sua lai
     public bool RotateTowardsTarget()

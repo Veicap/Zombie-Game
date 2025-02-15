@@ -12,12 +12,12 @@ public class UIManager : Singleton<UIManager>
     {
         // Load ui prefab tu resources
         UICanvas[] canvases = Resources.LoadAll<UICanvas>("UI/");
-        Debug.Log("Number of canvases " +  canvases.Length);
+        //Debug.Log("Number of canvases " +  canvases.Length);
         foreach (var canv in canvases)
         {
             canvasPrefabs.Add(canv.GetType(), canv);
-            Debug.Log(canv.GetType());
-            Debug.Log("Load Resource Complete!");
+            // Debug.Log(canv.GetType());
+           // Debug.Log("Load Resource Complete!");
         }
         
     }

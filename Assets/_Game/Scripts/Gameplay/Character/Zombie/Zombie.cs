@@ -12,6 +12,7 @@ public class Zombie : Character
         base.OnInit();
         goalTarget = LevelManager.Ins.heroTurret;
         SimplePool.PreLoad(hitEffect, 3, LevelManager.Ins.transform);
+        SetTarget(GoalTarget);
     }
     public Effect SpawnHitEffect(Transform parent)
     {

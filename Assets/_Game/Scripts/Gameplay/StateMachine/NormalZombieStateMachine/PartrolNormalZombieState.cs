@@ -5,10 +5,11 @@ using UnityEngine.TextCore.Text;
 
 public class PartrolNormalZombieState : IZombieNormalState
 {
-    float counter = 0;
+   /// float counter = 0;
     public void OnEnter(NormalZombie normalZombie)
     {
-
+        // Update mot lan duy nhat neu muc tieu la co dinh
+        normalZombie.OnMove();
     }
 
     public void OnExecute(NormalZombie normalZombie)
@@ -16,10 +17,7 @@ public class PartrolNormalZombieState : IZombieNormalState
         if(!normalZombie.IsDead())
         {
             // old
-            normalZombie.OnMove();  
-            
-            
-            // Neu co muc tieu trong tam danh
+            /*// Neu co muc tieu trong tam danh
             if (normalZombie.HasTargetInRange())
             {
                 // chuyen sang trang thai tan cong
@@ -34,13 +32,18 @@ public class PartrolNormalZombieState : IZombieNormalState
                     normalZombie.ChangeState(new IdleZombieNormalState());
                 }
 
-            }
+            }*/
             // Todo new()
-            normalZombie.MoveForward();
-            if (normalZombie.HasTarget())
+            // Neu muc tieu khong co dinh => Chuyen sang follow theo muc tieu
+            if (normalZombie.HasCharacterTarget())
             {
                 normalZombie.ChangeState(new FollowZombieNormalState());
             }
+            
+            /*if (normalZombie.HasTargetInRange())
+            {
+                normalZombie.ChangeState(new AttackZombieNormalState());
+            }*/
         }
         
     }

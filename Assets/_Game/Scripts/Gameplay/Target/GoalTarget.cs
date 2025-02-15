@@ -37,7 +37,7 @@ public class GoalTarget : MonoBehaviour, ITarget
     {
         if (!IsDead())
         {
-            Debug.Log(damageAmount);
+            //Debug.Log(damageAmount);
             hp -= damageAmount;
             hBar.SetNewHP(hp);
             if (IsDead())

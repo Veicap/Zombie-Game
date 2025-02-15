@@ -51,7 +51,9 @@ MonoBehaviour:
   rb: {fileID: 4682463646755731677}
   speed: 10
   damage: 20
-  hitEffect: {fileID: 9030627335931277897, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!54 &4682463646755731677
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -98,8 +100,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3241226, y: 0.3659824, z: 2.0330954}
-  m_Center: {x: 0.017904133, y: -0.0056157857, z: -0.84}
+  m_Size: {x: 0.3241226, y: 0.3659824, z: 1.8695793}
+  m_Center: {x: 0.017904136, y: -0.005615782, z: -0.92175794}
 --- !u!1001 &3732135847982367235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088415873981439560, guid: a22ed8e8c304ff642b579e48524e205e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.813
       objectReference: {fileID: 0}
     - target: {fileID: 9088415873981439560, guid: a22ed8e8c304ff642b579e48524e205e, type: 3}
       propertyPath: m_LocalRotation.w

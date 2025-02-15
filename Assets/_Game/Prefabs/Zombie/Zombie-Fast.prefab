@@ -72,8 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 6
   maxHP: 100
-  damage: 20
-  attackRange: 1.5
+  damage: 10
+  attackRange: 1.2
   attackSpeed: 2
   offsetRange: 0.2
   speedRotation: 3
@@ -103,10 +103,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.28759998
   m_Height: 2.0076642
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9012444, z: 0}
+  m_Center: {x: -6.9560607e-12, y: 0.9012445, z: -0.0054959655}
 --- !u!54 &8851064470759074187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 4229764814277352148, guid: 216bb9d4591a34742bf4b4d853b5315e, type: 3}
       propertyPath: m_Name
       value: characterMedium (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265989276359890256, guid: 216bb9d4591a34742bf4b4d853b5315e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

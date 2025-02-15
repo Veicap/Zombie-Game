@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : IState
+public class PartrolState : IState
 {
     public void OnEnter(Character character)
     {
-        
+        character.OnMove();
     }
 
     public void OnExecute(Character character)
     {
-        character.OnMove();
-        // Neu co muc tieu trong tam danh
-        if (character.HasTargetInRange())
+        if (!character.IsDead())
         {
-            // chuyen sang trang thai tan cong
-            character.ChangeState(new AttackState());
+            if (character.HasCharacterTarget())
+            {
+                character.ChangeState(new FollowState());
+            }
+
         }
+
     }
 
     public void OnExit(Character character)

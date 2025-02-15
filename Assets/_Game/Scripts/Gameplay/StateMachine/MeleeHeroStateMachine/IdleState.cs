@@ -13,7 +13,7 @@ public class IdleState : IState
     {
         if (character.HasTarget())
         {
-            character.ChangeState(new MoveState());
+            character.ChangeState(new PartrolState());
         }
     }
 

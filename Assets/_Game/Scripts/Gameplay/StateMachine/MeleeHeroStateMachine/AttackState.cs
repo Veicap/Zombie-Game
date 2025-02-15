@@ -13,21 +13,32 @@ public class AttackState : IState
     {
         if (!character.IsDead() && character.RotateTowardsTarget())
         {
+            
             // Tan cong
+            // Danh cho ban xa
+
             if (!character.HasTarget())
             {
                 character.ChangeState(new IdleState());
             }
-            else
+            else // danh' cho danh gan (neu phat hien co ke dich)
             {
-                if (!character.HasTargetInRange())
+                // Xet xem ke dich co dang trong tam danh khong?
+                //
+                //Neu ke dich khong trong tam danh => Move
+                if(!character.HasTargetInRange())
                 {
-                    character.ResetAttackCoolDown();
-                    character.ChangeState(new MoveState());
+                    character.ChangeState(new PartrolState());
                 }
+                else // Neu Ke dich trong tam danh
+                {
+                    character.OnAttack();
+                    character.ChangeState(new LoadAttackState());
+                }
+               
             }
-            // Neu khong co muc tieu
-            character.OnAttack();
+           
+            
         }
     }
 

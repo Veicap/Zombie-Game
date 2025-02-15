@@ -8,7 +8,6 @@ public class IdleZombieNormalState : IZombieNormalState
     float counter = 0;
     public void OnEnter(NormalZombie normalZombie)
     {
-        normalZombie.StopMoving();
         normalZombie.ChangeToIdleState();
     }
 
@@ -17,7 +16,7 @@ public class IdleZombieNormalState : IZombieNormalState
         counter += Time.deltaTime;
         if(!normalZombie.IsDead() && counter > Random.Range(2.8f, 3.5f))
         {
-            Debug.Log("Change state move");
+            //Debug.Log("Change state move");
             counter = 0;
             normalZombie.ChangeState(new PartrolNormalZombieState());
         }

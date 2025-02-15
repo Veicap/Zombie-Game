@@ -7,27 +7,20 @@ public class GunHero : Hero
     [SerializeField] protected Gun gun;
     public override void Update()
     {
-        base.Update();  
+        base.Update();
+        Debug.Log(CurrentState.ToString());
     }
-
+  
     public override void OnInit()
     {
         base.OnInit();
         gun.PreLoadBullet();
+       
     }
 
     public override void OnAttack()
     {
-       // base.OnAttack();
-       
-        attackCooldown += Time.deltaTime;
-        if (attackCooldown >= AttackSpeed)
-        {
-            gun.SpawnBullet(TargetTransform);
-            isAttacking = true;
-            attackCooldown = 0f;
-            ChangeAnimation(Constants.ANIM_ATTACK);
-        }
-
+        gun.SpawnBullet(TargetTransform);
+        ChangeAnimation(Constants.ANIM_ATTACK);
     }
 }

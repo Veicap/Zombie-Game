@@ -24,6 +24,7 @@ public class ZombieSight : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Hero"))
         {
             Hero hero = other.GetComponent<Hero>();

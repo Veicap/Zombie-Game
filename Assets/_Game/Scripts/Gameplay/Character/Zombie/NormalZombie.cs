@@ -16,7 +16,7 @@ public class NormalZombie : Zombie
        // Debug.Log(isMoving);
         currentState.OnExecute(this);
         
-        //Debug.Log(CurrentState.ToString());
+        Debug.Log(currentState.ToString());
     }
     public override void OnInit()
     {
