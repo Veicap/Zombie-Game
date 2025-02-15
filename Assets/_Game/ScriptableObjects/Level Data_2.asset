@@ -22,6 +22,15 @@ MonoBehaviour:
       amount: 10
       hp: 20
   - timeActive: 5
-    zombies: []
+    zombies:
+    - type: 0
+      amount: 0
+      hp: 0
+    - type: 0
+      amount: 0
+      hp: 0
+    - type: 0
+      amount: 0
+      hp: 0
   - timeActive: 5
     zombies: []
