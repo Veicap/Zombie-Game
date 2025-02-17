@@ -7,9 +7,10 @@ public class Zombie : Character
     [SerializeField] private Effect hitEffect;
     private GoalTarget goalTarget;
     public GoalTarget GoalTarget => goalTarget;
-    public override void OnInit()
+    public override void OnInit(int hpNeedToSpawn)
     {
-        base.OnInit();
+        base.OnInit(hpNeedToSpawn);
+        hp = hpNeedToSpawn;
         goalTarget = LevelManager.Ins.heroTurret;
         SimplePool.PreLoad(hitEffect, 3, LevelManager.Ins.transform);
         SetTarget(GoalTarget);

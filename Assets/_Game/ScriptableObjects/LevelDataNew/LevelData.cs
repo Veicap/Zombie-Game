@@ -7,14 +7,12 @@ namespace Scriptable
 {
     public enum ZombieType
     {
-        None = 0,
-        Red = 1,
-        Blue = 2,
-        Green = 3,
-        Orange = 4,
+        Normal_Zombie = 0,
+        Fast_Zombie = 1,
+        Boss_Zombie = 2,
     }
 
-    [CreateAssetMenu(menuName = "ColorData")]
+    [CreateAssetMenu(menuName = "ZombieData")]
     public class LevelData : ScriptableObject
     {
         public List<WaveData> waveDatas;

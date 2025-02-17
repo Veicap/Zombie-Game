@@ -8,8 +8,8 @@ public class PistolHero : GunHero
     {
        //    OnInit();
     }
-    public override void OnInit()
+    /*public override void OnInit()
     {
         base.OnInit();
-    }
+    }*/
 }

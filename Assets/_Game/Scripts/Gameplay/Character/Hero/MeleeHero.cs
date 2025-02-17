@@ -3,10 +3,10 @@ using UnityEngine;
 public class MeleeHero : Hero
 {
 
-    public override void OnInit()
+    /*public override void OnInit()
     {
         base.OnInit();
-    }
+    }*/
     public override void OnAttack()
     {
         base.OnAttack();

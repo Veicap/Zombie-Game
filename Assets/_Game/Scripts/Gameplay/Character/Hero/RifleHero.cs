@@ -31,9 +31,9 @@ public class RifleHero : GunHero
         // Debug.Log(attackCooldown);
        // Debug.Log(attackCooldown);
     }
-    public override void OnInit()
+    public override void OnInit(int hpNeedToSpawn)
     {
-        base.OnInit();
+        base.OnInit(hpNeedToSpawn);
         totalNumberOfBulletShooted = 0;
         currentState = new IdleRifleState();
     }

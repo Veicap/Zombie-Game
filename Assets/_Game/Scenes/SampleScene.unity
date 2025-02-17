@@ -1613,11 +1613,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnHeroPoints: {fileID: 1299183235}
   parentPool: {fileID: 1522793869}
-  listLevelDataSO: {fileID: 11400000, guid: 69dccf527cb35db46a025a5a60b255f6, type: 2}
   spawnZombiePoints:
   - {fileID: 489037861}
   - {fileID: 844066762}
   - {fileID: 1649093615}
+  zombieDataSO: {fileID: 11400000, guid: 4967d290a8864ba4a98ca4b5383028a7, type: 2}
+  listLevelDataSO:
+  - {fileID: 11400000, guid: 3672738adff73a541a148927c30aede8, type: 2}
+  - {fileID: 11400000, guid: 96880a7b340feda4d85884039b088a9b, type: 2}
   heroTurret: {fileID: 1270275428}
   zombieTurret: {fileID: 1868571291}
 --- !u!1 &1642618041

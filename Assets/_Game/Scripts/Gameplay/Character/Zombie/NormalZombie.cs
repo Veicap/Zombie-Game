@@ -16,9 +16,9 @@ public class NormalZombie : Zombie
        // Debug.Log(isMoving);
         currentState.OnExecute(this);
     }
-    public override void OnInit()
+    public override void OnInit(int hpNeedToSpawn)
     {
-        base.OnInit();
+        base.OnInit(hpNeedToSpawn);
         currentState = new IdleZombieNormalState();
         isMoving = false;    
     }

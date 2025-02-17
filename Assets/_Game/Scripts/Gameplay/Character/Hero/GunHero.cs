@@ -12,9 +12,9 @@ public class GunHero : Hero
         //Debug.Log(HasTargetInRange());
     }
   
-    public override void OnInit()
+    public override void OnInit(int hpNeedToSpawn)
     {
-        base.OnInit();
+        base.OnInit(hpNeedToSpawn);
         gun.PreLoadBullet();
        
     }

@@ -55,7 +55,7 @@ public abstract class Character : GameUnit, ITarget
         currentState?.OnExecute(this);
     }
 
-    public virtual void OnInit()
+    public virtual void OnInit(int hpNeedToSpawn)
     {
         hp = maxHP;
         currentState = new IdleState();

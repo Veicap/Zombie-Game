@@ -9,9 +9,9 @@ public class Hero : Character
     [SerializeField] private float timeToSpawn;
     private GoalTarget goalTarget;
     public GoalTarget GoalTarget => goalTarget;
-    public override void OnInit()
+    public override void OnInit(int hpNeedToSpawn)
     {
-        base.OnInit();
+        base.OnInit(hpNeedToSpawn);
         goalTarget = LevelManager.Ins.zombieTurret;
     }
 
