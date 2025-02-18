@@ -72,6 +72,7 @@ public abstract class Character : GameUnit, ITarget
             hBar.OnInit(maxHP, this);
         }
         characterCollider.enabled = true;
+        agent.speed = originalSpeed;
     }
 
     public virtual void OnAttack()
@@ -112,6 +113,7 @@ public abstract class Character : GameUnit, ITarget
     public virtual void OnDeath()
     {
         characterCollider.enabled = false;
+        agent.speed = 0f;
         ChangeAnimation(Constants.ANIM_DEAD);
         SimplePool.Despawn(hBar);
         if (this is Hero)
@@ -194,7 +196,7 @@ public abstract class Character : GameUnit, ITarget
     {
         if (targetTransform == null || agent == null) return;
         Vector3 forwardDirection = targetTransform.forward;
-        Vector3 destination = targetTransform.position + forwardDirection * attackRange;
+        Vector3 destination = targetTransform.position + forwardDirection ;
         agent.SetDestination(destination);
     }
 

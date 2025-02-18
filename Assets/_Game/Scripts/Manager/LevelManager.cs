@@ -68,17 +68,12 @@ public class LevelManager : Singleton<LevelManager>
     {
         while (currentWave <= currentLevelData.waveDatas.Count)
         {
-            int numberOfZombiesToSpawn = 0;
+            /*int numberOfZombiesToSpawn = 0;
             for (int i = 0; i < currentLevelData.waveDatas[currentWave-1].zombies.Count; i++)
             {
                 numberOfZombiesToSpawn += currentLevelData.waveDatas[currentWave - 1].zombies[i].amount;
 
-            }
-            /* 
-             for (int i = 0; i < currentLevelData.waveDatas[currentWave - 1].zombies.Count; i++)
-             {
-                 availableZombieTypes.Add(currentLevelData.waveDatas[currentWave - 1].zombies[i].type);
-             }*/
+            }*/
             List<ZombieType> zombiesToSpawn = new();
             for (int i = 0; i < currentLevelData.waveDatas[currentWave - 1].zombies.Count; i++)
             {
@@ -96,10 +91,10 @@ public class LevelManager : Singleton<LevelManager>
                 }
             }
             ShuffleList(zombiesToSpawn);
-            for (int i = 0; i < numberOfZombiesToSpawn; i++)
+            for (int i = 0; i < zombiesToSpawn.Count; i++)
             {
                 SpawnZombieBasedOnWave(zombiesToSpawn[i], dataOfZombieType);
-                yield return new WaitForSeconds((float)(currentLevelData.waveDatas[currentWave - 1].timeActive/numberOfZombiesToSpawn));
+                yield return new WaitForSeconds((float)(currentLevelData.waveDatas[currentWave - 1].timeActive/ zombiesToSpawn.Count));
             }
             yield return new WaitForSeconds(8f);
             currentWave++;

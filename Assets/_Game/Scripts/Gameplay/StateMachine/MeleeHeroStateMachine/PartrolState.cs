@@ -17,6 +17,10 @@ public class PartrolState : IState
             {
                 character.ChangeState(new FollowState());
             }
+            if(character.HasTargetInRange())
+            {
+                character.ChangeState(new AttackState());
+            }
 
         }
 

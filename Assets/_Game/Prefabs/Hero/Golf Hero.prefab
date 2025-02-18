@@ -217,7 +217,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4374723339233299285}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 1.8
   m_Acceleration: 8
   avoidancePriority: 50
@@ -304,7 +304,6 @@ MonoBehaviour:
   offsetHealthBar: {x: 0, y: 2.1, z: 0}
   animator: {fileID: 1222045627643432184}
   agent: {fileID: 4706130129691801114}
-  goalTarget: {fileID: 214001407490540225, guid: 94e7b04dd7aa3da46b3c7cb7c0d3c454, type: 3}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
   manaToSpawn: 20
   timeToSpawn: 3

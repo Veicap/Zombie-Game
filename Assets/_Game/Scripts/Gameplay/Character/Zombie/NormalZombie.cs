@@ -15,6 +15,7 @@ public class NormalZombie : Zombie
        // Debug.Log(currentState.ToString());
        // Debug.Log(isMoving);
         currentState.OnExecute(this);
+        Debug.Log(HasTargetInRange());
     }
     public override void OnInit(int hpNeedToSpawn)
     {

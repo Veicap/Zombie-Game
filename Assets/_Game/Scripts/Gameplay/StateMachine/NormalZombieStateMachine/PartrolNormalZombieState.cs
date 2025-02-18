@@ -39,7 +39,11 @@ public class PartrolNormalZombieState : IZombieNormalState
             {
                 normalZombie.ChangeState(new FollowZombieNormalState());
             }
-            
+            if (normalZombie.HasTargetInRange())
+            {
+
+                normalZombie.ChangeState(new AttackZombieNormalState());
+            }
             /*if (normalZombie.HasTargetInRange())
             {
                 normalZombie.ChangeState(new AttackZombieNormalState());
