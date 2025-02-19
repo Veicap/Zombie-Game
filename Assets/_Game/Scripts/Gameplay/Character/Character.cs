@@ -103,7 +103,6 @@ public abstract class Character : GameUnit, ITarget
         if(!IsDead())
         {
             hp -= damageAmount;
-            Debug.Log(hp);
             hBar.SetNewHP(hp);
             if (IsDead())
             {
