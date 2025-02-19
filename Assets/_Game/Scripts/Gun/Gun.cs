@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private Transform pointToSpawnBullet;
     [SerializeField] private Bullet bulletToShoot;
+    [SerializeField] private GunHero gunHero;
 
     private List<Bullet> listBulletSpawned = new();
 
@@ -13,7 +14,6 @@ public class Gun : MonoBehaviour
     {
         SimplePool.PreLoad(bulletToShoot, 3, LevelManager.Ins.transform);
     }
-
 
     public void SpawnBullet(Transform TargetTransform)
     {
@@ -26,5 +26,8 @@ public class Gun : MonoBehaviour
         }
     }
 
-    
+    public float GetHeroDamage()
+    {
+       return gunHero.Damage;
+    }
 }

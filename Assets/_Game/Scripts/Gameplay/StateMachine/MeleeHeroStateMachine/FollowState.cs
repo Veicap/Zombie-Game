@@ -22,7 +22,7 @@ public class FollowState : IState
             {
                 character.ChangeState(new PartrolState());
             }
-            Debug.Log(character.HasTargetInRange());
+            //Debug.Log(character.HasTargetInRange());
             // neu doi tuong trong tam danh thi => chuyen sang attack State
             if (character.HasTargetInRange())   
             {

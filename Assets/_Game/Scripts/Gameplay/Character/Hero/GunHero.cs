@@ -8,7 +8,7 @@ public class GunHero : Hero
     public override void Update()
     {
         base.Update();
-        Debug.Log(CurrentState.ToString());
+        //Debug.Log(CurrentState.ToString());
         //Debug.Log(HasTargetInRange());
     }
   

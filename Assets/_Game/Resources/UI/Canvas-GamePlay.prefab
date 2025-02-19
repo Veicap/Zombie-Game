@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7a8da797580d54b9562f2602b2a601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroToSpawn: {fileID: 6823929271642148061, guid: 6423a26a7a7399642a5565f38080d4ad, type: 3}
+  heroToSpawn: {fileID: -4464459149956855093, guid: 6423a26a7a7399642a5565f38080d4ad, type: 3}
   buttonSpawnHero: {fileID: 5138054194088911316}
   manaToSpawnHero: {fileID: 8532621984041608624}
   background: {fileID: 659188051209768826}

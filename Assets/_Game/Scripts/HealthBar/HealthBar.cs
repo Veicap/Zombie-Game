@@ -10,26 +10,24 @@ public class HealthBar : GameUnit
     //[SerializeField] PoolType poolType;
 
     private float hp;
-    private float maxHp;
+    private float initHp;
     private ITarget target;
     private void Update()
     {
-        if (imageFill != null && maxHp > 0)
+        if (imageFill != null && initHp > 0)
         {
-            imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount, hp / maxHp, Time.deltaTime * 5f);
+            imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount, hp / initHp, Time.deltaTime * 5f);
         }
-
         if (target != null)
         {
             transform.position = target.GetOffsetHealthBar() + target.GetPosition();
         }
-        //Debug.Log("RealHp" + this.hp);
     }
-
-    public void OnInit(float maxHp, ITarget target)
+    public void OnInit(float hpNeedToSpawn, ITarget target)
     {
-        this.maxHp = maxHp;
-        hp = this.maxHp;
+        initHp = hpNeedToSpawn;
+        //Debug.Log(hpNeedToSpawn);
+        hp = initHp;
         this.target = target;
         imageFill.fillAmount = 1f;
         transform.position = target.GetOffsetHealthBar() + target.GetPosition();

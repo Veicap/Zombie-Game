@@ -5,8 +5,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class RifleHero : GunHero
 {
-    //private const string V = "Rifle is Character : ";
-
     [SerializeField] private int numberOfBullet;
     [SerializeField] private float timeToReload;
     [SerializeField] private int numberOfBulletShoot;
@@ -15,18 +13,13 @@ public class RifleHero : GunHero
     private IRifleState currentState;
     private bool canCounter = true;
     private bool isReloading = false;
-   /* private void Awake()
-    {
-         //OnInit();
-        
-    }*/
     public override void Update()
     {
         //Debug.Log(Target);
         /*Debug.Log(currentState);
         Debug.Log("Rifle Hero has target: " + HasTarget());*/
         currentState.OnExecute(this);
-        Debug.Log(HasTarget());
+       // Debug.Log(HasTarget());
        // Debug.Log("Number of shoot" + totalNumberOfBulletShooted);
         // Debug.Log(attackCooldown);
        // Debug.Log(attackCooldown);

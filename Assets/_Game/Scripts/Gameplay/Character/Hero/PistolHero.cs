@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class PistolHero : GunHero
 {
-    private void Start()
-    {
-       //    OnInit();
-    }
+    private IPistolHeroState currentState;
     /*public override void OnInit()
     {
         base.OnInit();
     }*/
+
+    public void ChangeState(IPistolHeroState newState)
+    {
+        currentState?.OnExit(this);
+        currentState = newState;
+        currentState?.OnEnter(this);
+    }
+    public override void Update()
+    {
+        currentState.OnExecute(this);
+    }
+    public override void OnInit(int hpNeedToSpawn)
+    {
+        base.OnInit(hpNeedToSpawn);
+        currentState = new IdlePistolHeroState();
+    }
 }

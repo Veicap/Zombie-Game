@@ -15,13 +15,12 @@ public class NormalZombie : Zombie
        // Debug.Log(currentState.ToString());
        // Debug.Log(isMoving);
         currentState.OnExecute(this);
-        Debug.Log(HasTargetInRange());
+       // Debug.Log(HasTargetInRange());
     }
     public override void OnInit(int hpNeedToSpawn)
     {
         base.OnInit(hpNeedToSpawn);
-        currentState = new IdleZombieNormalState();
-        isMoving = false;    
+        currentState = new IdleZombieNormalState();   
     }
     public void ChangeState(IZombieNormalState newState)
     {
@@ -29,9 +28,5 @@ public class NormalZombie : Zombie
         currentState = newState;
         currentState?.OnEnter(this);
     }
-    //Todo
-    public void MoveForward()
-    {
-
-    }
+    
 }

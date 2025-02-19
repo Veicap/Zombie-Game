@@ -117,7 +117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 8
   imageFill: {fileID: 8573969370747379564}
-  poolType: 0
 --- !u!1 &7614224984625961347
 GameObject:
   m_ObjectHideFlags: 0

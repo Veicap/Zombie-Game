@@ -51,6 +51,7 @@ MonoBehaviour:
   rb: {fileID: -1763897677548276}
   speed: 10
   damage: 20
+  gun: {fileID: 2076151097045642889, guid: 0beb752b2dd943b4c8e77d3a9e3147a7, type: 3}
   hitLayers:
     serializedVersion: 2
     m_Bits: 512

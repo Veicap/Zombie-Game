@@ -64,15 +64,16 @@ public abstract class Character : GameUnit, ITarget
         if(this is Hero)
         {
             hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Hero, transform.position, Quaternion.identity);
-            hBar.OnInit(maxHP, this);
+            hBar.OnInit(hpNeedToSpawn, this);
         }
         if(this is Zombie)
         {
             hBar = SimplePool.Spawn<HealthBar>(PoolType.HealBar_Zombie, transform.position, Quaternion.identity);
-            hBar.OnInit(maxHP, this);
+            hBar.OnInit(hpNeedToSpawn, this);
         }
         characterCollider.enabled = true;
         agent.speed = originalSpeed;
+        
     }
 
     public virtual void OnAttack()
@@ -102,6 +103,7 @@ public abstract class Character : GameUnit, ITarget
         if(!IsDead())
         {
             hp -= damageAmount;
+            Debug.Log(hp);
             hBar.SetNewHP(hp);
             if (IsDead())
             {
@@ -113,7 +115,7 @@ public abstract class Character : GameUnit, ITarget
     public virtual void OnDeath()
     {
         characterCollider.enabled = false;
-        agent.speed = 0f;
+        StopMoving();
         ChangeAnimation(Constants.ANIM_DEAD);
         SimplePool.Despawn(hBar);
         if (this is Hero)

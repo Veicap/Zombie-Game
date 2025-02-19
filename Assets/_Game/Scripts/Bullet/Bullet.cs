@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Bullet : GameUnit  
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed;
-    [SerializeField] private float damage = 20f;
+    [SerializeField] private Gun gun;
     public LayerMask hitLayers;
     private float counter = 0;
 
@@ -17,10 +18,10 @@ public class Bullet : GameUnit
         counter += Time.deltaTime;
         if (counter > 5f)
         {
-            OnDespawn();
             counter = 0;
+            OnDespawn();
         }
-        
+        //Debug.Log(gun.GetHeroDamage());
     }
     private void FixedUpdate()
     {
@@ -36,8 +37,10 @@ public class Bullet : GameUnit
             {
                 Effect effect = zombie.SpawnHitEffect(transform);
                 LevelManager.Ins.DespawnEffect(effect);
+                zombie.OnHit(gun.GetHeroDamage());
+                Debug.Log("Alo");
+                counter = 0f;
                 OnDespawn();
-                zombie.OnHit(damage);
             }
         }
     }
@@ -63,8 +66,9 @@ public class Bullet : GameUnit
             Zombie zombie = other.GetComponent<Zombie>();
             Effect effect = zombie.SpawnHitEffect(transform);
             LevelManager.Ins.DespawnEffect(effect);
+            //zombie.OnHit(gun.GetHeroDamage());
+            counter = 0f;
             OnDespawn();
-            zombie.OnHit(damage);
         }
     }
 

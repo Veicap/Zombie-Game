@@ -50,7 +50,7 @@ MonoBehaviour:
   PoolType: 10
   rb: {fileID: 4682463646755731677}
   speed: 10
-  damage: 20
+  gun: {fileID: 3579851549691821271, guid: fc9fadd7639adb64690275170490d6a5, type: 3}
   hitLayers:
     serializedVersion: 2
     m_Bits: 512
