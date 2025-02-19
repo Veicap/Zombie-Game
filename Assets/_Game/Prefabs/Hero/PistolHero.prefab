@@ -123,7 +123,7 @@ MonoBehaviour:
   PoolType: 0
   maxHP: 100
   damage: 10
-  attackRange: 9.5
+  attackRange: 11
   attackSpeed: 1
   offsetRange: 0.2
   speedRotation: 15
