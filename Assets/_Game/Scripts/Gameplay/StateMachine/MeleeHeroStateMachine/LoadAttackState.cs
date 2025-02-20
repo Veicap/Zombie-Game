@@ -7,6 +7,13 @@ using static UnityEngine.GraphicsBuffer;
 public class LoadAttackState : IState
 {
     float attackCooldown = 0;
+    private ITarget target;
+
+    public LoadAttackState(ITarget target)
+    {
+        this.target = target;   
+    }
+
     public void OnEnter(Character character)
     {
         character.StopMoving();
@@ -16,7 +23,6 @@ public class LoadAttackState : IState
     {
         if(!character.IsDead())
         {
-            var target = character.Target;
             attackCooldown += Time.deltaTime;
             if (attackCooldown >= character.AttackSpeed)
             {

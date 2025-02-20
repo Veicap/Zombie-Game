@@ -29,7 +29,8 @@ public class AttackZombieNormalState : IZombieNormalState
                 else // Neu Ke dich trong tam danh
                 {
                     normalZombie.OnAttack();
-                    normalZombie.ChangeState(new LoadAttackNormalZombieState());
+                    var target = normalZombie.Target;
+                    normalZombie.ChangeState(new LoadAttackNormalZombieState(target));
                 }
             }
             // Neu khong co muc tieu

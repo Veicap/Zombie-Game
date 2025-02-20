@@ -6,6 +6,13 @@ using UnityEngine.TextCore.Text;
 public class LoadAttackNormalZombieState : IZombieNormalState
 {
     float attackCoolDown = 0f;
+    private ITarget target;
+
+    public LoadAttackNormalZombieState(ITarget target)
+    {
+        this.target = target;
+    }
+
     public void OnEnter(NormalZombie normalZombie)
     {
         
@@ -23,9 +30,9 @@ public class LoadAttackNormalZombieState : IZombieNormalState
                     Debug.Log("Change Idle State");
                     normalZombie.ChangeState(new PartrolNormalZombieState());
                 }
-                if (normalZombie.Target != null && !normalZombie.Target.IsDead())
+                if (target != null && !target.IsDead())
                 {
-                    normalZombie.Target.OnHit(normalZombie.Damage);
+                    target.OnHit(normalZombie.Damage);
                 }
                 attackCoolDown = 0f;
                 normalZombie.ChangeState(new AttackZombieNormalState());

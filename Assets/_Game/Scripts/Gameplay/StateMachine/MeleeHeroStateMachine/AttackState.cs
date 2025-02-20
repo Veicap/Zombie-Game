@@ -32,7 +32,8 @@ public class AttackState : IState
                 else // Neu Ke dich trong tam danh
                 {
                     character.OnAttack();
-                    character.ChangeState(new LoadAttackState());
+                    var target = character.Target;
+                    character.ChangeState(new LoadAttackState(target));
                 }
                
             }
