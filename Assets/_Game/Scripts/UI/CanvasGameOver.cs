@@ -29,10 +29,10 @@ public class CanvasGameOver : UICanvas
     {
         Time.timeScale = 1f;
         ShowGameOverUIAnimationEnd();
-        StartCoroutine(ClosePauseUIForOpenMainMenu());
+        StartCoroutine(CloseGameOverUIForOpenMainMenu());
     }
 
-    private IEnumerator ClosePauseUIForOpenMainMenu()
+    private IEnumerator CloseGameOverUIForOpenMainMenu()
     {
         yield return new WaitForSeconds(1.0f);
 

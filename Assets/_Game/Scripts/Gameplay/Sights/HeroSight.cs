@@ -67,7 +67,11 @@ public class HeroSight : MonoBehaviour
         if (listZombieInsight.Count > 0)
         {
             currentZombieTarget = listZombieInsight[0];
-            hero.SetTarget(currentZombieTarget);
+            if(!currentZombieTarget.IsDead())
+            {
+                hero.SetTarget(currentZombieTarget);
+            }
+            
         }
         else
         {

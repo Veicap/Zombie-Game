@@ -4,24 +4,60 @@ using UnityEngine;
 
 public class CanvasLevelCompleteUI : UICanvas
 {
+    public static CanvasLevelCompleteUI Instance { get; private set; }
+    [SerializeField] private Animator animator;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void OnRetryLevel()
     {
-        LevelManager.Ins.OnRetryLevel();
         Time.timeScale = 1.0f;
-        UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
+        ShowLevelCompleteUIAnimationEnd();
+        StartCoroutine(CloseLevelCompleteUIForOnRetryLevel());
     }
 
+    private IEnumerator CloseLevelCompleteUIForOnRetryLevel()
+    {
+        yield return new WaitForSeconds(1.0f);
+        LevelManager.Ins.OnRetryLevel();
+        UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
+    }
     public void OpenMainMenu()
     {
-        Time.timeScale = 0f;
-        UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
-        UIManager.Ins.OpenUI<CanvasMainMenu>();
+        Time.timeScale = 1f;
+        ShowLevelCompleteUIAnimationEnd();
+        StartCoroutine(CloseLeveCompleteUIForOpenMainMenu());
+    }
+
+    private IEnumerator CloseLeveCompleteUIForOpenMainMenu()
+    {
+        yield return new WaitForSeconds(1.0f);
         UIManager.Ins.CloseUIDirectly<CanvasGamePlay>();
+        yield return new WaitUntil(() =>
+            !UIManager.Ins.IsOpened<CanvasGamePlay>());
+        UIManager.Ins.OpenUI<CanvasMainMenu>();
+        CanvasMainMenu.Instance.ShowAnimationMainMenuIdle();
+        yield return new WaitForSecondsRealtime(1f);
+        UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
+        Time.timeScale = 0f;
     }
 
     public void OnNextLevel()
     {
         LevelManager.Ins.OnNextLevel();
         UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
+    }
+
+    public void ShowLevelCompleteUIAnimationStart()
+    {
+        animator.SetTrigger(Constants.ANIM_LEVELCOMPLETE_UI_START);
+    }
+
+    public void ShowLevelCompleteUIAnimationEnd()
+    {
+        animator.SetTrigger(Constants.ANIM_LEVELCOMPLETE_UI_END);
+
     }
 }

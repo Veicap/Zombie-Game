@@ -322,6 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8347064648817711601}
   - component: {fileID: 2528100003904760168}
+  - component: {fileID: 266342513068147712}
   m_Layer: 5
   m_Name: Canvas-LevelCompleteUI
   m_TagString: Untagged
@@ -339,7 +340,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2746308249515823726}
   - {fileID: 3694864623994448287}
@@ -363,6 +364,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isdestroyOnClose: 0
+  animator: {fileID: 266342513068147712}
+--- !u!95 &266342513068147712
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731768388801086426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c063abdc4c0ccb84b93ddc37f03a3ace, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2355571834009494987
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +397,7 @@ GameObject:
   - component: {fileID: 3694864623994448287}
   - component: {fileID: 4264088826649923553}
   - component: {fileID: 2212393195713374715}
+  - component: {fileID: 2272131550877261978}
   m_Layer: 5
   m_Name: Window
   m_TagString: Untagged
@@ -443,6 +467,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &2272131550877261978
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2355571834009494987}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2913247287524138749
 GameObject:
   m_ObjectHideFlags: 0

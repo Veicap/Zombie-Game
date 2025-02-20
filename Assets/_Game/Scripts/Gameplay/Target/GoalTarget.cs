@@ -53,6 +53,7 @@ public class GoalTarget : MonoBehaviour, ITarget
         if(turretType == TurretType.Turret_Enemy)
         {
             UIManager.Ins.OpenUI<CanvasLevelCompleteUI>();
+            CanvasLevelCompleteUI.Instance.ShowLevelCompleteUIAnimationStart();
         }
         if (turretType == TurretType.Turret_Hero)
         {
