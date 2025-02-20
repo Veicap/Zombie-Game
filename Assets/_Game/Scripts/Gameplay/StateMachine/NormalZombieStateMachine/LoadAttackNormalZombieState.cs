@@ -15,25 +15,32 @@ public class LoadAttackNormalZombieState : IZombieNormalState
     {
         if(!normalZombie.IsDead())
         {
-            if (!normalZombie.HasTargetInRange())   
+            /*if (!normalZombie.HasTargetInRange())   
             {
                 // Debug.Log("Change Move State");
                 normalZombie.ChangeState(new PartrolState());
-            }
-            else
-            {
+            }*/
+            /*else
+            {*/
                 attackCoolDown += Time.deltaTime;
                 //Debug.Log(attackCooldown);
                 if (attackCoolDown >= normalZombie.AttackSpeed)
                 {
+                    
                     if (normalZombie.Target != null && !normalZombie.Target.IsDead())
                     {
                         normalZombie.Target.OnHit(normalZombie.Damage);
                     }
                     attackCoolDown = 0f;
-                    normalZombie.ChangeState(new AttackState());
+                    Debug.Log(normalZombie.HasTargetInRange());
+                    if (!normalZombie.HasTargetInRange())
+                    {
+                         Debug.Log("Change Idle State");
+                        normalZombie.ChangeState(new PartrolNormalZombieState());
+                    }
+                    normalZombie.ChangeState(new AttackZombieNormalState());
                 }
-            }
+            //}
         }
         
     }

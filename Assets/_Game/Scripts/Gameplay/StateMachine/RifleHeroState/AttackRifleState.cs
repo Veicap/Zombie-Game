@@ -27,7 +27,7 @@ public class AttackRifleState : IRifleState
                 if (!rifleHero.HasTargetInRange())
                 {
                     rifleHero.ResetAttackCoolDown();
-                    rifleHero.ChangeState(new MoveRifleState());
+                    rifleHero.ChangeState(new IdleRifleState());
                 }
             }
             // Neu khong co muc tieu

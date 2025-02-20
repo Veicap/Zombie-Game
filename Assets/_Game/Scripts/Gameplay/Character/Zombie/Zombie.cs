@@ -25,7 +25,7 @@ public class Zombie : Character
     {
         base.Update();
         Debug.Log(HasTarget());
-        Debug.Log(CurrentState);
+       // Debug.Log(CurrentState);
     }
 
     public override void OnAttack()

@@ -48,12 +48,14 @@ public class CanvasMainMenu : UICanvas
 
     private IEnumerator ShowMainMenuAnim(int level)
     {
+        Time.timeScale = 1.0f;
+        SimplePool.ReleaseAll();
+        LevelManager.Ins.StopSpawnZombie();
         ShowAnimationMainMenuEnd();
         yield return new WaitForSeconds(2f);
         UIManager.Ins.CloseUIDirectly<CanvasMainMenu>();
         UIManager.Ins.OpenUI<CanvasGamePlay>();
         LevelManager.Ins.LoadLevel(level);
-        Time.timeScale = 1.0f;
     }
     
 }

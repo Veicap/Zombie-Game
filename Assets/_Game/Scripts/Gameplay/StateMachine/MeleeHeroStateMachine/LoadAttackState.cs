@@ -16,23 +16,20 @@ public class LoadAttackState : IState
     {
         if(!character.IsDead())
         {
-            if (!character.HasTargetInRange())
+            attackCooldown += Time.deltaTime;
+            if (attackCooldown >= character.AttackSpeed)
             {
-                // Debug.Log("Change Move State");
-                character.ChangeState(new PartrolState());
-            }
-            else
-            {
-                attackCooldown += Time.deltaTime;
-                if (attackCooldown >= character.AttackSpeed)
+                if (!character.HasTargetInRange())
                 {
-                    if (character.Target != null && !character.Target.IsDead())
-                    {
-                        character.Target.OnHit(character.Damage);
-                    }
-                    attackCooldown = 0f;
-                    character.ChangeState(new AttackState());
+                    
+                    character.ChangeState(new IdleState());
                 }
+                if (character.Target != null && !character.Target.IsDead())
+                {
+                    character.Target.OnHit(character.Damage);
+                }
+                attackCooldown = 0f;
+                character.ChangeState(new AttackState());
             }
         }
     }

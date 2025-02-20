@@ -76,7 +76,7 @@ MonoBehaviour:
   attackRange: 1.2
   attackSpeed: 2
   offsetRange: 0.2
-  speedRotation: 3
+  speedRotation: 50
   cTransform: {fileID: 8581083877820243575}
   timeToDespawn: 3.43
   offsetHealthBar: {x: 0, y: 2.4, z: 0}

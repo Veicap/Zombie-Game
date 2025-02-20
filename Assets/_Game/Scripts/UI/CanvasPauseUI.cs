@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,27 +30,39 @@ public class CanvasPauseUI : UICanvas
         StartCoroutine(ClosePauseUIForPlayGameButton());
         //UIManager.Ins.CloseUIDirectly<CanvasPauseUI>();
     }
-    
+
+    private IEnumerator ClosePauseUIForPlayGameButton()
+    {
+        yield return new WaitForSeconds(1.0f);
+        UIManager.Ins.CloseUIDirectly<CanvasPauseUI>();
+    }
+
     public void OpenMainMenu()
     {
         Time.timeScale = 1f;
         ShowPauseUIAnimationEnd();
         StartCoroutine(ClosePauseUIForOpenMainMenu());
     }
-    private IEnumerator ClosePauseUIForPlayGameButton()
-    {
-        yield return new WaitForSeconds(1.0f);
-        UIManager.Ins.CloseUIDirectly<CanvasPauseUI>();
-    }
+    
     private IEnumerator ClosePauseUIForOpenMainMenu()
     {
         yield return new WaitForSeconds(1.0f);
-        UIManager.Ins.CloseUIDirectly<CanvasPauseUI>();
+        
         UIManager.Ins.CloseUIDirectly<CanvasGamePlay>();
+        yield return new WaitUntil(() =>
+            !UIManager.Ins.IsOpened<CanvasGamePlay>());
+        // Doi 2 Canvas kia ddong lai da moi bat dau mo Main Menu
         UIManager.Ins.OpenUI<CanvasMainMenu>();
         CanvasMainMenu.Instance.ShowAnimationMainMenuIdle();
-        yield return new WaitForSeconds(0.5f);
-        Time.timeScale = 0f;  
+       /* if (CanvasMainMenu.Instance != null)
+        {
+            CanvasMainMenu.Instance.ShowAnimationMainMenuIdle();
+        }*/
+      
+        yield return new WaitForSecondsRealtime(1f);
+        UIManager.Ins.CloseUIDirectly<CanvasPauseUI>();
+        Time.timeScale = 0f;
+
     }
     public void OnRetryLevel()   
     {

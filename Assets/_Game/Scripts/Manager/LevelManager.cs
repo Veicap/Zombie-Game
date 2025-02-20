@@ -53,6 +53,15 @@ public class LevelManager : Singleton<LevelManager>
         zombieTurret.OnInit();  
     }
 
+    public void StopSpawnZombie()
+    {
+        if(c != null)
+        {
+            StopCoroutine(c);
+        }
+        
+    }
+
     public void DespawnEffect(Effect effect)
     {
         StartCoroutine(IEDespawnEffect(effect));
@@ -150,7 +159,6 @@ public class LevelManager : Singleton<LevelManager>
         //next 1 level
         OnDespawn();
         LoadLevel(++currentLevel);
-        
     }
 
     public void OnRetryLevel()
@@ -162,8 +170,6 @@ public class LevelManager : Singleton<LevelManager>
         // Load lai doc lai data
         LoadLevel(currentLevel);
         //Khoi tao level
-        
-    
     }
 
     public void OnDespawn()
