@@ -15,34 +15,22 @@ public class LoadAttackNormalZombieState : IZombieNormalState
     {
         if(!normalZombie.IsDead())
         {
-            /*if (!normalZombie.HasTargetInRange())   
+            attackCoolDown += Time.deltaTime;
+            if (attackCoolDown >= normalZombie.AttackSpeed)
             {
-                // Debug.Log("Change Move State");
-                normalZombie.ChangeState(new PartrolState());
-            }*/
-            /*else
-            {*/
-                attackCoolDown += Time.deltaTime;
-                //Debug.Log(attackCooldown);
-                if (attackCoolDown >= normalZombie.AttackSpeed)
+                if (!normalZombie.HasTargetInRange())
                 {
-                    
-                    if (normalZombie.Target != null && !normalZombie.Target.IsDead())
-                    {
-                        normalZombie.Target.OnHit(normalZombie.Damage);
-                    }
-                    attackCoolDown = 0f;
-                    Debug.Log(normalZombie.HasTargetInRange());
-                    if (!normalZombie.HasTargetInRange())
-                    {
-                         Debug.Log("Change Idle State");
-                        normalZombie.ChangeState(new PartrolNormalZombieState());
-                    }
-                    normalZombie.ChangeState(new AttackZombieNormalState());
+                    Debug.Log("Change Idle State");
+                    normalZombie.ChangeState(new PartrolNormalZombieState());
                 }
-            //}
+                if (normalZombie.Target != null && !normalZombie.Target.IsDead())
+                {
+                    normalZombie.Target.OnHit(normalZombie.Damage);
+                }
+                attackCoolDown = 0f;
+                normalZombie.ChangeState(new AttackZombieNormalState());
+            }
         }
-        
     }
     public void OnExit(NormalZombie normalZombie)
     {

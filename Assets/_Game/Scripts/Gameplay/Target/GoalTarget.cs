@@ -57,6 +57,7 @@ public class GoalTarget : MonoBehaviour, ITarget
         if (turretType == TurretType.Turret_Hero)
         {
             UIManager.Ins.OpenUI<CanvasGameOver>();
+            CanvasGameOver.Instance.ShowGameOverUIAnimationStart();
         }
     }
 
