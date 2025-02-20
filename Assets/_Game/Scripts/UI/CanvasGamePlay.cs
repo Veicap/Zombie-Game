@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CanvasGamePlay : UICanvas
 {
-    //[SerializeField] private Button pauseGame;
     public static CanvasGamePlay Instance { get; private set; }
     [SerializeField] private List<ButtonSpawnHero> buttonSpawnHeroes;
 

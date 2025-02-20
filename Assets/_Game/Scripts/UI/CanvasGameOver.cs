@@ -35,7 +35,6 @@ public class CanvasGameOver : UICanvas
     private IEnumerator CloseGameOverUIForOpenMainMenu()
     {
         yield return new WaitForSeconds(1.0f);
-
         UIManager.Ins.CloseUIDirectly<CanvasGamePlay>();
         yield return new WaitUntil(() =>
             !UIManager.Ins.IsOpened<CanvasGamePlay>());

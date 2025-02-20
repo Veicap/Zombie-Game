@@ -423,7 +423,7 @@ PrefabInstance:
     - target: {fileID: 2765465863352719163, guid: fc9fadd7639adb64690275170490d6a5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5f6836f8255d26a4e8c612789e61bc93, type: 2}
+      objectReference: {fileID: 2100000, guid: 3cdecf3bda1d2b94fb21d240d339f059, type: 2}
     - target: {fileID: 3579851549691821271, guid: fc9fadd7639adb64690275170490d6a5, type: 3}
       propertyPath: gunHero
       value: 

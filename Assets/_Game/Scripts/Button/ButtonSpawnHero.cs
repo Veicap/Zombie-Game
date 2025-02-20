@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,7 +35,7 @@ public class ButtonSpawnHero : MonoBehaviour
             StopCoroutine(c);
         }
         ShowBackGround();
-        buttonSpawnHero.interactable = false;
+        //buttonSpawnHero.interactable = false;
         manaToSpawnHero.text = heroToSpawn.ManaToSpawn.ToString();
         timeToSpawnHero = heroToSpawn.TimeToSpawn;
         counter = timeToSpawnHero;
@@ -84,8 +84,8 @@ public class ButtonSpawnHero : MonoBehaviour
     {
         ShowBackGround();
         isSpawnHeroUIEnabled = false;
-        buttonSpawnHero.interactable = false;
-        ChangePositionOfRectransfor(-offsetChangePosRect);
+        //buttonSpawnHero.interactable = false;
+        //ChangePositionOfRectransfor(-offsetChangePosRect);
     }
 
     private void LockSpawnHero()
@@ -94,12 +94,12 @@ public class ButtonSpawnHero : MonoBehaviour
         countDownToSpawnImage.fillAmount = 1;
     }
 
-    private void ChangePositionOfRectransfor(float numberOfOffset)
+    /*private void ChangePositionOfRectransfor(float numberOfOffset)
     {
         Vector2 currentPos = rectTransform.anchoredPosition;
         currentPos.y += numberOfOffset;
         rectTransform.anchoredPosition = currentPos;
-    }
+    }*/
 
     private IEnumerator UnlockSpawnHero()
     {
@@ -114,14 +114,16 @@ public class ButtonSpawnHero : MonoBehaviour
     {
         buttonSpawnHero.interactable = true;
         HideBackGround();
-        ChangePositionOfRectransfor(offsetChangePosRect);
+        //ChangePositionOfRectransfor(offsetChangePosRect);
     }
     private void ShowBackGround()
     {
         background.gameObject.SetActive(true);
+        background.raycastTarget = true;
     }
     private void HideBackGround()
     {
+        background.raycastTarget = true;
         background.gameObject.SetActive(false);
     }
 }

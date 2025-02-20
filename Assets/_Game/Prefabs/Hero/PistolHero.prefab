@@ -668,6 +668,10 @@ PrefabInstance:
       propertyPath: gunHero
       value: 
       objectReference: {fileID: -4464459149956855093}
+    - target: {fileID: 3961531529345093894, guid: 0beb752b2dd943b4c8e77d3a9e3147a7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cdecf3bda1d2b94fb21d240d339f059, type: 2}
     - target: {fileID: 4012016236681203430, guid: 0beb752b2dd943b4c8e77d3a9e3147a7, type: 3}
       propertyPath: m_Name
       value: Pistol

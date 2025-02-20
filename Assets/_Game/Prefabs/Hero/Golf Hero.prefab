@@ -494,6 +494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GolfClub_standardShader
       objectReference: {fileID: 0}
+    - target: {fileID: 9100416981648429263, guid: 13afc58790dc7ce449cf76b060552bb5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cdecf3bda1d2b94fb21d240d339f059, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

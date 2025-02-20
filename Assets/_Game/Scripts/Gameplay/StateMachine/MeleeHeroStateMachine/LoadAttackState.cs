@@ -16,6 +16,7 @@ public class LoadAttackState : IState
     {
         if(!character.IsDead())
         {
+            var target = character.Target;
             attackCooldown += Time.deltaTime;
             if (attackCooldown >= character.AttackSpeed)
             {
@@ -24,9 +25,9 @@ public class LoadAttackState : IState
                     
                     character.ChangeState(new IdleState());
                 }
-                if (character.Target != null && !character.Target.IsDead())
+                if (target != null && !target.IsDead())
                 {
-                    character.Target.OnHit(character.Damage);
+                    target.OnHit(character.Damage);
                 }
                 attackCooldown = 0f;
                 character.ChangeState(new AttackState());
