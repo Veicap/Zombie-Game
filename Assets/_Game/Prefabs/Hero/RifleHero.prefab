@@ -80,6 +80,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 164670569065872224}
   - {fileID: 3348470321207683409}
   - {fileID: 6842612386507766250}
   m_Father: {fileID: 0}
@@ -181,6 +182,8 @@ MonoBehaviour:
   animator: {fileID: 6276487098124519313}
   agent: {fileID: 2091768103872590524}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  combatTextPreb: {fileID: 7262026795549413857, guid: 105efbff9513ca94a896e70fe1807352, type: 3}
+  pointToSpawnCombatText: {fileID: 164670569065872224}
   manaToSpawn: 5
   timeToSpawn: 3
   gun: {fileID: 8405253663575885642}
@@ -362,6 +365,37 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!1 &8448407286256810908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164670569065872224}
+  m_Layer: 8
+  m_Name: SpawnPointForCombatText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &164670569065872224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448407286256810908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.58, z: -0.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7056340025116363306}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3022638250309766842
 PrefabInstance:
   m_ObjectHideFlags: 0

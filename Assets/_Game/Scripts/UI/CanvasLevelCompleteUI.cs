@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class CanvasLevelCompleteUI : UICanvas
 {
-    public static CanvasLevelCompleteUI Instance { get; private set; }
     [SerializeField] private Animator animator;
+    [SerializeField] GameObject[] stars;
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
+
+    public override void Open()
     {
-        Instance = this;
+        base.Open();
+        StartCoroutine(IEStarShow());
     }
+
     public void OnRetryLevel()
     {
         Time.timeScale = 1.0f;
@@ -58,6 +65,15 @@ public class CanvasLevelCompleteUI : UICanvas
     public void ShowLevelCompleteUIAnimationEnd()
     {
         animator.SetTrigger(Constants.ANIM_LEVELCOMPLETE_UI_END);
+    }
 
+    private IEnumerator IEStarShow()
+    {
+        for (int i = 0; i < stars.Length; i++)
+        {
+            
+            yield return new WaitForSeconds(1f);
+            stars[i].SetActive(true);
+        }
     }
 }

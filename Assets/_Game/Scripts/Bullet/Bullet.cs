@@ -38,7 +38,6 @@ public class Bullet : GameUnit
                 Effect effect = zombie.SpawnHitEffect(transform);
                 LevelManager.Ins.DespawnEffect(effect);
                 zombie.OnHit(gun.GetHeroDamage());
-                Debug.Log("Alo");
                 counter = 0f;
                 OnDespawn();
             }

@@ -18,6 +18,7 @@ public class Constants
     public const string ANIM_GAMEOVER_UI_END = "End";
     public const string ANIM_LEVELCOMPLETE_UI_START = "Start";
     public const string ANIM_LEVELCOMPLETE_UI_END = "End";
+    public const string ANIM_COMBAT_TEXT = "Init";
 }
 
 public enum ItemType

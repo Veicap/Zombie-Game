@@ -7,6 +7,11 @@ public class Zombie : Character
     [SerializeField] private Effect hitEffect;
     private GoalTarget goalTarget;
     public GoalTarget GoalTarget => goalTarget;
+
+    /*private void Start()
+    {
+        OnInit(100);
+    }*/
     public override void OnInit(int hpNeedToSpawn)
     {
         base.OnInit(hpNeedToSpawn);

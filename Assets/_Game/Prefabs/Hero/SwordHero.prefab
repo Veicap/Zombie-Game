@@ -154,6 +154,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3830073975463793855}
   - {fileID: 7438013061874410066}
   - {fileID: 8993620025469632708}
   m_Father: {fileID: 0}
@@ -305,8 +306,41 @@ MonoBehaviour:
   animator: {fileID: 6907130209430594382}
   agent: {fileID: 445459694953523682}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  combatTextPreb: {fileID: 7262026795549413857, guid: 105efbff9513ca94a896e70fe1807352, type: 3}
+  pointToSpawnCombatText: {fileID: 3830073975463793855}
   manaToSpawn: 5
   timeToSpawn: 3
+--- !u!1 &8357152685189458778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3830073975463793855}
+  m_Layer: 8
+  m_Name: SpawnPointForCombatText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3830073975463793855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357152685189458778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04, y: 0.66, z: -0.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6041099169715238571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2577598459523184093
 PrefabInstance:
   m_ObjectHideFlags: 0

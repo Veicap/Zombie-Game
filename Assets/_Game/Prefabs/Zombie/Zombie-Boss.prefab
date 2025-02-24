@@ -83,6 +83,7 @@ MonoBehaviour:
   animator: {fileID: 5144713891133587028}
   agent: {fileID: 829620876354065080}
   healthBar: {fileID: 8340815696775254413, guid: 238d368eb836a7a479d374254d96fbda, type: 3}
+  combatTextPreb: {fileID: 7262026795549413857, guid: 105efbff9513ca94a896e70fe1807352, type: 3}
   hitEffect: {fileID: 9030627335931277897, guid: 4f58d34b4be682944895d64fa469a504, type: 3}
 --- !u!136 &5838132090411691646
 CapsuleCollider:

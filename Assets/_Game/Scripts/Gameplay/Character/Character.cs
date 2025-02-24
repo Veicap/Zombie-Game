@@ -20,8 +20,9 @@ public abstract class Character : GameUnit, ITarget
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private NavMeshAgent agent;
-    //[SerializeField] private GoalTarget goalTarget;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private CombatText combatTextPreb;
+    [SerializeField] private Transform pointToSpawnCombatText;
    
 
     private IState currentState;
@@ -103,7 +104,16 @@ public abstract class Character : GameUnit, ITarget
         if(!IsDead())
         {
             hp -= damageAmount;
-            hBar.SetNewHP(hp);
+            hBar.SetNewHP(hp);    
+  /*          Vector3 combatTextPos = transform.position;
+            combatTextPos.y += 1f;*/
+            CombatText combatText = SimplePool.Spawn<CombatText>(combatTextPreb.PoolType, pointToSpawnCombatText.position, Quaternion.identity);
+            /*Vector3 directionToCamera = Camera.main.transform.position - combatText.transform.position;
+            Quaternion rotation = Quaternion.LookRotation(directionToCamera) * Quaternion.Euler(0, 180, 0);
+            combatText.transform.rotation = rotation;
+            directionToCamera.y = 0;*/
+            combatText.transform.forward = Camera.main.transform.forward;
+            combatText.OnInit(damageAmount, this);
             if (IsDead())
             {
                 OnDeath();

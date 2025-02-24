@@ -6,12 +6,7 @@ using UnityEngine.UI;
 
 public class CanvasPauseUI : UICanvas
 {
-    public static CanvasPauseUI Instance { get; private set; }  
     [SerializeField] private Animator animator;
-    private void Awake()
-    {
-        Instance = this;
-    }
     public void ShowPauseUIAnimationStart()
     {
         animator.SetTrigger(Constants.ANIM_PAUSE_UI_START);
@@ -20,7 +15,6 @@ public class CanvasPauseUI : UICanvas
     public void ShowPauseUIAnimationEnd()
     {
         animator.SetTrigger(Constants.ANIM_PAUSE_UI_END);
-       
     }
 
     public void PlayGame()
