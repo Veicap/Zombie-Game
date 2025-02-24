@@ -8,9 +8,18 @@ public class GoalTarget : MonoBehaviour, ITarget
     [SerializeField] private Transform goalPos;
     [SerializeField] private Vector3 offsetHeathBar;
     [SerializeField] private TurretType turretType;
-
+    [SerializeField] private CombatText combatTextPreb;
+    [SerializeField] private Transform pointToSpawnCombatText;
     protected HealthBar hBar;
     private float hp;
+
+    public TurretType GetTurretType
+    {
+        get { return turretType; }
+    }
+
+    public float HP => hp;
+    public float MaxHp => maxHp;
 
     public void OnInit()
     {
@@ -40,6 +49,9 @@ public class GoalTarget : MonoBehaviour, ITarget
             //Debug.Log(damageAmount);
             hp -= damageAmount;
             hBar.SetNewHP(hp);
+            CombatText combatText = SimplePool.Spawn<CombatText>(combatTextPreb.PoolType, pointToSpawnCombatText.position, Quaternion.identity);
+            combatText.transform.forward = Camera.main.transform.forward;
+            combatText.OnInit(damageAmount, this);
             if (IsDead())
             {
                 OnDeath();
@@ -52,17 +64,11 @@ public class GoalTarget : MonoBehaviour, ITarget
       //  Debug.Log("End Game");
         if(turretType == TurretType.Turret_Enemy)
         {
-            UIManager.Ins.OpenUI<CanvasLevelCompleteUI>().ShowLevelCompleteUIAnimationStart();
-            //CanvasLevelCompleteUI.Instance.ShowLevelCompleteUIAnimationStart();
-            //if (UIManager.Ins.IsOpened<CanvasLevelCompleteUI>())
-            //{
-            //    UIManager.Ins.GetUI<CanvasLevelCompleteUI>().SetUp();
-            //}
+            LevelManager.Ins.OnWin();
         }
         if (turretType == TurretType.Turret_Hero)
         {
-            UIManager.Ins.OpenUI<CanvasGameOver>();
-            CanvasGameOver.Instance.ShowGameOverUIAnimationStart();
+            LevelManager.Ins.OnLose();
         }
     }
 

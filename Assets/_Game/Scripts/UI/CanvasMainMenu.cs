@@ -5,15 +5,8 @@ using UnityEngine;
 
 public class CanvasMainMenu : UICanvas
 {
-    public static CanvasMainMenu Instance {  get; private set; } 
-
     [SerializeField] private Animator animator;
-
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField] private List<LevelButtonMenu> levelButtonMenu;
     public void ShowAnimationMainMenuEnd()
     {
         animator.SetTrigger(Constants.ANIM_MAINMENU_UI_END);
@@ -29,7 +22,14 @@ public class CanvasMainMenu : UICanvas
         animator.SetTrigger(Constants.ANIM_MAINMENU_UI_IDLE);
         Debug.Log("Anim Main Menu Idle");
     }
-
+    public override void Open()
+    {
+        base.Open();
+        for (int i = 0; i < levelButtonMenu.Count; i++)
+        {
+            levelButtonMenu[i].ShowBestStar(GetBestStars(i + 1));
+        }
+    }
     void Start()
     {
        
@@ -40,7 +40,7 @@ public class CanvasMainMenu : UICanvas
     {
         public int level;
     }
-
+    //Button
     public void OnLoadLevel(int level)
     {
         StartCoroutine(ShowMainMenuAnim(level));
@@ -57,5 +57,34 @@ public class CanvasMainMenu : UICanvas
         UIManager.Ins.OpenUI<CanvasGamePlay>();
         LevelManager.Ins.LoadLevel(level);
     }
-    
+    public void SaveBestStar(int level, int newStar)
+    {
+        string key = GetKeyPlayerPrefs(level);
+        int bestStar = PlayerPrefs.GetInt(key);
+        Debug.Log(newStar);
+        if (newStar > bestStar)
+        {
+            PlayerPrefs.SetInt(key, newStar);
+            PlayerPrefs.Save();
+        }
+        
+
+    }
+    public string GetKeyPlayerPrefs(int level)
+    {
+        string key = "Level_" + level + "_Stars";
+        return key;
+    }
+    public int GetBestStars(int level)
+    {
+        string key = GetKeyPlayerPrefs(level);
+        return PlayerPrefs.GetInt(key, 0);
+    }
+}
+
+[System.Serializable]
+public class StarsLevelObjects
+{
+    int level;
+    public List<GameObject> objects;
 }

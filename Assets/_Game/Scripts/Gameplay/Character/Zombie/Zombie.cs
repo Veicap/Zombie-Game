@@ -8,7 +8,7 @@ public class Zombie : Character
     private GoalTarget goalTarget;
     public GoalTarget GoalTarget => goalTarget;
 
-    /*private void Start()
+   /* private void Start()
     {
         OnInit(100);
     }*/

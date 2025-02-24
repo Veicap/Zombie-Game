@@ -7,11 +7,6 @@ public class CanvasLevelCompleteUI : UICanvas
     [SerializeField] private Animator animator;
     [SerializeField] GameObject[] stars;
 
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
-
     public override void Open()
     {
         base.Open();
@@ -44,8 +39,8 @@ public class CanvasLevelCompleteUI : UICanvas
         UIManager.Ins.CloseUIDirectly<CanvasGamePlay>();
         yield return new WaitUntil(() =>
             !UIManager.Ins.IsOpened<CanvasGamePlay>());
-        UIManager.Ins.OpenUI<CanvasMainMenu>();
-        CanvasMainMenu.Instance.ShowAnimationMainMenuIdle();
+        UIManager.Ins.OpenUI<CanvasMainMenu>().ShowAnimationMainMenuIdle();
+   
         yield return new WaitForSecondsRealtime(1f);
         UIManager.Ins.CloseUIDirectly<CanvasLevelCompleteUI>();
         Time.timeScale = 0f;
@@ -69,11 +64,12 @@ public class CanvasLevelCompleteUI : UICanvas
 
     private IEnumerator IEStarShow()
     {
-        for (int i = 0; i < stars.Length; i++)
+        //Debug.Log(LevelManager.Ins.StartGiven);
+        for (int i = 0; i < LevelManager.Ins.StartGiven; i++)
         {
-            
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             stars[i].SetActive(true);
         }
     }
 }
+

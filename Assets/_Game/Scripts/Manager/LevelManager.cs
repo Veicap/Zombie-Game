@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.HighDefinition.ScalableSettingLevelParameter;
 
 public class LevelManager : Singleton<LevelManager> 
 {
@@ -30,10 +31,13 @@ public class LevelManager : Singleton<LevelManager>
     private Coroutine c;
     public float NumberOfMana => numberOfMana;
     public float MaxMana => maxMana;
+    private int startGiven = 0;
     private void Start()
     {
         UIManager.Ins.OpenUI<CanvasMainMenu>();
     }
+
+    public int StartGiven => startGiven;    
 
     private void Update()
     {
@@ -43,12 +47,14 @@ public class LevelManager : Singleton<LevelManager>
             numberOfMana += 1;
             counter = 0f;
         }
+        // Debug.Log(startGiven);
+        
     }
     public void OnInit()
     {
         numberOfMana = 100;
         currentWave = 1;
-        c = StartCoroutine(SpawnRandomZombies());
+        //c = StartCoroutine(SpawnRandomZombies());
         heroTurret.OnInit();
         zombieTurret.OnInit();  
     }
@@ -146,12 +152,27 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnWin()
     {
-        //thang
+        if (heroTurret.HP >= heroTurret.MaxHp)
+        {
+            startGiven = 3;
+        }
+        else if (heroTurret.HP > (heroTurret.MaxHp * 60 / 100) && heroTurret.HP < heroTurret.MaxHp)
+        {
+            startGiven = 2;
+        }
+        else if (heroTurret.HP < (heroTurret.MaxHp * 60 / 100) && heroTurret.HP > (heroTurret.MaxHp * 30 / 100))
+        {
+            startGiven = 1;
+        }
+        UIManager.Ins.GetUI<CanvasMainMenu>().SaveBestStar(currentLevel, startGiven);
+        UIManager.Ins.OpenUI<CanvasLevelCompleteUI>().ShowLevelCompleteUIAnimationStart();
+        
     }
 
     public void OnLose()
     {
         //thua
+        UIManager.Ins.OpenUI<CanvasGameOver>().ShowGameOverUIAnimationStart();
     }
 
     public void OnNextLevel()

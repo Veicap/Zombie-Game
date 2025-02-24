@@ -17,28 +17,40 @@ public class CombatText : GameUnit
             counter += Time.deltaTime;
             if(counter > 1.1f)
             {
-                Debug.Log(counter);
                 onInit = false;
                 OnDespawn();
             }
         }
     }
 
-    public void OnInit(float damage, Character character)
+    public void OnInit(float damage, ITarget target)
     {
         counter = 0;
         combatText.text = damage.ToString();
         animator.SetTrigger(Constants.ANIM_COMBAT_TEXT);
-        if (character is Hero)
+        if (target is Hero)
         {
             combatText.color = Color.white;
         }
-        if (character is Zombie)
+        if (target is Zombie)
         {
             combatText.color = Color.red;
         }
+        if (target is GoalTarget)
+        {
+            GoalTarget goalTarget = (GoalTarget)target;
+            if(goalTarget.GetTurretType == TurretType.Turret_Hero)
+            {
+                combatText.color = Color.white;
+                
+            }
+            if(goalTarget.GetTurretType == TurretType.Turret_Enemy)
+            {
+                combatText.color = Color.red;
+            }
+            
+        }
         onInit = true;
-        Debug.Log(onInit);
     }
     public void OnDespawn()
     {

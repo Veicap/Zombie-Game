@@ -38,8 +38,8 @@ public class CanvasGameOver : UICanvas
         UIManager.Ins.CloseUIDirectly<CanvasGamePlay>();
         yield return new WaitUntil(() =>
             !UIManager.Ins.IsOpened<CanvasGamePlay>());
-        UIManager.Ins.OpenUI<CanvasMainMenu>();
-        CanvasMainMenu.Instance.ShowAnimationMainMenuIdle();
+        UIManager.Ins.OpenUI<CanvasMainMenu>().ShowAnimationMainMenuIdle();
+        
         yield return new WaitForSecondsRealtime(1f);
         UIManager.Ins.CloseUIDirectly<CanvasGameOver>();
         Time.timeScale = 0f;
