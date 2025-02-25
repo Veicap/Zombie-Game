@@ -19,6 +19,7 @@ public class Constants
     public const string ANIM_LEVELCOMPLETE_UI_START = "Start";
     public const string ANIM_LEVELCOMPLETE_UI_END = "End";
     public const string ANIM_COMBAT_TEXT = "Init";
+    public const string ANIM_POWER_UP = "PowerUp";  
 
 
     // Anim

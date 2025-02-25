@@ -29,7 +29,6 @@ public class Zombie : Character
     public override void Update()
     {
         base.Update();
-        Debug.Log(HasTarget());
        // Debug.Log(CurrentState);
     }
 
@@ -42,5 +41,10 @@ public class Zombie : Character
     {
         base.OnDeath();
         //LevelManager.Ins.RemoveZombieDeadthFormList(this);
+    }
+
+    public override void OnHit(float damageAmount)
+    {
+        base.OnHit(damageAmount);
     }
 }

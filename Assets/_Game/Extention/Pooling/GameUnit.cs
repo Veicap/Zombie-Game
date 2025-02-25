@@ -46,6 +46,10 @@ public enum PoolType
 
     // HealBar_Hero
     HealBar_Hero = 13,
+
     // Combat Text
-    Combat_Text = 14,    
+    Combat_Text = 14,
+    
+    // Hit Effect
+    HitEffect_Boss_To_Hero = 15,
 }

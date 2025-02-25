@@ -10,7 +10,6 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform spawnHeroPoints;
     [SerializeField] private Transform parentPool;
-    //[SerializeField] private ListLevelDataSO listLevelDataSO;
     [SerializeField] private List<Transform> spawnZombiePoints;
     [SerializeField] private ZombieData zombieDataSO;
     [SerializeField] private List<LevelData> listLevelDataSO; 
@@ -25,7 +24,6 @@ public class LevelManager : Singleton<LevelManager>
     private float counter;
     private const float maxMana = 100;
     int currentLevel;
-   // private LevelDataSO currentLevelData;
     private LevelData currentLevelData;
     private int currentWave;
     private Coroutine c;
@@ -34,7 +32,9 @@ public class LevelManager : Singleton<LevelManager>
     private int startGiven = 0;
     private void Start()
     {
-        UIManager.Ins.OpenUI<CanvasMainMenu>();
+        // UIManager.Ins.OpenUI<CanvasMainMenu>();
+        UIManager.Ins.OpenUI<CanvasGamePlay>();
+        numberOfMana = 100;
     }
 
     public int StartGiven => startGiven;    
@@ -47,14 +47,13 @@ public class LevelManager : Singleton<LevelManager>
             numberOfMana += 1;
             counter = 0f;
         }
-        // Debug.Log(startGiven);
-        
+        //Debug.Log(NumberOfMana);
     }
     public void OnInit()
     {
         numberOfMana = 100;
         currentWave = 1;
-        //c = StartCoroutine(SpawnRandomZombies());
+       // c = StartCoroutine(SpawnRandomZombies());
         heroTurret.OnInit();
         zombieTurret.OnInit();  
     }
@@ -65,7 +64,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             StopCoroutine(c);
         }
-        
     }
 
     public void DespawnEffect(Effect effect)

@@ -6,7 +6,6 @@ using UnityEngine.TextCore.Text;
 public abstract class Character : GameUnit, ITarget
 {
     [Header("Character Attributes")]
-    [SerializeField] protected float maxHP = 100f;
     [SerializeField] protected float damage = 10f;
     [SerializeField] protected float attackRange = 1.5f;
     [SerializeField] protected float attackSpeed = 1.0f;
@@ -15,7 +14,8 @@ public abstract class Character : GameUnit, ITarget
     [SerializeField] protected Transform cTransform;
     [SerializeField] protected float timeToDespawn = 3.5f;
     [SerializeField] private Vector3 offsetHealthBar;
-    
+   
+
 
     [Header("References")]
     [SerializeField] private Animator animator;
@@ -33,9 +33,11 @@ public abstract class Character : GameUnit, ITarget
     protected float hp;
     protected HealthBar hBar;
     private float originalSpeed;
+    private string currentAnim = "Idle";
     protected bool isAttacking;
     private Collider characterCollider;
-    
+    protected float maxHP = 100f;
+
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
@@ -49,7 +51,6 @@ public abstract class Character : GameUnit, ITarget
     {
         originalSpeed = agent.speed;
         characterCollider = GetComponent<Collider>();
-        //Debug.Log(originalSpeed);
     }
     public virtual void Update()
     {
@@ -58,7 +59,8 @@ public abstract class Character : GameUnit, ITarget
 
     public virtual void OnInit(int hpNeedToSpawn)
     {
-        hp = maxHP;
+        maxHP = hpNeedToSpawn;
+        hp = hpNeedToSpawn;
         currentState = new IdleState();
         attackCooldown = AttackSpeed;
         isAttacking = false;
@@ -74,7 +76,6 @@ public abstract class Character : GameUnit, ITarget
         }
         characterCollider.enabled = true;
         agent.speed = originalSpeed;
-        
     }
 
     public virtual void OnAttack()
@@ -99,7 +100,7 @@ public abstract class Character : GameUnit, ITarget
         agent.speed = 0f;
     }
 
-    public void OnHit(float damageAmount)
+    public virtual void OnHit(float damageAmount)
     {
         if(!IsDead())
         {
@@ -108,10 +109,35 @@ public abstract class Character : GameUnit, ITarget
             CombatText combatText = SimplePool.Spawn<CombatText>(combatTextPreb.PoolType, pointToSpawnCombatText.position, Quaternion.identity);
             combatText.transform.forward = Camera.main.transform.forward;
             combatText.OnInit(damageAmount, this);
-            if (IsDead())
+            if (this is BossZombie bossZombie)
             {
-                OnDeath();
+                if(bossZombie.IsDead())
+                {
+                    if (!bossZombie.deadFirstTime)
+                    {
+                        bossZombie.OnInit(200);
+                        attackSpeed = 2f;
+                        agent.speed += 1f;
+                        bossZombie.ChangeState(new PowerUpBossState());
+                        bossZombie.deadFirstTime = true;
+                        
+                    }
+                    else if (bossZombie.deadFirstTime && !bossZombie.deadSecondTime)
+                    {
+                        bossZombie.deadSecondTime = true;
+                        OnDeath();  
+                    }
+                }
+                
             }
+            else
+            {
+                if (IsDead())
+                {
+                    OnDeath();
+                }
+            }
+
         }
     }
 
@@ -143,14 +169,15 @@ public abstract class Character : GameUnit, ITarget
         yield return new WaitForSeconds(timeToDespawn);
         OnDespawn();
     }
-    public void ChangeAnimation(string animationName)
+    public void ChangeAnimation(string nameAnim)
     {
         if (animator != null)
         {
-            animator.SetTrigger(animationName);
+            animator.ResetTrigger(currentAnim);
+            currentAnim = nameAnim;
+            animator.SetTrigger(currentAnim);
         }
     }
-
     public void ChangeState(IState newState)
     {
         currentState?.OnExit(this);

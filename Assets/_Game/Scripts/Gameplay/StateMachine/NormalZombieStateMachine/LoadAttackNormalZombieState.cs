@@ -6,7 +6,7 @@ using UnityEngine.TextCore.Text;
 public class LoadAttackNormalZombieState : IZombieNormalState
 {
     float attackCoolDown = 0f;
-    private ITarget target;
+    private readonly ITarget target;
 
     public LoadAttackNormalZombieState(ITarget target)
     {

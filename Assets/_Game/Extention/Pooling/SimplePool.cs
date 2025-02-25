@@ -131,7 +131,6 @@ public class Pool
             // neu ma trong inactive ma da co roi thi ta loi thang do tu trong pool ra
             unit = inActives.Dequeue();
         }
-
         unit.TF.SetPositionAndRotation(pos, rot); // Set vi tri cho no tai diem cua moi khau sung
         actives.Add(unit); // add thang unit nay vao danh sach cac unit dang hoat dong de ty nua thu hoi no ve
         unit.gameObject.SetActive(true); // set active cho thang unit

@@ -10,6 +10,7 @@ public class CanvasGameOver : UICanvas
     private void Awake()
     {
         Instance = this;
+        
     }
     public void OnRetryLevel()
     {
