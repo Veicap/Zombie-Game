@@ -11,7 +11,7 @@ public class FollowState : IState
 
     public void OnExecute(Character character)
     {
-        Debug.Log("Follow Execute");
+       
        // Debug.Log(character.HasTargetInRange());
         if (!character.IsDead())
         {

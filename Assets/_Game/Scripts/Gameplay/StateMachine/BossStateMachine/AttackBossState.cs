@@ -28,6 +28,7 @@ public class AttackBossState : IBossState
                 else // Neu Ke dich trong tam danh
                 {
                     bossZombie.OnAttack();
+                    /*bossZombie.SpawnAttackEffect();*/
                     var target = bossZombie.Target;
                     bossZombie.ChangeState(new LoadAttackBossState(target));
                 }

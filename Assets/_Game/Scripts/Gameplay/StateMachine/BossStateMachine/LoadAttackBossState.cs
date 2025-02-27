@@ -31,6 +31,7 @@ public class LoadAttackBossState : IBossState
                 {
                     target.OnHit(bossZombie.Damage);
                 }
+                
                 attackCoolDown = 0f;
                 bossZombie.ChangeState(new AttackBossState());
             }

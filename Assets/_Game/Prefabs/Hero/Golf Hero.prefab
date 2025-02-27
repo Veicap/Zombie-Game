@@ -325,7 +325,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolType: 3
-  maxHP: 100
   damage: 10
   attackRange: 1
   attackSpeed: 2
@@ -459,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238d25bdc2122ee46abbf552b04b644e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
+  hero: {fileID: 5992930188084616542}
 --- !u!1001 &9102863754042824307
 PrefabInstance:
   m_ObjectHideFlags: 0

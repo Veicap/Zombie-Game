@@ -21,6 +21,12 @@ public class Zombie : Character
         SetTarget(GoalTarget);
         
     }
+
+    public virtual void SpawnAttackEffect()
+    {
+
+    }
+
     public Effect SpawnHitEffect(Transform parent)
     {
         return SimplePool.Spawn<Effect>(hitEffect.PoolType, parent.position, parent.rotation);

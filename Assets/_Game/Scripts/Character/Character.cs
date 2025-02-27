@@ -19,7 +19,7 @@ public abstract class Character : GameUnit, ITarget
 
     [Header("References")]
     [SerializeField] private Animator animator;
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] protected NavMeshAgent agent;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private CombatText combatTextPreb;
     [SerializeField] private Transform pointToSpawnCombatText;
@@ -32,16 +32,24 @@ public abstract class Character : GameUnit, ITarget
     protected ITarget target;
     protected float hp;
     protected HealthBar hBar;
-    private float originalSpeed;
+    protected float originalSpeed;
     private string currentAnim = "Idle";
     protected bool isAttacking;
-    private Collider characterCollider;
+    protected Collider characterCollider;
     protected float maxHP = 100f;
 
 
     public IState CurrentState => currentState;
     public float AttackSpeed => attackSpeed;
-    public bool IsDead() => hp <= 0;
+    public bool IsDead()
+    {
+        if (this is BossZombie bossZombie)
+        {
+            if (bossZombie.deadSecondTime) return true;
+        }
+        else return hp < 0;
+        return false;
+    }
     public Transform TargetTransform => targetTransform;
     public ITarget Target => target;
     public float AttackRange => attackRange;
@@ -111,22 +119,15 @@ public abstract class Character : GameUnit, ITarget
             combatText.OnInit(damageAmount, this);
             if (this is BossZombie bossZombie)
             {
-                if(bossZombie.IsDead())
+                if(bossZombie.IsDeadFirstTime())
                 {
-                    if (!bossZombie.deadFirstTime)
-                    {
-                        bossZombie.OnInit(200);
-                        attackSpeed = 2f;
-                        agent.speed += 1f;
-                        bossZombie.ChangeState(new PowerUpBossState());
-                        bossZombie.deadFirstTime = true;
-                        
-                    }
-                    else if (bossZombie.deadFirstTime && !bossZombie.deadSecondTime)
-                    {
-                        bossZombie.deadSecondTime = true;
-                        OnDeath();  
-                    }
+                    bossZombie.ChangeState(new PowerUpBossState());
+                    bossZombie.deadFirstTime = true;
+                }
+                if(bossZombie.IsDeadSecondTime())
+                {
+                    bossZombie.deadSecondTime = true;
+                    OnDeath();
                 }
                 
             }

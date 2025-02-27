@@ -6,18 +6,17 @@ using UnityEngine.Rendering;
 public class BossZombie : Zombie
 {
     [SerializeField] private GameObject lightitngImpact;
+    [SerializeField] private GameObject attackEffect;
+    [SerializeField] private Transform pointToSpawnAttackEffect;
     private IBossState currentState;
     public bool deadFirstTime = false;
     public bool deadSecondTime = false;
-
-    private void Start()
-    {
-        OnInit(500);
-    }
+    public bool revised = false;
     public override void Update()
     {
         currentState.OnExecute(this);
-        
+        //Debug.Log(currentState);
+        Debug.Log(IsDead());
     }
     public override void OnHit(float damageAmount)
     {
@@ -51,5 +50,38 @@ public class BossZombie : Zombie
         localScaleNeedUpdate.y += offset;
         localScaleNeedUpdate.z += offset;
         lightitngImpact.transform.localScale = localScaleNeedUpdate;
+    }
+
+    public void OnRivise(int hpNeedToRevise)
+    {
+        characterCollider.enabled = true;
+        maxHP = hpNeedToRevise;
+        hp = hpNeedToRevise;
+        revised = true;
+        attackCooldown = AttackSpeed -1f;
+        isAttacking = false;
+        hBar.OnInit(hpNeedToRevise, this);
+        agent.speed = originalSpeed + 1f;
+    }
+
+    public bool IsDeadFirstTime()
+    {
+        if (!deadFirstTime && hp < 0) return true;
+        return false;
+    }
+    public bool IsDeadSecondTime()
+    {
+        if (deadFirstTime && !deadSecondTime && revised && hp < 0) return true;
+        return false;
+    }
+
+    public override void OnAttack()
+    {
+        base.OnAttack();
+    }
+    public override void SpawnAttackEffect()
+    {
+        base.SpawnAttackEffect();
+        Instantiate(attackEffect, pointToSpawnAttackEffect.position, Quaternion.identity);
     }
 }

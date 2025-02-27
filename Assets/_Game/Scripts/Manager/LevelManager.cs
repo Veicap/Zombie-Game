@@ -32,9 +32,9 @@ public class LevelManager : Singleton<LevelManager>
     private int startGiven = 0;
     private void Start()
     {
-        // UIManager.Ins.OpenUI<CanvasMainMenu>();
-        UIManager.Ins.OpenUI<CanvasGamePlay>();
-        numberOfMana = 100;
+        UIManager.Ins.OpenUI<CanvasMainMenu>();
+        //UIManager.Ins.OpenUI<CanvasGamePlay>();
+        //numberOfMana = 100;
     }
 
     public int StartGiven => startGiven;    
@@ -53,7 +53,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         numberOfMana = 100;
         currentWave = 1;
-       // c = StartCoroutine(SpawnRandomZombies());
+        c = StartCoroutine(SpawnRandomZombies());
         heroTurret.OnInit();
         zombieTurret.OnInit();  
     }
