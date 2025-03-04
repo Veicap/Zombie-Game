@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class CanvasGameOver : UICanvas
 {
-    public static CanvasGameOver Instance { get; private set; }
     [SerializeField] private Animator animator;
 
-    private void Awake()
-    {
-        Instance = this;
-        
-    }
     public void OnRetryLevel()
     {
         Time.timeScale = 1.0f;

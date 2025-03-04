@@ -9,6 +9,10 @@ public class PistolHero : GunHero
     {
         base.OnInit();
     }*/
+    private void Start()
+    {
+        OnInit(100);
+    }
 
     public void ChangeState(IPistolHeroState newState)
     {

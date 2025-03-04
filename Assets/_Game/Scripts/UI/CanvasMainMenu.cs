@@ -80,6 +80,13 @@ public class CanvasMainMenu : UICanvas
         string key = GetKeyPlayerPrefs(level);
         return PlayerPrefs.GetInt(key, 0);
     }
+
+    public void OpenInventory()
+    {
+        UIManager.Ins.OpenUI<CanvasInventory>().OnInit();
+
+    }
+    
 }
 
 [System.Serializable]

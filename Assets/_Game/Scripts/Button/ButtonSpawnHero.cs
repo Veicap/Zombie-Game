@@ -12,6 +12,9 @@ public class ButtonSpawnHero : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaToSpawnHero;
     [SerializeField] private Image background;
     [SerializeField] private Image countDownToSpawnImage;
+    [SerializeField] private Image heroImage;
+    public int slotIndex;
+
 
     private float timeToSpawnHero;
     public float counter;
@@ -125,5 +128,17 @@ public class ButtonSpawnHero : MonoBehaviour
     {
         background.raycastTarget = true;
         background.gameObject.SetActive(false);
+    }
+
+    public void SetHeroToSpawn(Hero herotoSpawn)
+    {
+        heroToSpawn = herotoSpawn;
+    }
+
+    public void SetSpritesHeroItem(Sprite heroSprite)
+    {
+        
+        heroImage.sprite = heroSprite;
+        Debug.Log($"Button {this.name} and {heroImage.sprite.name}");
     }
 }

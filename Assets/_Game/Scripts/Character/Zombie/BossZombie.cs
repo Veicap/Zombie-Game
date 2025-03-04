@@ -9,9 +9,9 @@ public class BossZombie : Zombie
     [SerializeField] private GameObject attackEffect;
     [SerializeField] private Transform pointToSpawnAttackEffect;
     private IBossState currentState;
-    public bool deadFirstTime = false;
-    public bool deadSecondTime = false;
-    public bool revised = false;
+    [HideInInspector] public bool deadFirstTime = false;
+    [HideInInspector] public bool deadSecondTime = false;
+    private bool revised = false;
     public override void Update()
     {
         currentState.OnExecute(this);

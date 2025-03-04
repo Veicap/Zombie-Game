@@ -12,8 +12,8 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform parentPool;
     [SerializeField] private List<Transform> spawnZombiePoints;
     [SerializeField] private ZombieData zombieDataSO;
-    [SerializeField] private List<LevelData> listLevelDataSO; 
-
+    [SerializeField] private List<LevelData> listLevelDataSO;
+    public GameData data;
 
     private readonly List<Hero> listHeroesSpawned = new();
     private readonly List<Zombie> listZombieSpawned = new();
@@ -30,10 +30,17 @@ public class LevelManager : Singleton<LevelManager>
     public float NumberOfMana => numberOfMana;
     public float MaxMana => maxMana;
     private int startGiven = 0;
+
+    private void Awake()
+    {
+        LoadGame();
+    }
+
     private void Start()
     {
         UIManager.Ins.OpenUI<CanvasMainMenu>();
-        //UIManager.Ins.OpenUI<CanvasGamePlay>();
+     /*   UIManager.Ins.OpenUI<CanvasGamePlay>();
+        UIManager.Ins.OpenUI<CanvasInventory>();*/
         //numberOfMana = 100;
     }
 
@@ -136,7 +143,6 @@ public class LevelManager : Singleton<LevelManager>
         CanvasGamePlay.Instance.OnInit();
         currentLevel = level;
         currentLevelData = listLevelDataSO[currentLevel - 1];
-
         for (int i = 0; i < currentLevelData.waveDatas.Count; i++)
         {
             for(int j = 0; j < currentLevelData.waveDatas[i].zombies.Count; j++)
@@ -234,6 +240,31 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+
+    public void SaveGame()
+    {
+        SaveLoadManager.Save(data);
+    }
+
+    public void LoadGame()
+    {
+        data = SaveLoadManager.Load();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus) SaveGame();
+    }
+}
+[System.Serializable]
+public class GameData
+{
+    public Dictionary<string, string> slotToItemMap = new();
 }
 
 

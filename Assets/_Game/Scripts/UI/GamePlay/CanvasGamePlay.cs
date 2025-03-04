@@ -36,4 +36,18 @@ public class CanvasGamePlay : UICanvas
             button.OnInit();
         }
     }
+
+    public void SetSpawnHeroForButton(Hero heroSpawnA, int slotIndexA,Sprite spriteA, Hero heroSpawnB, int slotIndexB, Sprite spriteB)
+    {
+        buttonSpawnHeroes[slotIndexA].SetHeroToSpawn(heroSpawnA);
+        buttonSpawnHeroes[slotIndexA].SetSpritesHeroItem(spriteA);
+        buttonSpawnHeroes[slotIndexB].SetHeroToSpawn(heroSpawnB);
+        buttonSpawnHeroes[slotIndexB].SetSpritesHeroItem(spriteB);
+ 
+    }
+
+    public void SetSpawnHeroForButton(Hero heroSpawnA, int slotIndexA)
+    {
+        buttonSpawnHeroes[slotIndexA].SetHeroToSpawn(heroSpawnA);
+    }
 }

@@ -52,4 +52,7 @@ public enum PoolType
     
     // Hit Effect
     HitEffect_Boss_To_Hero = 15,
+
+    // Heri
+    Hero_pistol_2 = 16,
 }
