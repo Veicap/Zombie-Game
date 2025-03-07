@@ -5,10 +5,10 @@ using UnityEngine;
 public class NormalZombie : Zombie
 {
     private IZombieNormalState currentState;
-    private void Start()
+    /*private void Start()
     {
         OnInit(100);
-    }
+    }*/
     public override void Update()
     {
         currentState.OnExecute(this);

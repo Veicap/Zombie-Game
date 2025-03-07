@@ -46,8 +46,9 @@ public class CanvasGamePlay : UICanvas
  
     }
 
-    public void SetSpawnHeroForButton(Hero heroSpawnA, int slotIndexA)
+    public void SetSpawnHeroForButton(Hero heroSpawnA, int slotIndexA, Sprite sprite)
     {
         buttonSpawnHeroes[slotIndexA].SetHeroToSpawn(heroSpawnA);
+        buttonSpawnHeroes[slotIndexA].SetSpritesHeroItem(sprite);
     }
 }

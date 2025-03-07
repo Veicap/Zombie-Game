@@ -341,7 +341,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 214001407490540225, guid: 94e7b04dd7aa3da46b3c7cb7c0d3c454, type: 3}
       propertyPath: maxHp
-      value: 100
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 214001407490540225, guid: 94e7b04dd7aa3da46b3c7cb7c0d3c454, type: 3}
       propertyPath: turretType
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f0c4572cd6d3f4c99c93dfab7f59b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 10000
   goalPos: {fileID: 649007821}
   offsetHeathBar: {x: 0, y: 2.5, z: 8}
   turretType: 1

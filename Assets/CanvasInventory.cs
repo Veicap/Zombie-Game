@@ -19,14 +19,19 @@ public class CanvasInventory : UICanvas
             /*Debug.Log(oldSlot.HeroItem.image.sprite.name);
             Debug.Log(newSlot.HeroItem.image.sprite.name);*/
             UIManager.Ins.GetUI<CanvasGamePlay>().SetSpawnHeroForButton(oldSlot.HeroToSpawn, oldSlot.slotIndex, oldSlot.HeroItem.image.sprite, newSlot.HeroToSpawn, newSlot.slotIndex, newSlot.HeroItem.image.sprite);
+
         }
         if (oldSlot.inventoryName == "Team" && newSlot.inventoryName == "BackUp")
         {
-            UIManager.Ins.GetUI<CanvasGamePlay>().SetSpawnHeroForButton(oldSlot.HeroToSpawn, oldSlot.slotIndex);
+            UIManager.Ins.GetUI<CanvasGamePlay>().SetSpawnHeroForButton(oldSlot.HeroToSpawn, oldSlot.slotIndex, oldSlot.HeroItem.image.sprite);
         }
         if (oldSlot.inventoryName == "BackUp" && newSlot.inventoryName == "Team")
         {
-            UIManager.Ins.GetUI<CanvasGamePlay>().SetSpawnHeroForButton(newSlot.HeroToSpawn, newSlot.slotIndex);
+            UIManager.Ins.GetUI<CanvasGamePlay>().SetSpawnHeroForButton(newSlot.HeroToSpawn, newSlot.slotIndex, newSlot.HeroItem.image.sprite);
+        }
+        if(UIManager.Ins.IsOpened<CanvasGamePlay>())
+        {
+            UIManager.Ins.GetUI<CanvasGamePlay>().CloseDirectly();
         }
     }
     public void CloseInventory()
